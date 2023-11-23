@@ -1,0 +1,55 @@
+@charset "UTF-8";
+*{
+	font-family: 'Blinker', sans-serif;
+}
+      body{
+          font-size: 14px;
+          background-color: #f5f6f7;
+          line-height: 1.5em;
+          color : #222;
+          margin: 0;
+      }
+
+
+      .member{
+          width: 500px;
+          margin: auto;
+          padding: 0 20px;
+
+      }
+
+      h1{
+          display: block;
+          margin : 50px auto;
+      }
+
+      .member .wrap{
+          margin :5px 0;
+      }
+
+      .member b{
+          display: block;
+          margin-bottom: 5px;
+      }
+
+.member input:not(input[type=radio]),.member select{
+    border: 1px solid #dadada;
+    padding: 15px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+
+
+.member button[type=button]{
+    background-color: black;
+    color: white;
+}
+
+
+.member button[type=button]:hover{
+    background-color: #ffffff;
+    color: steelblue;
+    font-weight: bold;
+}
+
