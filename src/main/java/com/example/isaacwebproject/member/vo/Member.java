@@ -13,10 +13,8 @@ public class Member {
         private String memPasswd;
         private int memBirth;
         private String memGender;
-        private int memPhone;
         private String mailId;
         private String mailAddr;
-        private String memSelCat;
         private String memAuth;
 
 
