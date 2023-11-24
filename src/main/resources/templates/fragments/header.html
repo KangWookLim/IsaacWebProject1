@@ -2,6 +2,39 @@
 
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="header">
+    <div id = "header-container">
+        <div id = "main-logo-container">
+            <a th:href="@{/}">
+                <img th:src="@{/images/logo/isaaclogo.png}" class="main-logo-img">
+            </a>
+        </div>
+        <div id = "main-search-bar-container">
+            <!-- <div id = "main-search-bar"> -->
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <button class="btn btn-outline-secondary" type="button" style = "background : black;">Search</button>
+            </div>
+            <!-- </div> -->
+        </div>
+        <div class = "start-btn-container">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "background : black; width: 10rem; float : left; font-size: 1.5rem">Game Start</button>
+        </div>
+    </div>
+    <div id = "category-container">
+        <div class = "category-box">
+            <ul>
+                <li>상점</li>
+                <li>거래소</li>
+                <li>채팅</li>
+                <li>인벤토리</li>
+            </ul>
+        </div>
+        <a th:href="@{/mem/login}">
+            <div class = "login-container">
+                login
+            </div>
+        </a>
+    </div>
     <script>
     </script>
 </div>

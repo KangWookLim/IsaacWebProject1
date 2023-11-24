@@ -2,9 +2,9 @@ server:
   port: 8080
   file:
     storage:
-      #Mac OS ?? ?? ??
+#      #Mac OS
       path: /Users/laku_mwa/resource/
-      #Windows OS ?? ?? ??
+#      Windows OS
 #      path:
 
 spring:

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}">
+
+<th:block layout:fragment="css">
+  <link rel="stylesheet" th:href="@{/css/home/home.css}">
+  <link rel="stylesheet" th:href="@{/css/home/modal.css}">
+  <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
+  <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
+
+</th:block>
+<div layout:fragment="content">
+  <div id = "main-container">
+
+
+    <div id = "preview-container">
+      <div id = "preview-box">
+        <div class = "preview-bg-btn-container">
+          <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg1();">1</button>
+          <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg2();">2</button>
+          <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg3();">3</button>
+        </div>
+        <img th:src="@{/images/map/caves.png}" class = "preview-bg" id = "preview-bg"/>
+        <div class="preview-img-head"></div>
+        <div class="preview-img-body"></div>
+      </div>
+    </div>
+    <div id = "item-container" >
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+      <div class="img-container">
+        <div class="skin-img"></div>
+        <div class="skin-name"></div>
+        <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- modal section -->
+  <div id="modal" class="modal-overlay">
+    <div class="modal-window">
+      <div id = "modal-img-container">
+        <div id = "modal-img-box">
+          <img th:src="@{/images/map/caves.png}" class = "preview-bg"/>
+        </div>
+      </div>
+      <div id = "modal-btn-container">
+        <button type="button" class="btn-close" aria-label="Close"></button>
+      </div>
+      <div id = "modal-title-container">
+        <div class = "modal-title-txt">Item Name</div>
+        <div>seller : <span> SellerName </span></div>
+        <div>Due Date : <span>2099.99.99</span></div>
+      </div>
+      <div id = "modal-price-container">
+        <div>
+          <p>
+            <span>-</span><br>
+            +<br>
+            =
+          </p>
+        </div>
+        <div class = "price-txt">
+          <div> <span>Price</span> </div>
+          <div> fund</div>
+          <div> result</div>
+        </div>
+      </div>
+      <div id = "modal-confirm-container" onclick = "confirmOrder();">
+        <div class = "make-order-txt">
+          Purchase
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    let modal = document.getElementById("modal")
+
+    $(document).ready(function(){
+      modalOff();
+      loginChk();
+    });
+
+    function loginChk() {}
+
+    function modalOff() {
+      modal.style.display = "none"
+    }
+    function modalOn() {
+      modal.style.display = "grid"
+    }
+
+    /* 배경 변경  */
+    function changeBg1() {
+      document.getElementById("preview-bg").src = "/images/map/caves.png";
+    }
+    function changeBg2() {
+      document.getElementById("preview-bg").src = "/images/map/nfloor.png";
+    }
+    function changeBg3() {
+      document.getElementById("preview-bg").src = "/images/map/library.png";
+    }
+
+    /* 주문 확인 */
+    function confirmOrder() {
+      modalOff();
+    }
+
+
+
+    const  btnModal = document.querySelectorAll('.img-container')
+    btnModal.forEach(function (obj, index){
+      obj.addEventListener("click", e => {
+        modalOn();
+      })
+    });
+
+    /* 모달 바깥이나 X버튼 누르면 종료 */
+    modal.addEventListener("click", e => {
+      const evTarget = e.target
+      if(evTarget.classList.contains("modal-overlay") ||
+              evTarget.classList.contains("btn-close")) {
+        modalOff()
+      }
+    })
+    /* esc누르면 종료 */
+    window.addEventListener("keydown", e => {
+      if (e.keyCode === 27) {
+        modalOff()
+      }
+    })
+
+
+
+  </script>
+</div>
+
+</html>
