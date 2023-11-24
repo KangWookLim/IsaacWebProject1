@@ -8,38 +8,12 @@
     <link rel="stylesheet" th:href="@{/css/home/modal.css}">
     <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
     <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
+
 </th:block>
 <div layout:fragment="content">
 <div id = "main-container">
-    <div id = "header-container">
-        <div id = "main-logo-container">
-            <a th:href="@{/}">
-                <img th:src="@{/images/logo/isaaclogo.png}" class="main-logo-img">
-            </a>
-        </div>
-        <div id = "main-search-bar-container">
-            <!-- <div id = "main-search-bar"> -->
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" style = "background : black;">Search</button>
-            </div>
-            <!-- </div> -->
-        </div>
-        <div class = "start-btn-container">
-            <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "background : black; width: 10rem; float : left; font-size: 1.5rem">Game Start</button>
-        </div>
-    </div>
-    <div id = "category-container">
-        <ul>
-            <li>상점</li>
-            <li>거래소</li>
-            <li>채팅</li>
-            <li>인벤토리</li>
-        </ul>
-        <div class = "login-container">
 
-        </div>
-    </div>
+
     <div id = "preview-container">
         <div id = "preview-box">
             <div class = "preview-bg-btn-container">
@@ -52,7 +26,7 @@
             <div class="preview-img-body"></div>
         </div>
     </div>
-    <div id = "item-container" onclick = >
+    <div id = "item-container" >
         <div class="img-container">
             <div class="skin-img"></div>
             <div class="skin-name"></div>
@@ -139,10 +113,6 @@
 
     </div>
 </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<link href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;300&display=swap" rel="stylesheet">
 <script>
     let modal = document.getElementById("modal")
 
@@ -203,5 +173,6 @@
 
 
 </script>
+</div>
 
 </html>

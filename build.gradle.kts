@@ -28,6 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
+    implementation ("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0")
     implementation ("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")

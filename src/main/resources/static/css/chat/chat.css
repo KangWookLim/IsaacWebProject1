@@ -1,0 +1,35 @@
+#main-container {
+    height: 100%;
+    width: 1000px;
+    display : grid;
+    background-color: #ccc;
+    margin : 0 auto;
+    gap : 2px;
+    grid-template :
+        " a a " 50px
+        " b c " 3fr
+        " d e " 2fr / 1fr 3fr;
+}
+#menu-container {
+    grid-area: a;
+    background : white;
+}
+#menu-container ul {
+    transform: translateY(30%);
+}
+#total-mem-container {
+    grid-area : b;
+    background : white;
+}
+#chat-room-container {
+    grid-area : c;
+    background : white;
+}
+#user-view-container {
+    grid-area : d;
+    background : white;
+}
+#chat-container {
+    grid-area : e;
+    background : white;
+}
