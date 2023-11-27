@@ -81,8 +81,6 @@
     background : white;
 }
 
-
-
 .img-container:hover {
     box-shadow : none;
 }
@@ -90,13 +88,3 @@
     box-shadow: 1px 3px 5px 3px #dadce0 inset;
 }
 
-.skin-img {
-    display : inline-block;
-    width : 100%;
-    aspect-ratio: 1/1;
-    background: orange;
-}
-.skin-img-btn {
-    margin : 10px auto;
-    display : flex
-}
