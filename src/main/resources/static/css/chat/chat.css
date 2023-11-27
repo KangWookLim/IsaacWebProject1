@@ -31,7 +31,7 @@
     justify-content : center;
 }
 #total-mem-container li {
-    width: 80%;
+    width: 100%;
     display : block;
     font-size : 0.8rem;
     border-left : none;
@@ -62,7 +62,10 @@
     justify-content : center;
     float : right;
     transition: background-color 0.5s;
-
+    display: grid;
+    grid-template:
+        "b a a a"
+        "b c c d";
 }
 
 
