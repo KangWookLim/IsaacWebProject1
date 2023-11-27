@@ -3,6 +3,7 @@
     width: 1000px;
     display : grid;
     background-color: #ccc;
+    box-shadow: 1px 3px 5px 3px #dadce0;
     margin : 0 auto;
     gap : 2px;
     grid-template :
@@ -20,10 +21,56 @@
 #total-mem-container {
     grid-area : b;
     background : white;
+    text-align : center;
+    justify-content: center;
+    display : flex;
+}
+#total-mem-container ul {
+    margin : 0;
+    padding : 0;
+    justify-content : center;
+}
+#total-mem-container li {
+    width: 80%;
+    display : block;
+    font-size : 0.8rem;
+    border-left : none;
+    text-align : center;
+    border-bottom : 1px solid #ccc;
+
 }
 #chat-room-container {
     grid-area : c;
+    width : 100%;
+    padding : 10px;
     background : white;
+    display : flex;
+    flex-wrap : wrap;
+    gap : 1.2rem;
+    overflow-y : auto;
+
+}
+.chat-room-card {
+    height : 80px;
+    min-width : 300px;
+    flex-basis: 300px;
+    flex-grow: 0;
+    border : 2px solid #ccc;
+    border-radius : 0.5rem;
+    margin : 0 auto;
+    box-shadow: 1px 3px 5px 3px #dadce0;
+    justify-content : center;
+    float : right;
+    transition: background-color 0.5s;
+
+}
+
+
+.chat-room-card:hover {
+    box-shadow : none;
+}
+.chat-room-card:active {
+    box-shadow: 1px 3px 5px 3px #dadce0 inset;
 }
 #user-view-container {
     grid-area : d;
@@ -32,4 +79,24 @@
 #chat-container {
     grid-area : e;
     background : white;
+}
+
+
+
+.img-container:hover {
+    box-shadow : none;
+}
+.img-container:active {
+    box-shadow: 1px 3px 5px 3px #dadce0 inset;
+}
+
+.skin-img {
+    display : inline-block;
+    width : 100%;
+    aspect-ratio: 1/1;
+    background: orange;
+}
+.skin-img-btn {
+    margin : 10px auto;
+    display : flex
 }
