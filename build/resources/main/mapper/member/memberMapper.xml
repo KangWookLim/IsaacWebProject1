@@ -11,9 +11,9 @@
     <insert id="insertMember" parameterType="com.example.isaacwebproject.member.vo.Member$Request">
 
         insert into member
-        (user_uid, user_id, user_passwd, user_nickname, user_coin, user_craetedate, user_exp)
-        values(#{memId}, #{ID}, #{PW}, #{nickname}, #{coin},
-               #{createdate}, #{exp});
+        (MEMID, ID, PW, NICKNAME)
+        values(IDUP.NEXTVAL, #{userID}, #{PW}, #{nickname}
+               );
 
     </insert>
 

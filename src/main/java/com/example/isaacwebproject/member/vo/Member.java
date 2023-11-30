@@ -8,13 +8,9 @@ public class Member {
     @AllArgsConstructor
     @RequiredArgsConstructor
     public static class Request {
-        private int memId;
         private String userID;
         private String PW;
         private String nickname;
-        private int coin;
-        private String createdate;
-        private int exp;
     }
     @Data
     @Builder

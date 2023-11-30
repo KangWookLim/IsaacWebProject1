@@ -6,12 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" th:href="@{/css/member/join.css}">
-
+</head>
 <div>
 
     <div class="member" style = "margin-top : 40px;">
         <!-- 로고 -->
         <h1>Sign In</h1>
+        <form id="frm"  action="/mem/join"  method="post">
         <div class="wrap" style = "margin-bottom : 30px;">
             <label class="form-label-mt-4"><b>ID</b></label>
             <input type="text" class="form-control" id="userID" name="userID">
@@ -20,7 +21,7 @@
 
         <div class="wrap">
             <label class="form-label-mt-4"><b>PW</b></label>
-            <input type="password" class="form-control" id="memPasswd" name="memPasswd">
+            <input type="password" class="form-control" id="PW" name="PW">
         </div>
         <div class="wrap">
             <label class="form-label-mt-4"><b>PW Confirm</b></label>
@@ -28,10 +29,10 @@
         </div>
         <div class="wrap">
             <label class="form-label-mt-4"><b>Nickname</b></label>
-            <input type="text" class="form-control" id="memName" name="memName">
+            <input type="text" class="form-control" id="nickname" name="nickname">
         </div>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "background : black; margin-right: 5px; float : right; width : 60px; position : relative" onclick="join()">Join</button>
-
+        </form>
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
@@ -98,7 +99,7 @@ function validated () {
             message = "이름을 입력하십시오";
         }
     });
-        if( $('#memPasswd').val() !== $('#memPasswdConfirm').val()) {
+        if( $('#PW').val() !== $('#memPasswdConfirm').val()) {
             alert('비밀번호 확인이 일치하지 않습니다!');
             isValid = false;
             return false;
@@ -108,16 +109,6 @@ function validated () {
     return isValid;
 }
 
-function setEmailAddr(optionValue) {
-    const mailAddr = $('#mailAddr');
-    mailAddr.attr('readOnly', true);
-    mailAddr.val('');
-
-    if (optionValue !== "none") {
-        mailAddr.val(optionValue);
-        mailAddr.attr('readOnly', true);
-    }
-}
 
 function join(){
     if(validated()) {
