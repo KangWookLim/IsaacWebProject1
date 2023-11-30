@@ -39,7 +39,7 @@ dependencies {
     implementation ("jakarta.servlet:jakarta.servlet-api") //스프링부트 3.0 이상
     implementation ("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api") //스프링부트 3.0 이상
     implementation ("org.glassfish.web:jakarta.servlet.jsp.jstl") //스프링부트 3.0 이상
-
+    implementation("org.springframework:spring-websocket:6.1.1")
 }
 
 tasks.withType<Test> {
