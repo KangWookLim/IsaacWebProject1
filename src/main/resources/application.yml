@@ -17,7 +17,7 @@ spring:
 
   datasource:
     driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
+    url: jdbc:oracle:thin:@192.168.8.49:1521:xe
     username: isaacweb
     password: 1234
     hikari:
@@ -39,3 +39,15 @@ spring:
       content-type: text/html
     prefix: classpath:/templates/
     suffix: .html
+  devtools:
+    livereload:
+      enabled: true
+    remote:
+      restart:
+        enabled: true
+    restart:
+      enabled: true
+
+mybatis:
+  config-location: classpath:config/mybatis-config.xml
+  mapper-locations: classpath:mapper/**/*.xml
