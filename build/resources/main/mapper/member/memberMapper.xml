@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.isaacwebproject.member.mapper.MemberMapper">
+
+    <select id="checkUser" resultType="int" parameterType="java.util.Map">
+        select count(*) as  cnt
+        from member
+        where ID =  #{userID}
+    </select>
+
+    <insert id="insertMember" parameterType="com.example.isaacwebproject.member.vo.Member$Request">
+
+        insert into member
+        (user_uid, user_id, user_passwd, user_nickname, user_coin, user_craetedate, user_exp)
+        values(#{memId}, #{ID}, #{PW}, #{nickname}, #{coin},
+               #{createdate}, #{exp});
+
+    </insert>
+
+    <select id="getMemberInfo"  parameterType="com.example.isaacwebproject.member.vo.Member$GetUserInfo">
+        select *
+        from member
+        where user_id =  #{memId}
+    </select>
+
+</mapper>

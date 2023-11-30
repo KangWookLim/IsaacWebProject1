@@ -11,8 +11,8 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
 
-    public int checkUser(String memId) throws Exception{
-        return memberMapper.checkUser(memId);
+    public int checkUser(String userID) throws Exception{
+        return memberMapper.checkUser(userID);
     }
 
     public int insertMember(Member.Request request) throws Exception {

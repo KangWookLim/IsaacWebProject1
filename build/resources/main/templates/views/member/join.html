@@ -14,7 +14,7 @@
         <h1>Sign In</h1>
         <div class="wrap" style = "margin-bottom : 30px;">
             <label class="form-label-mt-4"><b>ID</b></label>
-            <input type="text" class="form-control" id="memId" name="memId">
+            <input type="text" class="form-control" id="userID" name="userID">
             <button type = "button" class="btn btn-secondary" id="idChkBtn" style = "float : right; display : block;" onclick="userIdChk();">중복확인</button>
         </div>
 
@@ -30,40 +30,6 @@
             <label class="form-label-mt-4"><b>Nickname</b></label>
             <input type="text" class="form-control" id="memName" name="memName">
         </div>
-        <div class="wrap">
-            <label class="form-label-mt-4"><b>Birth</b></label>
-            <input type="number" class="form-control" id="memBirth" name="memBirth" placeholder="6자리">
-        </div>
-        <div class="wrap">
-            <label class="form-label-mt-4"><b>Gender</b></label>
-            <select class="form-control" id="memGender" name="memGender">
-                <option value="남자">Male</option>
-                <option value="여자">Female</option>
-            </select>
-        </div>
-        <div>
-            <div class="wrap" id="email">
-                <label class="form-label-mt-4"><b>E-mail</b></label>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <input type="text" class="form-control" id="mailId" name="mailId">
-                </div>
-                <div class="col-md-auto" style="padding-top: 5px">
-                    <span style="font-weight: bold">@</span>
-                </div>
-                <div class="col-md-4">
-                    <select id="mailAddr" name="mailAddr"
-                            class="form-control" onchange="setEmailAddr(this.options[this.selectedIndex].value);">
-                        <option value="none">선택해주세요</option>
-                        <option value="naver.com">naver.com</option>
-                        <option value="daum.net">daum.net</option>
-                        <option value="gmail.com">gmail.com</option>
-                        <option value="hotmail.com">hotmail.com</option>
-                    </select>
-                </div>
-            </div>
-        </div>
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "background : black; margin-right: 5px; float : right; width : 60px; position : relative" onclick="join()">Join</button>
 
     </div>
@@ -75,10 +41,10 @@
     let isUserIdChk = false;
 
 function userIdChk() {
-    const memId = $('#memId').val();
+    const userID = $('#userID').val();
     isUserIdChk = false;
 
-    if($.trim(memId).length === 0) {
+    if($.trim(userID).length === 0) {
         alert('아이디를 입력하십시오.');
         return false;
     }
@@ -89,7 +55,7 @@ function userIdChk() {
         dataType : 'json',
         data : 'json',
         data :{
-            memId : memId
+            userID : userID
         }
     }).done(function (data){
         if(data.resultCode === 200) {
@@ -98,6 +64,7 @@ function userIdChk() {
 
             $('#idChkBtn').prop('disabled', true);
         }else {
+            alert(data.resultCode);
             alert('이미 등록된 ID 입니다.');
         }
     }).fail(function (xhr, status, error) {
@@ -121,7 +88,7 @@ function validated () {
         checkObj = $('#' + inputId);
         let message = '';
 
-        if(inputId === 'memId') {
+        if(inputId === 'ID') {
             message = "아이디를 입력하십시오.";
         }else if(inputId === 'memPasswd') {
             message = '패스워드를 입력하십시오';
@@ -129,20 +96,10 @@ function validated () {
             message = '패스워드를 입력하십시오';
         }else if(inputId === 'memName') {
             message = "이름을 입력하십시오";
-        }else if(inputId === 'memBirth') {
-            message = "생년월일을 입력하십시오.";
-        }else if(inputId === 'mailId') {
-            message = "메일주소를  입력하십시오.";
-        }else if(inputId === "mailAddr") {
-            message = "메일서비스 업체를 입력하십시오.";
         }
     });
         if( $('#memPasswd').val() !== $('#memPasswdConfirm').val()) {
             alert('비밀번호 확인이 일치하지 않습니다!');
-            isValid = false;
-            return false;
-        }else if( $('#mailAddr').val() === 'none') {
-            alert('메일서비스 업체를 입력하십시오.');
             isValid = false;
             return false;
         }
