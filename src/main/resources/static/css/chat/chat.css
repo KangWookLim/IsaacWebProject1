@@ -56,19 +56,18 @@
     flex-basis: 300px;
     flex-grow: 0;
     border : 2px solid #ccc;
-    border-radius : 0.5rem;
+    border-radius : 1rem;
     margin : 0 auto;
     box-shadow: 1px 3px 5px 3px #dadce0;
     justify-content : center;
+    text-align : center;
     float : right;
     transition: background-color 0.5s;
     display: grid;
     grid-template:
-        "b a a a"
-        "b c c d";
+        "b a a a" 1fr
+        "b c c c" 1.5fr / 1fr 3fr;
 }
-
-
 .chat-room-card:hover {
     box-shadow : none;
 }
@@ -91,3 +90,36 @@
     box-shadow: 1px 3px 5px 3px #dadce0 inset;
 }
 
+.chat-room-name {
+    background : white;
+    grid-area : a;
+    border-bottom : 2px solid #ccc;
+    justify-content: center;
+    display : flex;
+    align-items : center;
+
+}
+.chat-room-number {
+    background : white;
+    font-size : 2rem;
+    color : #ccc;
+    grid-area : b;
+    border-right : 2px solid #ccc;
+    justify-content: center;
+    display : flex;
+    align-items : center;
+
+}
+.chat-room-icon-container {
+    background: white;
+    grid-area : c;
+    justify-content: center;
+    display : flex;
+    align-items : center;
+    margin-left : auto;
+}
+.chat-room-icon {
+    width : 20px;
+    height : 20px;
+    margin : 0 5px 0 25px;
+}
