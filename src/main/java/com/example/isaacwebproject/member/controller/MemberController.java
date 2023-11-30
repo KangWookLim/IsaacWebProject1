@@ -30,11 +30,11 @@ public class MemberController {
     }
     @GetMapping("/mem/chk")
     @ResponseBody
-    public Map<String, Object> memCheck(@RequestParam(name="memId") String memId) {
+    public Map<String, Object> memCheck(@RequestParam(name="userID") String userID) {
         Map<String, Object> resultMap = new HashMap<>();
 
         try {
-            int result = memberService.checkUser(memId);
+            int result = memberService.checkUser(userID);
 
             if (result == 0) {
                 resultMap.put("resultCode", 200);

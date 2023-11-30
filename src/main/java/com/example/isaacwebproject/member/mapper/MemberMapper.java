@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface MemberMapper {
-    int checkUser(@Param("memId") String memId);
+    int checkUser(@Param("userID") String userID);
 
     int insertMember(Member.Request request) throws Exception;
 
-    Member.GetUserInfo getMemberInfo(@Param("memId") String boardId) throws Exception;
+    Member.GetUserInfo getMemberInfo(@Param("userID") String boardId) throws Exception;
 }
