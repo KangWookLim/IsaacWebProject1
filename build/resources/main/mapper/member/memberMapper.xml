@@ -10,7 +10,7 @@
 
     <insert id="insertMember" parameterType="com.example.isaacwebproject.member.vo.Member$Request">
 
-        insert into member
+
         (MEMID, ID, PW, NICKNAME)
         values(IDUP.NEXTVAL, #{userID}, #{PW}, #{nickname}
                );
