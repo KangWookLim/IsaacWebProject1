@@ -8,8 +8,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Collections {
-    private Integer collections_id;
+    private Integer id;
     private String img_url;
     private Integer price;
-
+    private String name;
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.isaacwebproject.collections.mapper.CollectionsMapper">
+
+    <select id="getCollection" resultType="int" parameterType="java.util.Map">
+        select collections_id
+        from collections
+        where ID = #{ID}
+    </select>
+
+    <insert id="insertCollections" parameterType="com.example.isaacwebproject.collections.vo.Collections">
+        insert into Collections
+        (ID, IMG_URL, PRICE)
+        values(COLLECTIONS_IDUP.NEXTVAL, #{img_url}, #{price}, #{name})
+
+    </insert>
+
+    <select id="getCollectionsInfo"  parameterType="com.example.isaacwebproject.collections.vo.Collections">
+        select *
+        from collections
+        where collections_id =  #{id}
+    </select>
+
+</mapper>
