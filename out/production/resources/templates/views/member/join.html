@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" th:href="@{/css/member/join.css}">
+</head>
+<div>
+
+    <div class="member" style = "margin-top : 40px;">
+        <!-- 로고 -->
+        <h1>Sign In</h1>
+        <form id="frm"  action="/mem/join"  method="post">
+        <div class="wrap" style = "margin-bottom : 30px;">
+            <label class="form-label-mt-4"><b>ID</b></label>
+            <input type="text" class="form-control" id="userID" name="userID">
+            <button type = "button" class="btn btn-secondary" id="idChkBtn" style = "float : right; display : block;" onclick="userIdChk();">중복확인</button>
+        </div>
+
+        <div class="wrap">
+            <label class="form-label-mt-4"><b>PW</b></label>
+            <input type="password" class="form-control" id="PW" name="PW">
+        </div>
+        <div class="wrap">
+            <label class="form-label-mt-4"><b>PW Confirm</b></label>
+            <input type="password" class="form-control" id="memPasswdConfirm" name="memPasswdConfirm">
+        </div>
+        <div class="wrap">
+            <label class="form-label-mt-4"><b>Nickname</b></label>
+            <input type="text" class="form-control" id="nickname" name="nickname">
+        </div>
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "background : black; margin-right: 5px; float : right; width : 60px; position : relative" onclick="join()">Join</button>
+        </form>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css2?family=Blinker:wght@100;300&display=swap" rel="stylesheet">
+<script>
+    let isUserIdChk = false;
+
+function userIdChk() {
+    const userID = $('#userID').val();
+    isUserIdChk = false;
+
+    if($.trim(userID).length === 0) {
+        alert('아이디를 입력하십시오.');
+        return false;
+    }
+
+    $.ajax({
+        url : '/mem/chk',
+        type : 'get',
+        dataType : 'json',
+        data : 'json',
+        data :{
+            userID : userID
+        }
+    }).done(function (data){
+        if(data.resultCode === 200) {
+            alert('사용가능한 ID 입니다');
+            isUserIdChk = true;
+
+            $('#idChkBtn').prop('disabled', true);
+        }else {
+            alert(data.resultCode);
+            alert('이미 등록된 ID 입니다.');
+        }
+    }).fail(function (xhr, status, error) {
+        alert('시스템에 문제가 발생했습니다. 관리자에게 문의해주세요.');
+        console.log(status);
+    });
+}
+
+function validated () {
+    const inputAll = document.querySelectorAll("input");
+    let isValid = true;
+
+    if(!isUserIdChk) {
+        alert('아이디 중복체크를 실행해주세요');
+        isValid = false;
+        return false;
+    }
+
+    $.each(inputAll, function (index, obj) {
+        const inputId = $(obj).attr('id');
+        checkObj = $('#' + inputId);
+        let message = '';
+
+        if(inputId === 'ID') {
+            message = "아이디를 입력하십시오.";
+        }else if(inputId === 'memPasswd') {
+            message = '패스워드를 입력하십시오';
+        }else if(inputId === 'memPasswdConfirm') {
+            message = '패스워드를 입력하십시오';
+        }else if(inputId === 'memName') {
+            message = "이름을 입력하십시오";
+        }
+    });
+        if( $('#PW').val() !== $('#memPasswdConfirm').val()) {
+            alert('비밀번호 확인이 일치하지 않습니다!');
+            isValid = false;
+            return false;
+        }
+
+
+    return isValid;
+}
+
+
+function join(){
+    if(validated()) {
+        $('#frm').submit();
+    }
+}
+
+</script>
+</html>
