@@ -26,3 +26,5 @@ replay_pid*
 # settingFile
 .gradle/
 .idea/
+*.yml
+*.yml
