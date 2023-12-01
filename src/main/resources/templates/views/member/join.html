@@ -15,7 +15,7 @@
         <form id="frm"  action="/mem/join"  method="post">
         <div class="wrap" style = "margin-bottom : 30px;">
             <label class="form-label-mt-4"><b>ID</b></label>
-            <input type="text" class="form-control" id="userID" name="userID">
+            <input type="text" class="form-control" id="ID" name="ID">
             <button type = "button" class="btn btn-secondary" id="idChkBtn" style = "float : right; display : block;" onclick="userIdChk();">중복확인</button>
         </div>
 
@@ -42,10 +42,10 @@
     let isUserIdChk = false;
 
 function userIdChk() {
-    const userID = $('#userID').val();
+    const ID = $('#ID').val();
     isUserIdChk = false;
 
-    if($.trim(userID).length === 0) {
+    if($.trim(ID).length === 0) {
         alert('아이디를 입력하십시오.');
         return false;
     }
@@ -56,7 +56,7 @@ function userIdChk() {
         dataType : 'json',
         data : 'json',
         data :{
-            userID : userID
+            ID : ID
         }
     }).done(function (data){
         if(data.resultCode === 200) {

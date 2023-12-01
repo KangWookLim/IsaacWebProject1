@@ -20,7 +20,7 @@ public class Server {
 	private ServerSocket serverSocket;
 	private int startTime;
 	public Server() {
-		this.socket = 8050;
+		this.socket = 8056;
 		this.dataSendList = Collections.synchronizedList(new ArrayList<ObjectOutputStream>());
 	}
 	public void start() {}

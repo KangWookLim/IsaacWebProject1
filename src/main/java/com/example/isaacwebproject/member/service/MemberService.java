@@ -11,11 +11,13 @@ public class MemberService {
 
     private final MemberMapper memberMapper;
 
-    public int checkUser(String userID) throws Exception{
-        return memberMapper.checkUser(userID);
+    public int checkUser(String ID) throws Exception{
+        return memberMapper.checkUser(ID);
     }
 
     public int insertMember(Member.Request request) throws Exception {
+        System.out.println(request.getID() + request.getPW() + request.getNickname());
+
         return memberMapper.insertMember(request);
     }
     

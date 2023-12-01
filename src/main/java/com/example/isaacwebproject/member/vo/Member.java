@@ -7,8 +7,9 @@ public class Member {
     @Getter
     @AllArgsConstructor
     @RequiredArgsConstructor
+    @Setter
     public static class Request {
-        private String userID;
+        private String ID;
         private String PW;
         private String nickname;
     }
@@ -18,7 +19,7 @@ public class Member {
     @NoArgsConstructor
     public static class GetUserInfo{
         private String UserImg;
-        private String UserId;
+        private String Id;
     }
 
 }

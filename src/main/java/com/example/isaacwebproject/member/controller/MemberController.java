@@ -30,11 +30,11 @@ public class MemberController {
     }
     @GetMapping("/mem/chk")
     @ResponseBody
-    public Map<String, Object> memCheck(@RequestParam(name="userID") String userID) {
+    public Map<String, Object> memCheck(@RequestParam(name="ID") String ID) {
         Map<String, Object> resultMap = new HashMap<>();
 
         try {
-            int result = memberService.checkUser(userID);
+            int result = memberService.checkUser(ID);
 
             if (result == 0) {
                 resultMap.put("resultCode", 200);
@@ -54,6 +54,8 @@ public class MemberController {
         ModelAndView view = new ModelAndView();
         view.setViewName("views/member/join_result");
         try{
+            System.out.println("controller " + request.getID() + request.getPW() + request.getNickname());
+
             int result = memberService.insertMember(request);
 
             if(result > 0) {
