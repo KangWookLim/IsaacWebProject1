@@ -7,13 +7,14 @@
   <title>Insert title here</title>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script th:inline="javascript">
 
   const msg = [[${resultMsg}]]
 
           $(document).ready(function(){
             alert(msg);
-            location.href ="/login";
+            location.href ="/mem/login";
           });
 
 
