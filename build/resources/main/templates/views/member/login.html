@@ -13,12 +13,12 @@
 	    <div class="log">
 	        <h2>Login Page</h2>
 	        <div class="id">
-	            <label for="userId">ID </label>
-	            <input type="text"  id="userId" name="userId" placeholder="아이디를 입력하십시오.">
+	            <label for="ID">ID </label>
+	            <input type="text"  id="ID" name="ID" placeholder="아이디를 입력하십시오.">
 	        </div>
 	        <div class="pw">
-	            <label for="userPasswd">PW </label>
-	            <input type="password"  id="userPasswd" name="userPasswd" placeholder="패스워드를 입력하십시오.">
+	            <label for="PW">PW </label>
+	            <input type="password"  id="PW" name="PW" placeholder="패스워드를 입력하십시오.">
 	        </div>
 	        <div class="loginBtn" id="btn">
 	            <button type="button" class="loginBtn" id="loginBtn">Login</button>
@@ -29,6 +29,8 @@
 	    </div>
 	</div>
 </div>
+<script th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
+<script th:src="@{/webjars/bootstrap/4.6.2/js/bootstrap.min.js}"></script>
 <script>
 function initEvt() {
 
@@ -38,18 +40,18 @@ function initEvt() {
 }
 
 function validated(){
-    const userId = $('#userId');
-    const userPasswd = $('#userPasswd');
+    const ID = $('#ID');
+    const PW = $('#PW');
 
-    if($.trim(userId.val()).length === 0) {
+    if($.trim(ID.val()).length === 0) {
         alert('아이디를 입력하십시오.');
-        userId.focus();
+        ID.focus();
         return false;
     }
 
-    if($.trim(userPasswd.val()).length === 0) {
+    if($.trim(PW.val()).length === 0) {
         alert('패스워드를 입력하십시오.');
-        userPasswd.focus();
+        PW.focus();
         return false;
     }
 
@@ -60,12 +62,12 @@ function login() {
 
     if(validated()) {
         const dataParam = {
-            userId : $('#userId').val(),
-            userPasswd : $('#userPasswd').val()
+            ID : $('#ID').val(),
+            PW : $('#PW').val()
         }
 
         $.ajax({
-            url : '/login',
+            url : 'mem/login',
             type : 'post',
             dataType : 'json',
             data : dataParam
