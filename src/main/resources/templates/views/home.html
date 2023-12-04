@@ -12,8 +12,6 @@
 </th:block>
 <div layout:fragment="content">
 <div id = "main-container">
-
-
     <div id = "preview-container">
         <div id = "preview-box">
             <div class = "preview-bg-btn-container">
@@ -26,11 +24,14 @@
             <div class="preview-img-body"></div>
         </div>
     </div>
-    <div id = "item-container" >
-        <div class="img-container">
-            <div class="skin-img"></div>
-            <div class="skin-name"></div>
-            <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">가격</a>
+    <div id = "itemList-container" >
+        <div class="item-container" th:each="items, loop : ${itemList}">
+            <div class="skin-img-container">
+                <img class="skin-img" th:src="${items.img_url}">
+                <img class="table-img" src="/images/items/item_table.png"/>
+            </div>
+            <div class="skin-name" th:text="${items.name}"></div>
+            <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex">Price</a>
         </div>
     </div>
 </div>
@@ -108,7 +109,7 @@
 
 
 
-    const  btnModal = document.querySelectorAll('.img-container')
+    const  btnModal = document.querySelectorAll('.item-container')
     btnModal.forEach(function (obj, index){
         obj.addEventListener("click", e => {
             modalOn();
