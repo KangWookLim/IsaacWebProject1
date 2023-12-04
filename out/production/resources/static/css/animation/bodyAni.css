@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.preview-img-body {
+    width: 60px;
+    height: 46px;
+    position : relative;
+    top : calc(50% - 53px);
+    left : calc(50% - 25px);
+    background: url("../../images/isaac/issacBody.png") left center;
+    background-size : cover;
+    animation: playB 0.8s steps(10) infinite;
+    z-index: 2;
+} /* 몬스터 1마리의 크기만큼 width와 height 설정 */
+@keyframes playB {
+    100% {
+        background-position: -600px;
+    }
+}

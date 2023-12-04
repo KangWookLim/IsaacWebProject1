@@ -1,0 +1,93 @@
+@charset "UTF-8";
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial;
+        }
+
+        .wrap {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h2 {
+            font-size: 3em;
+            margin-bottom: 15%;
+        }
+
+        .log {
+            width: 30%;
+            height: 600px;
+            background: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border : 2px solid #ccc;
+        }
+
+        .id {
+            margin-bottom: 5%;
+            width: 80%;
+        }
+
+        .id input {
+            width: 100%;
+            height: 50px;
+            border-radius: 1rem;
+            margin-top: 10px;
+            padding: 0px 20px;
+            border: 1px solid lightgray;
+            outline: none;
+        }
+
+        .pw {
+            margin-bottom: 5%;
+            width: 80%;
+        }
+
+        .pw input {
+            width: 100%;
+            height: 50px;
+            border-radius: 1rem;
+            margin-top: 10px;
+            padding: 0px 20px;
+            border: 1px solid lightgray;
+            outline: none;
+        }
+
+
+        .loginBtn {
+            margin-top: 50px;
+            width: 80%;
+        }
+
+        #loginBtn {
+            width: 100%;
+            height: 50px;
+            border: 0;
+            outline: none;
+            border-radius: 40px;
+            background: #aaa;
+            color: white;
+            font-size: 1.2em;
+            letter-spacing: 2px;
+        }
+        .loginBtn a {
+			text-decoration : none;        	
+        	color : black;
+        }
+        .loginBtn a:hover {
+        	
+        	color : #ccc;
+        }
+
+        #loginBtn:hover{
+            color:white;
+            background-color: #ccc;
+        }
