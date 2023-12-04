@@ -39,8 +39,10 @@ dependencies {
     implementation ("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api") //스프링부트 3.0 이상
     implementation ("org.glassfish.web:jakarta.servlet.jsp.jstl") //스프링부트 3.0 이상
     implementation("org.springframework:spring-websocket:6.1.1")
-    implementation ("org.webjars:jquery:3.5.1")
+    implementation("javax.servlet:javax.servlet-api:3.0.1")
+
 }
+
 
 tasks.withType<Test> {
     useJUnitPlatform()
