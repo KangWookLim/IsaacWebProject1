@@ -22,12 +22,7 @@ public class MemberController {
         view.setViewName("views/member/join");
         return view;
     }
-    @GetMapping("/mem/login")
-    public ModelAndView login() {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("views/member/login");
-        return view;
-    }
+
     @GetMapping("/mem/chk")
     @ResponseBody
     public Map<String, Object> memCheck(@RequestParam(name="ID") String ID) {

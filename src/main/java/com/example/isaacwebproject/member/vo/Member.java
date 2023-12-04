@@ -2,8 +2,6 @@ package com.example.isaacwebproject.member.vo;
 
 import lombok.*;
 
-import java.util.Collection;
-
 @Getter
 public class Member {
 
