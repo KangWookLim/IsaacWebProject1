@@ -69,7 +69,7 @@ a{
     border : 2px solid white;
     margin-left : auto;
 }
-#item-container {
+#itemList-container {
     width : 100%;
     padding : 10px;
     grid-area : d;
@@ -79,7 +79,7 @@ a{
     gap : 1.2rem;
     overflow-y : auto;
 }
-.img-container {
+.item-container {
     max-height: 360px;
     min-width : 250px;
     flex-basis: 150px;
@@ -94,22 +94,38 @@ a{
     transition: background-color 0.5s;
 
 }
-.img-container:hover {
+.item-container:hover {
     box-shadow : none;
 }
-.img-container:active {
+.item-container:active {
     box-shadow: 1px 3px 5px 3px #dadce0 inset;
 }
 
-.skin-img {
-    display : inline-block;
+.skin-img-container {
+    display : flex;
     width : 100%;
     aspect-ratio: 1/1;
-    background: orange;
+    background: url("../../images/map/caves.png");
+    background-size : cover;
+    position : relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 .skin-img-btn {
     margin : 10px auto;
     display : flex
+}
+.skin-img{
+        width: 30%;
+        height: 30%;
+        margin-left: -5px;
+        margin-bottom: -25px;
+        z-index: 1;
+}
+.table-img{
+    width : 30%;
+    height : 30%;
 }
 #main-logo-container {
     width: 20vw;

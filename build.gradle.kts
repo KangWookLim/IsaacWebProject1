@@ -26,6 +26,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
     implementation ("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0")
     implementation ("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.0")
@@ -40,9 +41,7 @@ dependencies {
     implementation ("org.glassfish.web:jakarta.servlet.jsp.jstl") //스프링부트 3.0 이상
     implementation("org.springframework:spring-websocket:6.1.1")
     implementation("javax.servlet:javax.servlet-api:3.0.1")
-
 }
-
 
 tasks.withType<Test> {
     useJUnitPlatform()

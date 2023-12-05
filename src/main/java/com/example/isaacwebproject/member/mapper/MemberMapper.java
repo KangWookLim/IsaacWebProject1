@@ -4,13 +4,16 @@ import com.example.isaacwebproject.member.vo.Member;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 @Mapper
 public interface MemberMapper {
-    int checkUser(@Param("ID") String ID);
+    int checkId(@Param("ID") String ID);
 
-    int insertMember(Member.Request request) throws Exception;
+    Boolean insertMember(Member member);
 
-    Member.GetUserInfo getMemberInfo(@Param("ID") String boardId) throws Exception;
+    Member getMemberById(@Param("ID") String ID);
+
+
 }

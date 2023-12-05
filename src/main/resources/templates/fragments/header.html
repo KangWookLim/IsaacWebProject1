@@ -29,7 +29,12 @@
                 <li>Inventory</li>
             </ul>
         </div>
-        <a th:href="@{/mem/login}">
+        <a th:if="${userInfo==null}" th:href="@{/mem/login}">
+            <div class = "login-container">
+                login
+            </div>
+        </a>
+        <a th:if="${userInfo!=null}" th:href="@{/mem/logout}">
             <div class = "login-container">
                 login
             </div>

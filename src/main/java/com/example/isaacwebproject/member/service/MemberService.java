@@ -3,6 +3,7 @@ package com.example.isaacwebproject.member.service;
 import com.example.isaacwebproject.member.mapper.MemberMapper;
 import com.example.isaacwebproject.member.vo.Member;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,15 +11,17 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberMapper memberMapper;
-
-    public int checkUser(String ID) throws Exception{
-        return memberMapper.checkUser(ID);
+    private final PasswordEncoder passwordEncoder;
+    public int checkUser(String ID){
+        return memberMapper.checkId(ID);
     }
 
-    public int insertMember(Member.Request request) throws Exception {
-        System.out.println(request.getID() + request.getPW() + request.getNickname());
-
-        return memberMapper.insertMember(request);
+    public Boolean insertMember(String ID,String PW, String NICKNAME) throws Exception {
+        Member member = new Member();
+        member.setID(ID);
+        member.setPW(passwordEncoder.encode(PW));
+        member.setNICKNAME(NICKNAME);
+        return memberMapper.insertMember(member);
     }
     
 }
