@@ -1,0 +1,216 @@
+@charset "UTF-8";
+
+* {
+    margin : 0;
+    padding : 0;
+    list-style : none;
+    font-family: 'Blinker', sans-serif;
+}
+a{
+    text-decoration : none;
+    color : black;
+}
+#main-container {
+    height: 100%;
+    width: 100vw;
+    /* background : rgb(200, 200, 200); */
+    display : grid;
+    grid-template:
+            "c d d d" 1fr / 1fr 2fr;
+}
+
+#header-container {
+    min-width: 600px;
+    height : 70px;
+    padding-top : 5px;
+    /* background : red; */
+    display: flex;
+}
+#category-container {
+    height: 45px;
+    display : flex;
+    justify-content : center;
+    border-bottom : 2px solid rgb(200, 200, 200);
+    /* background : blue; */
+}
+#preview-container {
+    width : 100%;
+    /* padding : 15px; */
+    grid-area : c;
+    background : #eee;
+    display: flex;
+    justify-content: center;
+}
+#preview-box {
+    position : relative;
+    min-height : 300px;
+    min-width : 200px;
+    width : 80%;
+    aspect-ratio: auto 2/3;
+    background : #ccc;
+    margin : auto;
+    border-radius : 1rem;
+}
+.preview-bg-btn-container {
+    margin-top : 15px;
+    position :absolute;
+    width : 70%;
+    height : 50px;
+    display : flex;
+    margin-left : auto;
+}
+#preview-box .preview-bg-btn {
+    width : 3rem;
+    height : 2.5rem;
+    background : black;
+    z-index : 4;
+    display : inline;
+    position : relative;
+    border : 2px solid white;
+    margin-left : auto;
+}
+#itemList-container {
+    width : 100%;
+    padding : 10px;
+    grid-area : d;
+    background : white;
+    display : flex;
+    flex-wrap : wrap;
+    gap : 1.2rem;
+    overflow-y : auto;
+}
+.item-container {
+    max-height: 360px;
+    min-width : 250px;
+    flex-basis: 150px;
+    flex-grow: 0;
+    border : 2px solid #ccc;
+    border-radius : 0.5rem;
+    padding : 15px;
+    margin : 0 auto;
+    box-shadow: 1px 3px 5px 3px #dadce0;
+    justify-content : center;
+    float : right;
+    transition: background-color 0.5s;
+
+}
+.item-container:hover {
+    box-shadow : none;
+}
+.item-container:active {
+    box-shadow: 1px 3px 5px 3px #dadce0 inset;
+}
+
+.skin-img-container {
+    display : flex;
+    width : 100%;
+    aspect-ratio: 1/1;
+    background: url("../../images/map/caves.png");
+    background-size : cover;
+    position : relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.skin-img-btn {
+    margin : 10px auto;
+    display : flex
+}
+.skin-img{
+        width: 30%;
+        height: 30%;
+        margin-left: -5px;
+        margin-bottom: -25px;
+        z-index: 1;
+}
+.table-img{
+    width : 30%;
+    height : 30%;
+}
+#main-logo-container {
+    width: 20vw;
+    height: 120%;
+    transform: translateY(20%);
+}
+#main-logo-container a{
+    justify-content: center;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding : 0 10%;
+}
+
+#main-search-bar-container {
+    width : 65vw;
+    min-height : 40px;
+    display: flex;
+    justify-content: center;
+    padding : 15px 20px;
+}
+#game-start-btn {
+    width : 100%;
+    height : 100%;
+    background : blue;
+    display : inline;
+}
+.start-btn-container {
+    width : 15vw;
+    display : flex;
+    justify-content: center;
+
+}
+#main-search-bar {
+    width: 100%;
+    height: 100%;
+    margin : 0 auto;
+    background : white;
+    border-radius : 0.5rem;
+}
+li {
+    display : flex;
+    justify-content : center;
+}
+ul li {
+    display:inline;
+    font-size : 1.2rem;
+    border-left: 1px solid #c0c0c0;
+    padding: 0px 20px 0px 20px;
+    margin: 10px 0px 10px 0px;
+}
+ul li:first-child {
+    border-left: none;
+}
+li:hover {
+    color : gray;
+    cursor : pointer;
+}
+.preview-bg {
+    position : absolute;
+    z-index : 1;
+    height : 100%;
+    width : 100%;
+    object-fit : cover;
+    border-radius : 1rem;
+}
+.main-logo-img {
+    width: 100%;
+}
+.category-box {
+    display : flex;
+    justify-content : center;
+    width: 85vw;
+}
+#category-container>a {
+    margin : 5px;
+    width : 10vw;
+    background : black;
+    position : relative;
+    text-decoration : none;
+    text-align : center;
+    color : white;
+    border-radius : 5px;
+}
+.login-container {
+    transform: translateY(10%);
+}
+

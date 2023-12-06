@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/shop/shop.css}">
+    <link rel="stylesheet" th:href="@{/css/shop/modal.css}">
+    <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
+    <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
+
+</th:block>
+<div layout:fragment="content">
+    <div id = "main-container">
+        <div id = "preview-container">
+            <div id = "preview-box">
+                <div class = "preview-bg-btn-container">
+                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg1();">1</button>
+                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg2();">2</button>
+                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg3();">3</button>
+                </div>
+                <img th:src="@{/images/map/caves.png}" class = "preview-bg" id = "preview-bg"/>
+                <div class="preview-img-head"></div>
+                <div class="preview-img-body"></div>
+            </div>
+        </div>
+        <div id = "itemList-container" >
+            <div class="item-container" th:each="items, loop : ${itemList}">
+                <div class="skin-img-container">
+                    <img class="skin-img" th:src="${items.img_url}">
+                    <img class="table-img" src="/images/items/item_table.png"/>
+                </div>
+                <div class="skin-name" th:text="${items.name}"></div>
+                <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex" th:text="|Price : ${items.price}|"></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal section -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div id = "modal-img-container">
+                <div id = "modal-img-box">
+                    <img th:src="@{/images/map/caves.png}" class = "preview-bg"/>
+                </div>
+            </div>
+            <div id = "modal-btn-container">
+                <button type="button" class="btn-close" aria-label="Close"></button>
+            </div>
+            <div id = "modal-title-container">
+                <div class = "modal-title-txt">Item Name</div>
+                <div>seller : <span> SellerName </span></div>
+                <div>Due Date : <span>2099.99.99</span></div>
+            </div>
+            <div id = "modal-price-container">
+                <div>
+                    <p>
+                        <span>-</span><br>
+                        +<br>
+                        =
+                    </p>
+                </div>
+                <div class = "price-txt">
+                    <div> <span>Price</span> </div>
+                    <div> fund</div>
+                    <div> result</div>
+                </div>
+            </div>
+            <div id = "modal-confirm-container" onclick = "confirmOrder();">
+                <div class = "make-order-txt">
+                    Purchase
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript" th:src="@{/js/view/shop.js}"></script>
+</div>
+
+</html>

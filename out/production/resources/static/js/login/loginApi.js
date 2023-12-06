@@ -40,8 +40,9 @@ function login() {
         }).done(function(data){
             if(data.resultCode === 200) {
             	alert('성공');
-                location.href ="../../../../../../build/generated/sources/annotationProcessor/java/main";
+                location.href ="/";
             }else {
+                console.log(data.resultCode);
                 alert('아이디 또는 패스워드를 확인하십시오.');
                 return false;
             }
