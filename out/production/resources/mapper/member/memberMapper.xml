@@ -2,24 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.isaacwebproject.member.mapper.MemberMapper">
 
-    <select id="checkUser" resultType="int" parameterType="java.util.Map">
+    <select id="checkId" resultType="int" parameterType="map">
         select count(*) as  cnt
         from member
         where ID =  #{ID}
     </select>
 
-    <insert id="insertMember" parameterType="com.example.isaacwebproject.member.vo.Member$Request">
-
-        insert into member
-        (MEMID, ID, PW, NICKNAME)
-        values(IDUP.NEXTVAL, #{ID}, #{PW}, #{nickname})
+    <insert id="insertMember" parameterType="com.example.isaacwebproject.member.vo.Member">
+        INSERT INTO member
+        (memid,id,pw,nickname)
+        VALUES
+        (IDUP.NEXTVAL,#{ID},#{PW},#{NICKNAME})
 
     </insert>
 
-    <select id="getMemberInfo"  parameterType="com.example.isaacwebproject.member.vo.Member$GetUserInfo">
+    <select id="getMemberById" resultType="com.example.isaacwebproject.member.vo.Member" parameterType="java.util.Map">
         select *
         from member
-        where user_id =  #{memId}
+        where ID =  #{ID}
     </select>
 
 </mapper>

@@ -1,0 +1,124 @@
+@charset "UTF-8";
+#modal.modal-overlay {
+    z-index: 100;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(1.5px);
+    -webkit-backdrop-filter: blur(1.5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#modal .modal-window {
+    background: rgb( 255, 255, 255 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 14px );
+    -webkit-backdrop-filter: blur( 14px );
+    border-radius: 1.5em;
+    z-index: 101;
+    width: 70vw;
+    aspect-ratio: auto 3/2;
+    min-width: 500px !important;
+    display : grid;
+    overflow : hidden;
+    -webkit-touch-callout: none;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    grid-template:
+            "a b " 70px
+            "a c " 1fr
+            "a d " 1fr
+            "a e " 70px / 1fr 1fr;
+}
+
+.btn-close {
+    position : absolute;
+    top : 20px;
+    right : 20px;
+}
+
+#modal-img-container {
+    grid-area : a;
+    background : #eee;
+    display: flex;
+    justify-content: center;
+    border-right : 2px solid #ccc;
+}
+#modal-img-box {
+    position : relative;
+    min-height : 300px;
+    min-width : 200px;
+    width : 70%;
+    aspect-ratio: auto 2/3;
+    background : #ccc;
+    margin : auto;
+    border-radius : 1rem;
+}
+#modal-btn-container {
+    grid-area : b;
+    /* background : blue; */
+}
+#modal-title-container {
+    grid-area : c;
+    /* background : yellow; */
+    text-align : right;
+    border-top : 2px solid #ccc;
+    padding : 15px;
+    color : #999;
+}
+#modal-title-container span {
+    color : black;
+    font-size : 1.2rem;
+}
+#modal-price-container {
+    grid-area : d;
+    text-align : right;
+    border-top : 2px solid #ccc;
+    padding : 15px;
+    display : grid;
+    grid-template-columns : 1fr 1fr;
+    font-size : 1.2rem;
+}
+#modal-price-container span{
+    font-size : 1.5rem;
+}
+#modal-price-container p{
+    color : #aaa;
+}
+#modal-confirm-container {
+    grid-area : e;
+    pointer-events : auto;
+    border-top : 2px solid #ccc;
+    cursor :pointer;
+}
+.make-order-txt {
+    text-align: center;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size : 2rem;
+}
+#modal-confirm-container:hover {
+    background : #ccc;
+}
+
+#modal-confirm-container:active {
+    background : #aaa;
+}
+.modal-title-txt {
+    font-size : 1.5rem;
+    text-align : center;
+    margin-bottom : 10px;
+    color : black;
+}
