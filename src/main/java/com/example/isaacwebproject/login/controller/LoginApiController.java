@@ -1,9 +1,11 @@
 package com.example.isaacwebproject.login.controller;
 
+import com.example.isaacwebproject.config.SessionConfig;
 import com.example.isaacwebproject.login.service.LoginService;
 import com.example.isaacwebproject.member.vo.Member;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSessionEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +18,7 @@ import java.util.Map;
 public class LoginApiController {
 
     private final LoginService service;
-
+    private final SessionConfig sessionConfig;
 
     @RequestMapping("/mem/login")
     @ResponseBody
@@ -35,9 +37,14 @@ public class LoginApiController {
 
             }else {
                 HttpSession session = request.getSession();
-                session.setAttribute("userInfo", member);
-                resultMap.put("resultCode", 200);
-                session.setMaxInactiveInterval(60 * 30);
+                if(sessionConfig.doubleLoginCheck(ID)) {
+                    throw new Exception("중복 로그인 입니다.");
+                }else {
+                    session.setAttribute("userInfo", member.getID());
+                    sessionConfig.sessionCreated(session);
+                    resultMap.put("resultCode", 200);
+                    session.setMaxInactiveInterval(60 * 30);
+                }
             }
         }catch (Exception e) {
             resultMap.put("resultCode", 500);

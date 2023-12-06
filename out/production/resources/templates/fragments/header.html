@@ -30,13 +30,25 @@
                 <li><a th:href="@{/inven}">Inventory</a></li>
             </ul>
         </div>
-        <a th:href="@{/mem/login}">
+        <a th:href="@{/mem/login}" th:style="${session.userInfo == null ? 'display:block' : 'display:none'}">
             <div class = "login-container">
                 login
             </div>
         </a>
+        <a href="javascript:void(0);" onclick="logOut();" th:style="${session.userInfo != null ? 'display:block' : 'display:none'}">
+            <div class = "login-container">
+                logout
+            </div>
+        </a>
     </div>
-    <script></script>
+    <script>
+        function logOut(){
+            const isConfirm = confirm('로그아웃 하시겠습니까?');
+            if(isConfirm) {
+                location.href = '/mem/logout';
+            }
+        }
+    </script>
 </div>
 
 </html>
