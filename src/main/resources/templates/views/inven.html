@@ -8,9 +8,28 @@
     <link rel="stylesheet" th:href="@{/css/home/modal.css}">
     <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
     <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
+    <link rel="stylesheet" th:href="@{/css/inven/inven.css}">
 
 </th:block>
 <div layout:fragment="content">
-
+    <div id="inven-wrap">
+        <div id = "inven-side-container">
+            <div id = "preview-box">
+                <img th:src="@{/images/map/caves.png}" class = "preview-bg" id = "preview-bg"/>
+                <div class="preview-img-head"></div>
+                <div class="preview-img-body"></div>
+            </div>
+        </div>
+        <div id = "inven-main-container">
+            <div id = "itemList-container" >
+                <div class="item-container">
+                    <div class="skin-img-container">
+                        <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
+                        <img class="table-img" src="/images/items/item_table.png"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </html>
