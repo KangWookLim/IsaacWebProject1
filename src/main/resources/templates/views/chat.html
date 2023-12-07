@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main_layout}">
+
+<th:block layout:fragment="css">
+    <link rel="stylesheet" th:href="@{/css/home/home.css}">
+    <link rel="stylesheet" th:href="@{/css/chat/chat.css}">
+
+</th:block>
+<th:block layout:fragment="script">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script th:src="@{/js/view/chat.js}"></script>
+</th:block>
+<div layout:fragment="content">
+    <div id = "main-container">
+        <div id = "left-navbar-container">
+
+        </div>
+        <div id = "chat-container">
+            <input type="text" id="message" placeholder="메세지 입력" />
+            <button id="sendBtn">전송</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var socket = new WebSocket("ws:localhost:8098/chat")
+    socket.onopen = function (event) {
+        console.log("연결 성공");
+    };
+    socket.onmessage = function (event) {
+        showMessage(event.data);
+    };
+
+    function sendMessage() {
+        var message = $("#message").val();
+        socket.send(message);
+        console.log(message);
+    }
+
+    function showMessage(message) {
+        $("#messageArea").append("<br>" + message);
+    }
+
+    $("#sendBtn").on("click", function () {
+        sendMessage();
+    });
+
+    $("#message").keypress(function (e) {
+        if (e.which === 13) {
+            sendMessage();
+        }
+    });
+</script>
+</html>
