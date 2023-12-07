@@ -3,20 +3,24 @@ package com.example.isaacwebproject.login.controller;
 import com.example.isaacwebproject.config.SessionConfig;
 import com.example.isaacwebproject.login.service.LoginService;
 import com.example.isaacwebproject.member.vo.Member;
+import com.example.isaacwebproject.websocket.socketClient.MyWebSocketClient;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpSessionEvent;
 import lombok.RequiredArgsConstructor;
+import org.java_websocket.client.WebSocketClient;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 
+import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
 public class LoginApiController {
-
+    private MyWebSocketClient client;
     private final LoginService service;
     private final SessionConfig sessionConfig;
 
@@ -51,5 +55,22 @@ public class LoginApiController {
             e.printStackTrace();
         }
         return resultMap;
+    }
+
+    @GetMapping("/mem/logout")
+    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
+        ModelAndView view = new ModelAndView();
+
+        if(request.getSession().getAttribute("userInfo") != null) {
+            sessionConfig.sessionDestroyed(request.getSession().getAttribute("userInfo"));
+            sessionConfig.countsessions();
+            request.getSession().removeAttribute("userInfo");
+        }
+
+        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+        response.setHeader("Pragma", "no-cache");
+        response.setHeader("Expires", "0");
+        view.setViewName("redirect:/");
+        return view;
     }
 }

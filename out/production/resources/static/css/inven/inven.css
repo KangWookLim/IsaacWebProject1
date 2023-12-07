@@ -1,0 +1,16 @@
+#inven-wrap {
+    width : 100%;
+    min-width : 800px;
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    height : 100%;
+
+}
+
+#inven-side-container {
+    background : #eee;
+    border-right : 2px solid rgb(200, 200, 200);
+    display : flex;
+    justify-content : center;
+    align-items : center;
+}

@@ -33,22 +33,4 @@ public class LoginController {
         view.setViewName("views/member/error");
         return view;
     }
-
-
-    @GetMapping("/mem/logout")
-    public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView view = new ModelAndView();
-
-        if(request.getSession().getAttribute("userInfo") != null) {
-            sessionConfig.sessionDestroyed(request.getSession().getAttribute("userInfo"));
-            sessionConfig.countsessions();
-            request.getSession().removeAttribute("userInfo");
-        }
-
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Expires", "0");
-        view.setViewName("redirect:/");
-        return view;
-    }
 }
