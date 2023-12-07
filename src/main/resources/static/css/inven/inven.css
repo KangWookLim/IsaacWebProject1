@@ -14,3 +14,49 @@
     justify-content : center;
     align-items : center;
 }
+#inven-main-container {
+    padding : 10px;
+    background : white;
+    display : flex;
+    flex-wrap : wrap;
+    gap : 1rem;
+    overflow-y : auto;
+    justify-content : flex-start;
+    align-items : flex-start;
+    align-content : flex-start;
+}
+.inven-item-container {
+    height: 120px;
+    width : 120px;
+    flex-grow: 0;
+    border : 2px solid #ccc;
+    border-radius : 0.5rem;
+    padding : 15px;
+    margin : 0 auto;
+    box-shadow: 1px 3px 5px 3px #dadce0;
+    justify-content : center;
+    transition: background-color 0.5s;
+}
+.inven-item-container:hover {
+    box-shadow : none;
+}
+.inven-item-container:active {
+    box-shadow: 1px 3px 5px 3px #dadce0 inset;
+}
+.item-img-container {
+    display : flex;
+    width : 100%;
+    aspect-ratio: 1/1;
+    background: url("../../images/map/caves.png");
+    background-size : cover;
+    position : relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#inven-category-box {
+    display : flex;
+    justify-content : center;
+    width : 100%;
+    border-bottom: 1px solid #ccc;
+}
