@@ -27,7 +27,6 @@ public class InvenController {
     }
 
 
-
 //    @RequestMapping("/inven")
 //    public List<InvenVO> getInvenData(){
 //        List<InvenVO> inven = new ArrayList<>();
@@ -41,4 +40,5 @@ public class InvenController {
 //
 //        return inven;
 //    }
+
 }
