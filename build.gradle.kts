@@ -44,7 +44,7 @@ dependencies {
     implementation("org.java-websocket:Java-WebSocket:1.5.4")
 }
 
-tasks.withType(test) {
+tasks.withType<test> {
     useJUnitPlatform()
 }
 
