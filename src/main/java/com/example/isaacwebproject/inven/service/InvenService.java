@@ -1,6 +1,7 @@
 package com.example.isaacwebproject.inven.service;
 
 import com.example.isaacwebproject.inven.mapper.InvenMapper;
+import com.example.isaacwebproject.inven.repo.InvenRepo;
 import com.example.isaacwebproject.inven.vo.InvenVO;
 import com.example.isaacwebproject.member.mapper.MemberMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,11 +21,16 @@ import java.util.Map;
 public class InvenService {
 
     private final MemberMapper memberMapper;
+    private final InvenRepo invenRepo;
     private final InvenMapper mapper;
 
     public List<InvenVO> getInvenData(String ID) throws Exception {
         List<InvenVO> inventory = mapper.getInvenData(ID);
         return inventory;
+    }
+    public List<InvenVO> findElementsByMemid(String ID) throws Exception {
+        System.out.println(invenRepo.findElementsByMemid(ID));
+        return invenRepo.findElementsByMemid(ID);
     }
 
 
