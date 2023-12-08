@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 @Controller
@@ -18,10 +20,13 @@ public class InvenController {
     private final MemberMapper memberMapper;
 
     @RequestMapping("/inven")
-    public ModelAndView inven() throws Exception {
+    public ModelAndView inven(HttpServletRequest request) throws Exception {
         List<InvenVO> inven = new ArrayList<>();
         ModelAndView view = new ModelAndView();
-        inven = service.findElementsByMemid("1234");
+        HttpSession session = request.getSession();
+        String memId = (String)(session.getAttribute("userInfo"));
+        inven = service.findElementsByMemid(memId);
+        view.addObject("inven", inven);
         view.setViewName("views/inven");
         return view;
     }

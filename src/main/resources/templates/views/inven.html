@@ -22,16 +22,14 @@
         </div>
         <div id = "inven-main-container">
             <div id = "inven-category-box">
-                <ul>
-                    <li><a th:href="@{/}">All</a></li>
-                    <li><a th:href="@{/}">Skin</a></li>
-                    <li><a th:href="@{/}">Item</a></li>
-                </ul>
             </div>
-            <div class="inven-item-container" th:each="items, loop : ${itemList}">
+            <div class="inven-item-container" th:each="inven, loop : ${inven}">
                 <div class="item-img-container">
-                    <img class="skin-img" th:src="${items.img_url}">
+                    <img class="inven-skin-img" th:src="${inven.img_url}">
                     <img class="table-img" src="/images/items/item_table.png"/>
+                </div>
+                <div class="item-amount">
+                    <span class="inven-item-x">X</span><span class="inven-item-amount" th:text="${inven.amount}"></span>
                 </div>
             </div>
         </div>

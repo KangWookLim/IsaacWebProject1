@@ -19,10 +19,12 @@ public class InvenRepo {
                     rs.getString("mem_id"),
                     rs.getInt("items_id"),
                     rs.getInt("amount"),
-                    rs.getInt("used")
+                    rs.getInt("used"),
+                    rs.getString("img_url")
             );
     public List<InvenVO> findElementsByMemid(String memId) {
-        String query = "SELECT * FROM inventory WHERE mem_id = :memId";
+        String query =
+                "SELECT inv.*, i.IMG_URL img_url FROM inventory inv LEFT OUTER JOIN items i ON inv.ITEMS_ID = i.ID WHERE mem_id = :memId";
         Map<String, Object> param = Map.of("memId", memId);
         return jdbcTemplate.query(query, param, rowMapper);
     }
