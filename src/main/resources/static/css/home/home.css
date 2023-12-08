@@ -17,7 +17,7 @@ a{
     /* background : rgb(200, 200, 200); */
     display : grid;
     grid-template:
-            "c d d d" 1fr / 1fr 2fr;
+            "a b c c" 1fr / 1.5fr 4fr;
 }
 
 #header-container {
@@ -215,4 +215,6 @@ li:hover {
 .login-container {
     transform: translateY(10%);
 }
+#main-slide-container {
 
+}
