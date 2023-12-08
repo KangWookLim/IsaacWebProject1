@@ -28,8 +28,6 @@ public class InvenController {
         return view;
     }
 
-
-
     @RequestMapping(value ="/inven", method = { RequestMethod.GET})
     public List<InvenVO> getInvenData(@RequestParam(name="ID", required = true)String ID){
         List<InvenVO> inven = new ArrayList<>();

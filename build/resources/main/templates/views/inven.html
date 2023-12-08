@@ -28,74 +28,14 @@
                     <li><a th:href="@{/}">Item</a></li>
                 </ul>
             </div>
-            <div class="inven-item-container">
+            <div class="inven-item-container" th:each="items, loop : ${itemList}">
                 <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
+                    <img class="skin-img" th:src="${items.img_url}">
                     <img class="table-img" src="/images/items/item_table.png"/>
                 </div>
             </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-            <div class="inven-item-container">
-                <div class="item-img-container">
-                    <img class="skin-img" th:src="@{/images/items/icon/crown.png}">
-                    <img class="table-img" src="/images/items/item_table.png"/>
-                </div>
-            </div>
-
         </div>
     </div>
+    <script type="text/javascript" th:src="@{/js/view/inven.js}"></script>
 </div>
 </html>
