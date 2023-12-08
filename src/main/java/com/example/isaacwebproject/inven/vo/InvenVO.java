@@ -13,4 +13,5 @@ public class InvenVO {
         private int ItemId;
         private int amount;
         private int used;
+        private String img_url;
 }

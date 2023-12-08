@@ -19,9 +19,9 @@ public class ItemsController {
     @RequestMapping("/shop")
     public ModelAndView itemsList() {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("views/shop");
         List<Items> itemList = this.itemsService.getAllItems();
         modelAndView.addObject("itemList", itemList);
+        modelAndView.setViewName("views/shop");
         return modelAndView;
     }
 
