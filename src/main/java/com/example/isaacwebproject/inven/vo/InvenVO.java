@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class InvenVO {
-
         private String memId;
         private int ItemId;
         private int amount;

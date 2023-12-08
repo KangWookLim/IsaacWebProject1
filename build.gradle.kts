@@ -2,7 +2,8 @@ plugins {
     java
     id("org.springframework.boot") version "3.1.5"
     id("io.spring.dependency-management") version "1.1.3"
-}
+    kotlin("jvm") version "1.6.10"
+}   
 
 group = "com.example"
 version = "0.0.1-SNAPSHOT"
@@ -43,7 +44,7 @@ dependencies {
     implementation("org.java-websocket:Java-WebSocket:1.5.4")
 }
 
-tasks.withType <Test>{
+tasks.withType<test> {
     useJUnitPlatform()
 }
 
