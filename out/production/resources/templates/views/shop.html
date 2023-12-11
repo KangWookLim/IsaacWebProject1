@@ -2,13 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/main_layout}">
-
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/shop/shop.css}">
     <link rel="stylesheet" th:href="@{/css/shop/modal.css}">
     <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
     <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
-
 </th:block>
 <div layout:fragment="content">
     <div id = "main-container">
@@ -37,44 +35,54 @@
     </div>
 
     <!-- modal section -->
-    <div id="modal" class="modal-overlay">
+    <div class="modal" th:each="items, loop : ${itemList}">
         <div class="modal-window">
-            <div id = "modal-img-container">
-                <div id = "modal-img-box">
+            <div class = "modal-img-container">
+                <div class = "modal-img-box">
                     <img th:src="@{/images/map/caves.png}" class = "preview-bg"/>
+                    <div class="preview-img-head"></div>
+                    <div class="preview-img-body"></div>
                 </div>
             </div>
-            <div id = "modal-btn-container">
+            <div class = "modal-btn-container">
+                <div class = "modal-item-id">
+                    <div th:text="${items.name}"></div>
+                </div>
                 <button type="button" class="btn-close" aria-label="Close"></button>
             </div>
-            <div id = "modal-title-container">
-                <div class = "modal-title-txt">Item Name</div>
-                <div>seller : <span> SellerName </span></div>
-                <div>Due Date : <span>2099.99.99</span></div>
+            <div class = "modal-title-container">
+                <strong>ID : </strong><span th:text="${items.id}"></span> <br>
+                <strong>PRICE : </strong><span class="item-price" th:text="|${items.price}|"></span> <br>
+                <strong>RARITY : </strong><span th:text="|${items.rarity}|"></span> <br>
+                <strong>EFECT : </strong><span th:text="|${items.effect}|"></span>
             </div>
-            <div id = "modal-price-container">
-                <div>
-                    <p>
-                        <span>-</span><br>
-                        +<br>
-                        =
-                    </p>
-                </div>
+            <div class = "modal-price-container">
                 <div class = "price-txt">
-                    <div> <span>Price</span> </div>
-                    <div> fund</div>
-                    <div> result</div>
+                    <div>
+                        <span>Total Price : </span> <span class="total-price"> 0 </span>
+                    </div>
+                    <div>
+                        <span>Amount : </span> <span class="total-amount"> 0 </span>
+                    </div>
+                </div>
+                <div class="amount-button-container">
+                    <div class="amount-button-plus">+</div>
+                    <div class="amount-button-minus">-</div>
                 </div>
             </div>
-            <div id = "modal-confirm-container" onclick = "confirmOrder();">
-                <div class = "make-order-txt">
+            <div class="modal-pagebutton-container">
+
+            </div>
+            <div class = "modal-confirm-container">
+                <div class = "order">
                     Purchase
                 </div>
             </div>
 
         </div>
     </div>
-    <script type="text/javascript" th:src="@{/js/view/shop.js}"></script>
 </div>
-
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/view/shop.js}"></script>
+</th:block>
 </html>

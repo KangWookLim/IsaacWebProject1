@@ -20,12 +20,13 @@
         </div>
         <div id = "chat-container">
             <input type="text" id="message" placeholder="메세지 입력" />
-            <button id="sendBtn">전송</button>
+            <button id="sendBtn">메세지 전송</button>
         </div>
     </div>
 </div>
+</html>
 <script type="text/javascript">
-    var socket = new WebSocket("ws:localhost:8098/chat")
+    var socket = new WebSocket("ws://localhost:8056");
     socket.onopen = function (event) {
         console.log("연결 성공");
     };
@@ -37,6 +38,10 @@
         var message = $("#message").val();
         socket.send(message);
         console.log(message);
+    }
+
+    socket.onerror = function(event){
+        console.log("에러");
     }
 
     function showMessage(message) {
@@ -53,4 +58,3 @@
         }
     });
 </script>
-</html>

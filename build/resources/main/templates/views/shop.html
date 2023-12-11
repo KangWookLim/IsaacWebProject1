@@ -2,13 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/main_layout}">
-
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/shop/shop.css}">
     <link rel="stylesheet" th:href="@{/css/shop/modal.css}">
     <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
     <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
-
 </th:block>
 <div layout:fragment="content">
     <div id = "main-container">
@@ -42,15 +40,16 @@
             <div id = "modal-img-container">
                 <div id = "modal-img-box">
                     <img th:src="@{/images/map/caves.png}" class = "preview-bg"/>
+                    <div class="preview-img-head"></div>
+                    <div class="preview-img-body"></div>
                 </div>
             </div>
             <div id = "modal-btn-container">
+                <div id = "modal-item-id"></div>
                 <button type="button" class="btn-close" aria-label="Close"></button>
             </div>
             <div id = "modal-title-container">
-                <div class = "modal-title-txt">Item Name</div>
-                <div>seller : <span> SellerName </span></div>
-                <div>Due Date : <span>2099.99.99</span></div>
+
             </div>
             <div id = "modal-price-container">
                 <div>
@@ -74,7 +73,8 @@
 
         </div>
     </div>
-    <script type="text/javascript" th:src="@{/js/view/shop.js}"></script>
 </div>
-
+<th:block layout:fragment="script">
+    <script th:inline="javascript" th:src="@{/js/view/shop.js}"></script>
+</th:block>
 </html>

@@ -10,7 +10,12 @@
     function modalOff() {
         modal.style.display = "none"
     }
-    function modalOn() {
+    function modalOn(index) {
+        let modal_title = document.getElementById("modal-title-container");
+        var add_title = document.createElement("div");
+        add_title.setAttribute("class","modal-title-txt");
+        add_title.setAttribute("th:text","|ItemID : ${itemList["+index+"].id}|");
+        modal_title.append(add_title);
         modal.style.display = "grid"
     }
 
@@ -29,13 +34,11 @@
     function confirmOrder() {
         modalOff();
     }
-
-
-
-    const  btnModal = document.querySelectorAll('.item-container')
+    
+    const btnModal = document.querySelectorAll('.item-container');
     btnModal.forEach(function (obj, index){
         obj.addEventListener("click", e => {
-            modalOn();
+            modalOn(index);
         })
     });
 
