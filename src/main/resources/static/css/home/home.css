@@ -17,11 +17,11 @@ a{
     /* background : rgb(200, 200, 200); */
     display : grid;
     grid-template:
-            "a b c c" 1fr / 1.5fr 4fr;
+            "a b" 1fr / 1.5fr 4fr;
 }
 
 #header-container {
-    min-width: 800px;
+    width :100vw;
     height : 70px;
     padding-top : 5px;
     /* background : red; */
@@ -30,7 +30,6 @@ a{
 }
 #category-container {
     height: 45px;
-    min-width :800px;
     display : flex;
     justify-content : center;
     border-bottom : 2px solid rgb(200, 200, 200);
@@ -215,6 +214,57 @@ li:hover {
 .login-container {
     transform: translateY(10%);
 }
+#accordionExample .btn-light {
+    display:block;
+    width : 100%;
+    border-radius : 0;
+}
+.main-slide-box {
+    padding: 20px;
+    position: relative;
+    display : block;
+}
+.main-img-box {
+width: 150px;
+height: 150px;
+background: url(../../images/map/caves.png);
+background-size: cover;
+border-radius: 5px;
+display: flex;
+justify-content: center;
+align-items: center;
+margin-right: 20px;
+float: left;
+}
+.main-ex-img {
+width : 50px;
+}
+.main-text-container .table-dark {
+width : 250px;
+min-width : 200px;
+}
+#main-slide-cover .main-text-container {
+position: relative;
+width: 150px;
+height: 150px;
+float: left;
+margin-right: 20px;
+}
+.main-slide-box span {
+word-break: break-all;
+}
+#main-content-container {
+    border-right : 2px solid #ccc;
+}
 #main-slide-container {
+    width : 100%;
+}
+.home-default-logo {
+    width : 100%;
+    display : flex;
+    justify-content: center;
+}
+.home-logo-img {
+    width : 60%;
 
 }
