@@ -15,10 +15,6 @@ public class ServerControl extends Server {
 		start();
 	}
 
-	public static void main(String[] args) {
-		ServerControl serverControl = new ServerControl();
-	}
-
 	@Override
 	public void start() {
 		Socket socket = null;
