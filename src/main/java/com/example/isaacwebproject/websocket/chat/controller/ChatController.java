@@ -21,7 +21,7 @@ public class ChatController {
 
    @GetMapping("/chat")
    public ModelAndView chatHome(){
-      ModelAndView chat = new ModelAndView("views/chat");
+      ModelAndView chat = new ModelAndView("views/board/chat");
       return chat;
    }
 

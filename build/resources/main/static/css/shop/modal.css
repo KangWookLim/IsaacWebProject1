@@ -1,5 +1,5 @@
 @charset "UTF-8";
-#modal.modal-overlay {
+.modal {
     z-index: 100;
     width: 100%;
     height: 100%;
@@ -18,7 +18,7 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-#modal .modal-window {
+.modal .modal-window {
     background: rgb( 255, 255, 255 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 14px );
@@ -29,7 +29,7 @@
     aspect-ratio: auto 3/2;
     min-width: 500px !important;
     display : grid;
-    overflow : hidden;
+    overflow : auto;
     -webkit-touch-callout: none;
     user-select: none;
     -moz-user-select: none;
@@ -40,6 +40,10 @@
             "a c " 1fr
             "a d " 1fr
             "a e " 70px / 1fr 1fr;
+
+}
+.modal .modal-window::-webkit-scrollbar{
+    border-radius: 1.5rem;
 }
 
 .btn-close {
@@ -48,14 +52,14 @@
     right : 20px;
 }
 
-#modal-img-container {
+.modal-img-container {
     grid-area : a;
     background : #eee;
     display: flex;
     justify-content: center;
     border-right : 2px solid #ccc;
 }
-#modal-img-box {
+.modal-img-box {
     position : relative;
     min-height : 300px;
     min-width : 200px;
@@ -65,23 +69,37 @@
     margin : auto;
     border-radius : 1rem;
 }
-#modal-btn-container {
-    grid-area : b;
-    /* background : blue; */
+.modal-btn-container {
+    display: flex;
+    grid-area: b;
+    /* background: blue; */
+    justify-content: center;
+    align-items: center;
 }
-#modal-title-container {
+.modal-title-container {
     grid-area : c;
     /* background : yellow; */
-    text-align : right;
     border-top : 2px solid #ccc;
     padding : 15px;
     color : #999;
 }
-#modal-title-container span {
+
+.modal-item-id{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align : center;
+}
+
+.modal-title-container span {
     color : black;
     font-size : 1.2rem;
 }
-#modal-price-container {
+
+.modal-title-container strong {
+    color : black;
+    font-size : 1.3rem;
+}
+.modal-price-container {
     grid-area : d;
     text-align : right;
     border-top : 2px solid #ccc;
@@ -90,32 +108,40 @@
     grid-template-columns : 1fr 1fr;
     font-size : 1.2rem;
 }
-#modal-price-container span{
+.modal-price-container span{
     font-size : 1.5rem;
 }
-#modal-price-container p{
+.modal-price-container p{
     color : #aaa;
 }
-#modal-confirm-container {
+.price-txt{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.modal-confirm-container {
     grid-area : e;
     pointer-events : auto;
     border-top : 2px solid #ccc;
     cursor :pointer;
 }
-.make-order-txt {
+.modal-confirm-container:hover {
+    background : #ccc;
+}
+
+.modal-confirm-container:active {
+    background : #aaa;
+}
+.modal-confirm-container .order {
     text-align: center;
     position: relative;
     top: 50%;
     transform: translateY(-50%);
     font-size : 2rem;
 }
-#modal-confirm-container:hover {
-    background : #ccc;
-}
 
-#modal-confirm-container:active {
-    background : #aaa;
-}
 .modal-title-txt {
     font-size : 1.5rem;
     text-align : center;
