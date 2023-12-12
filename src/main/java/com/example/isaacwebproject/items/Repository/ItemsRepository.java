@@ -25,6 +25,15 @@ public class ItemsRepository {
                     rs.getInt("price"),
                     rs.getString("name")
             );
+//    private final RowMapper<Items> searchMapper = (rs, rowNum) ->
+//            new Items(
+//                    rs.getInt("id"),
+//                    rs.getString("img_url"),
+//                    rs.getInt("price"),
+//                    rs.getString("name"),
+//                    rs.getString("search")
+//            );
+
     public Optional<Items> findById(int id){
         String sql = "SELECT * FROM items WHERE id = :id";
         try{
@@ -40,5 +49,9 @@ public class ItemsRepository {
         String sql = "SELECT * FROM items";
         return jdbcTemplate.query(sql, rowMapper);
     }
+//    public List<Items> searchItems(String keyword) {
+//        String sql = "SELECT * FROM items WHERE name like '%keyword%'";
+//        return jdbcTemplate.query(sql, rowMapper);
+//    }
 
 }

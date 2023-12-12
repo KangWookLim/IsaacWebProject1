@@ -25,6 +25,14 @@ public class ItemsController {
         return modelAndView;
     }
 
+//    @RequestMapping("/shop/search")
+//    public ModelAndView searchList(String keyword) {
+//        ModelAndView modelAndView = new ModelAndView();
+//        List<Items> itemList = this.itemsService.searchItem(keyword);
+//        modelAndView.addObject("itemList", itemList);
+//        modelAndView.setViewName("views/shop");
+//        return modelAndView;
+//    }
 
 
 

@@ -25,4 +25,7 @@ public class ItemsService {
     public List<Items> getAllItems() {
         return this.itemsRepository.findAll();
     }
+//    public List<Items> searchItem(String keyword) {
+//        return this.itemsRepository.searchItems(keyword);
+//    }
 }
