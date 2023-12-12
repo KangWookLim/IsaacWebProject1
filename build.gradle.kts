@@ -42,6 +42,7 @@ dependencies {
     implementation ("org.glassfish.web:jakarta.servlet.jsp.jstl") //스프링부트 3.0 이상
     implementation("javax.servlet:javax.servlet-api:3.0.1")
     implementation("org.java-websocket:Java-WebSocket:1.5.4")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
 
