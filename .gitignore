@@ -12,6 +12,7 @@
 
 # Package Files #
 *.jar
+!minigame.jar
 *.war
 *.nar
 *.ear
