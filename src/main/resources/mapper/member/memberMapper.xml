@@ -24,13 +24,13 @@
 
     <update id="updateCoinById">
         update member
-        set coin = #{Coin}
+        set COIN = #{COIN}
         where ID = #{ID}
     </update>
 
     <update id="updateEXPById">
         update member
-        set coin = #{EXP}
+        set EXP = #{EXP}
         where ID = #{ID}
     </update>
 

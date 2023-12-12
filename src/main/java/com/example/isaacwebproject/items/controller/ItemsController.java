@@ -5,6 +5,7 @@ import com.example.isaacwebproject.items.service.ItemsService;
 import com.example.isaacwebproject.items.vo.Items;
 import com.example.isaacwebproject.member.service.MemberSecurityService;
 import com.example.isaacwebproject.member.service.MemberService;
+import com.example.isaacwebproject.member.vo.Member;
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -38,22 +39,22 @@ public class ItemsController {
 
     @PostMapping("/shop/order")
     @ResponseBody
-    public ResponseEntity<String> orderItems(@RequestParam("totalprice") int totalprice, HttpServletRequest request) {
-        int coin;
+    public ResponseEntity<String> orderItems(@RequestParam("ItemID") int ItemID, @RequestParam("Amount") int Amount, HttpServletRequest request) {
         HttpSession session = request.getSession();
         String memId = (String)(session.getAttribute("userInfo"));
         if(memId == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인이 필요합니다.");
         }else {
-            coin = memberSecurityService.loadUserByUsername(memId).getCOIN();
-            if(coin < totalprice) {
-                //TODO: 거래실패 로직
-            }else{
-                memberService.updateCoinById(memId, coin-totalprice);
-                return ResponseEntity.ok("success");
-            }
+            Member orderedMember = memberSecurityService.loadUserByUsername(memId);
+            Items orderedItem = this.itemsService.getItem(ItemID);
+//            if(membercoin < totalprice) {
+//                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("소지 골드가 모자랍니다.");
+//            }else{
+//                System.out.println("성공");
+//                memberService.updateCoinById(memId, coin-totalprice);
+//                return ResponseEntity.ok("구입성공");
+//            }
         }
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
     }
 
     @RequestMapping(value = "/shop/search")
