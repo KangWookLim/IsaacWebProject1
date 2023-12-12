@@ -27,6 +27,8 @@ public class ItemsRepository {
                     rs.getString("rarity"),
                     rs.getString("effect")
             );
+
+
     public Optional<Items> findById(int id){
         String sql = "SELECT * FROM items WHERE id = :id";
         try{
@@ -41,6 +43,12 @@ public class ItemsRepository {
     public List<Items> findAll() {
         String sql = "SELECT * FROM items";
         return jdbcTemplate.query(sql, rowMapper);
+    }
+
+    public List<Items> searchItems(String keyword) {
+        String sql = "SELECT * FROM items WHERE name like :keyword";
+        Map<String, Object> params = Map.of("keyword", "%" + keyword + "%");
+        return jdbcTemplate.query(sql, params, rowMapper);
     }
 
 }

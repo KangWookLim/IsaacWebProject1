@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -24,5 +25,10 @@ public class ItemsService {
 
     public List<Items> getAllItems() {
         return this.itemsRepository.findAll();
+    }
+
+    public List<Items> searchItem(String keyword) {
+        System.out.println(itemsRepository.searchItems(keyword));
+        return this.itemsRepository.searchItems(keyword);
     }
 }

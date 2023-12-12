@@ -55,4 +55,13 @@ public class ItemsController {
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
     }
+
+    @RequestMapping(value = "/shop/search")
+    public ModelAndView searchList(@RequestParam("keyword") String keyword) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Items> itemList = this.itemsService.searchItem(keyword);
+        modelAndView.addObject("itemList", itemList);
+        modelAndView.setViewName("views/shop");
+        return modelAndView;
+    }
 }
