@@ -28,8 +28,7 @@ public class InvenService {
         List<InvenVO> inventory = mapper.getInvenData(ID);
         return inventory;
     }
-    public List<InvenVO> findElementsByMemid(String ID) throws Exception {
-        System.out.println(invenRepo.findElementsByMemid(ID));
+    public List<InvenVO> findElementsByMemid(String ID){
         return invenRepo.findElementsByMemid(ID);
     }
 

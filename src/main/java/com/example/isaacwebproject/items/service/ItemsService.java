@@ -1,6 +1,6 @@
 package com.example.isaacwebproject.items.service;
 
-import com.example.isaacwebproject.DataNotFoundException;
+import com.example.isaacwebproject.error.exception.DataNotFoundException;
 import com.example.isaacwebproject.items.Repository.ItemsRepository;
 import com.example.isaacwebproject.items.vo.Items;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +18,7 @@ public class ItemsService {
         if (opItems.isPresent()) {
             return opItems.get();
         }else {
-            throw new DataNotFoundException("items not found");
+                throw new DataNotFoundException("items not found");
         }
     }
 
