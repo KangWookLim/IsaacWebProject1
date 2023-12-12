@@ -26,7 +26,7 @@ public class InvenController {
         HttpSession session = request.getSession();
         String memId = (String)(session.getAttribute("userInfo"));
         if(memId == null) {
-            throw new DoNotLoginException();
+            throw new DoNotLoginException("로그인이 필요합니다.");
         }else {
             inven = service.findElementsByMemid(memId);
             view.addObject("inven", inven);
