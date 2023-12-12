@@ -1,10 +1,17 @@
 package com.example.isaacwebproject.items.controller;
 
+import com.example.isaacwebproject.error.exception.DoNotLoginException;
 import com.example.isaacwebproject.items.service.ItemsService;
 import com.example.isaacwebproject.items.vo.Items;
+import com.example.isaacwebproject.member.service.MemberSecurityService;
+import com.example.isaacwebproject.member.service.MemberService;
 import groovy.util.logging.Slf4j;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -18,6 +25,8 @@ import java.util.Map;
 @Controller
 public class ItemsController {
     private final ItemsService itemsService;
+    private final MemberService memberService;
+    private final MemberSecurityService memberSecurityService;
     @RequestMapping(value = "/shop", method = RequestMethod.GET)
     public ModelAndView itemsList() {
         ModelAndView modelAndView = new ModelAndView();
@@ -29,9 +38,22 @@ public class ItemsController {
 
     @PostMapping("/shop/order")
     @ResponseBody
-    public Integer orderItems(@RequestParam("totalprice") int totalprice) {
-        System.out.println(totalprice);
-        return 2000-totalprice;
+    public ResponseEntity<String> orderItems(@RequestParam("totalprice") int totalprice, HttpServletRequest request) {
+        int coin;
+        HttpSession session = request.getSession();
+        String memId = (String)(session.getAttribute("userInfo"));
+        if(memId == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("fail");
+        }else {
+            coin = memberSecurityService.loadUserByUsername(memId).getCOIN();
+            if(coin < totalprice) {
+                //TODO: 거래실패 로직
+            }else{
+                memberService.updateCoinById(memId, coin-totalprice);
+                return ResponseEntity.ok("success");
+            }
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("fail");
     }
 
     @RequestMapping(value = "/shop/search")

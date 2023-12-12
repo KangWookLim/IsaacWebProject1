@@ -20,15 +20,4 @@ public class LoginController {
 
         return view;
     }
-
-
-
-
-
-    @GetMapping("/error")
-    public ModelAndView PageError( ) {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("views/member/error");
-        return view;
-    }
 }

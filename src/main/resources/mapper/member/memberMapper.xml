@@ -22,4 +22,16 @@
         where ID =  #{ID}
     </select>
 
+    <update id="updateCoinById">
+        update member
+        set coin = #{Coin}
+        where ID = #{ID}
+    </update>
+
+    <update id="updateEXPById">
+        update member
+        set coin = #{EXP}
+        where ID = #{ID}
+    </update>
+
 </mapper>

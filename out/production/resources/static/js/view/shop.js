@@ -90,7 +90,7 @@
                 }).done(function (data){
                     console.log(data);
                 }).fail(function (xhr, status, error) {
-                    console.log(status);
+                    window.location.href = "/error/401";
                 });
             modalOff(index)
         })

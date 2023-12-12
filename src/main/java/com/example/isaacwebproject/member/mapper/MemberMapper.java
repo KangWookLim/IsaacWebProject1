@@ -15,5 +15,7 @@ public interface MemberMapper {
 
     Member getMemberById(@Param("ID") String ID);
 
+    boolean updateCoinById(@Param("ID") String ID, @Param("COIN") int COIN);
 
+    boolean updateEXPById(@Param("ID") String ID, @Param("EXP") int EXP);
 }
