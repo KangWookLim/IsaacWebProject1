@@ -2,6 +2,7 @@
 
 <html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="header">
+    <link rel="stylesheet" th:href="@{/css/home/header.css}">
     <div id = "header-container">
         <div id = "main-logo-container">
             <a th:href="@{/}">
@@ -10,10 +11,12 @@
         </div>
         <div id = "main-search-bar-container">
             <!-- <div id = "main-search-bar"> -->
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2" name="keyword" value="">
-                <button class="btn btn-outline-secondary" type="button" style = "background : black;">Search</button>
-            </div>
+            <form action="/shop/search" method="get" id="searchForm" name="search-form">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2" name="keyword">
+                    <button class="btn btn-outline-secondary" type="submit" style = "background : black;" value = "검색하기">Search</button>
+                </div>
+            </form>
             <!-- </div> -->
         </div>
         <div class = "start-btn-container">

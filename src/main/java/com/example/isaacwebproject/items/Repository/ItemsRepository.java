@@ -27,14 +27,7 @@ public class ItemsRepository {
                     rs.getString("rarity"),
                     rs.getString("effect")
             );
-//    private final RowMapper<Items> searchMapper = (rs, rowNum) ->
-//            new Items(
-//                    rs.getInt("id"),
-//                    rs.getString("img_url"),
-//                    rs.getInt("price"),
-//                    rs.getString("name"),
-//                    rs.getString("search")
-//            );
+
 
     public Optional<Items> findById(int id){
         String sql = "SELECT * FROM items WHERE id = :id";
@@ -51,9 +44,11 @@ public class ItemsRepository {
         String sql = "SELECT * FROM items";
         return jdbcTemplate.query(sql, rowMapper);
     }
-//    public List<Items> searchItems(String keyword) {
-//        String sql = "SELECT * FROM items WHERE name like '%keyword%'";
-//        return jdbcTemplate.query(sql, rowMapper);
-//    }
+
+    public List<Items> searchItems(String keyword) {
+        String sql = "SELECT * FROM items WHERE name like :keyword";
+        Map<String, Object> params = Map.of("keyword", "%" + keyword + "%");
+        return jdbcTemplate.query(sql, params, rowMapper);
+    }
 
 }

@@ -33,4 +33,13 @@ public class ItemsController {
         System.out.println(totalprice);
         return 2000-totalprice;
     }
+
+    @RequestMapping(value = "/shop/search")
+    public ModelAndView searchList(@RequestParam("keyword") String keyword) {
+        ModelAndView modelAndView = new ModelAndView();
+        List<Items> itemList = this.itemsService.searchItem(keyword);
+        modelAndView.addObject("itemList", itemList);
+        modelAndView.setViewName("views/shop");
+        return modelAndView;
+    }
 }
