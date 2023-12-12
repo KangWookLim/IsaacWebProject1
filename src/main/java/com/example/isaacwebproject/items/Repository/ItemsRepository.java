@@ -23,7 +23,9 @@ public class ItemsRepository {
                     rs.getInt("id"),
                     rs.getString("img_url"),
                     rs.getInt("price"),
-                    rs.getString("name")
+                    rs.getString("name"),
+                    rs.getString("rarity"),
+                    rs.getString("effect")
             );
 //    private final RowMapper<Items> searchMapper = (rs, rowNum) ->
 //            new Items(

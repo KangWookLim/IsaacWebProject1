@@ -1,8 +1,6 @@
 package com.example.isaacwebproject.login.controller;
 
 import com.example.isaacwebproject.config.SessionConfig;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +25,7 @@ public class LoginController {
 
 
 
-    @GetMapping("/mem/error")
+    @GetMapping("/error")
     public ModelAndView PageError( ) {
         ModelAndView view = new ModelAndView();
         view.setViewName("views/member/error");

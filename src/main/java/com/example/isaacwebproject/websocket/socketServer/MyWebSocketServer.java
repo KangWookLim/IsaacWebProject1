@@ -1,16 +1,17 @@
 package com.example.isaacwebproject.websocket.socketServer;
 
-import jakarta.websocket.server.ServerEndpoint;
 import jakarta.websocket.*;
-import org.springframework.web.bind.annotation.RequestMapping;
+import jakarta.websocket.server.ServerEndpoint;
 
-import java.io.IOException;
 import java.util.*;
 
-@RequestMapping("/chat")
 @ServerEndpoint("/chat")
 public class MyWebSocketServer {
     private static Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
+   
+    public MyWebSocketServer(){
+        System.out.println("실행");
+    }
 
     @OnOpen
     public void onOpen(Session session) {
@@ -34,5 +35,10 @@ public class MyWebSocketServer {
     @OnClose
     public void onClose(Session session) {
         sessions.remove(session);
+    }
+
+    @OnError
+    public void OnError(){
+        System.out.println("오류");
     }
 }

@@ -1,15 +1,10 @@
 package com.example.isaacwebproject.member.controller;
 
-import com.example.isaacwebproject.DataNotFoundException;
 import com.example.isaacwebproject.member.service.MemberService;
-import com.example.isaacwebproject.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor

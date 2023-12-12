@@ -22,7 +22,7 @@ public class InvenRepo {
                     rs.getInt("used"),
                     rs.getString("img_url")
             );
-    public List<InvenVO> findElementsByMemid(String memId) {
+    public List<InvenVO> findElementsByMemid(String memId){
         String query =
                 "SELECT inv.*, i.IMG_URL img_url FROM inventory inv LEFT OUTER JOIN items i ON inv.ITEMS_ID = i.ID WHERE mem_id = :memId";
         Map<String, Object> param = Map.of("memId", memId);
