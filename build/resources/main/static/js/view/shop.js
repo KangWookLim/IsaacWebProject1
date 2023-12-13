@@ -19,7 +19,7 @@
     }
     function modalOn(index) {
         modal.item(index).style.display = "grid"
-        console.log(modal.item(index));
+        console.log(index);
     }
 
     /* 배경 변경  */
@@ -71,9 +71,7 @@
         })
         minusbutton.addEventListener("click", e => {
             if(parseInt(amount.innerHTML) === 0) {
-                totalprice.innerHTML = "Total amount cannot be less than 0";
-                totalprice
-                totalprice.innerHTML = 0;
+                totalprice.innerHTML = "Total amount cannot be less than 0"
             }else {
                 amount.innerHTML = parseInt(amount.innerHTML) - 1;
                 totalprice.innerHTML = parseInt(price.innerHTML) * parseInt(amount.innerHTML);
@@ -85,13 +83,19 @@
                 type : 'post',
                 data : 'json',
                 data : {
-                    totalprice: parseInt(totalprice.innerHTML)
+                    ItemID : index+1,
+                    Amount : amount.innerHTML
                 }
                 }).done(function (data){
                     console.log(data);
                 }).fail(function (xhr, status, error) {
-                    window.location.href = "/error/401";
+                    alert(xhr.responseText);
+                    if(xhr.status === 401) {
+                        window.location.href = "/error/401";
+                    }
                 });
+            amount.innerHTML = 0;
+            totalprice.innerHTML = 0;
             modalOff(index)
         })
     });
