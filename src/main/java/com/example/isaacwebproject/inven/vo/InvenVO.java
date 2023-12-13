@@ -1,9 +1,9 @@
 package com.example.isaacwebproject.inven.vo;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+
+import jakarta.annotation.Nullable;
+import lombok.*;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -12,6 +12,8 @@ public class InvenVO {
         private String memId;
         private int ItemId;
         private int amount;
-        private int used;
         private String img_url;
+
+        public InvenVO(String memId, int itemsId, int amount) {
+        }
 }

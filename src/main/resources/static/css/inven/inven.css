@@ -63,7 +63,8 @@
 .inven-skin-img {
     width: 30%;
     height: 30%;
-    margin-left: -5px;
+    margin-left: -2px;
+    margin-bottom: -11px;
     z-index: 1;
 }
 .item-amount {
