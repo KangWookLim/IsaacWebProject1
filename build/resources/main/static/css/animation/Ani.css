@@ -1,0 +1,130 @@
+@charset "UTF-8";
+.preview-img-body {
+    width: 60px;
+    height: 46px;
+    position : relative;
+    top : calc(50% - 53px);
+    left : calc(50% - 25px);
+    background: url("../../images/isaac/issacBody.png") left center;
+    background-size : cover;
+    animation: playB 0.8s steps(10) infinite;
+    z-index: 2;
+} /* 몬스터 1마리의 크기만큼 width와 height 설정 */
+@keyframes playB {
+    100% {
+        background-position: 111%
+    }
+}
+/* Body End */
+.preview-img-head {
+    width: 90px;
+    height: 76px;
+    position : relative;
+    top : calc(50% - 39px);
+    left : calc(50% - 40px);
+    background: url("../../images/isaac/issacHead2.png") left center;
+    background-size : cover;
+    animation: playH 1.2s steps(2) infinite;
+    z-index : 3;
+} /* 몬스터 1마리의 크기만큼 width와 height 설정 */
+@keyframes playH {
+    100% {
+        background-position: 199%
+    }
+}
+/* Head End */
+.preview-img-wings{
+    width: 192px;
+    height: 132px;
+    position: absolute;
+    top: calc(50% - 26px);
+    left: calc(50% - 86px);
+    background: url(../../images/items/sprite_img/wings.png) left;
+    background-size: cover;
+    animation: playW 0.68s steps(7) infinite;
+    z-index: 1;
+}
+@keyframes playW {
+    100% {
+        background-position: 117%;
+    }
+}
+/*Wings End*/
+.preview-img-darkwings{
+    width: 174px;
+    height: 84px;
+    position: absolute;
+    top: calc(50% - 19px);
+    left: calc(50% - 82px);
+    background: url(../../images/items/sprite_img/darkwings.png) left;
+    background-size: cover;
+    animation: playDW 0.6s steps(5) infinite;
+    z-index: 1;
+}
+@keyframes playDW {
+    100% {
+        background-position: -123%;
+    }
+}
+/* Dark Wings End */
+.preview-img-mantle{
+    width: 144px;
+    height: 144px;
+    position: absolute;
+    top: calc(50% - 60px);
+    left: calc(50% - 71px);;
+    background: url(../../images/items/sprite_img/mantle.png) left;
+    background-size: cover;
+    animation: playM 1s steps(4) infinite;
+    z-index: 4;
+}
+@keyframes playM {
+    100% {
+        background-position: 576px;
+    }
+}
+.preview-img-red{
+    width: 90px;
+    height: 76px;
+    position: absolute;
+    top: calc(50% - 95px);
+    left: calc(50% - 42.4px);
+    background: url(../../images/items/sprite_img/redmus.png) left;
+    background-size: cover;
+    z-index: 1;
+    animation: playMus 1.2s steps(2) infinite;
+}
+@keyframes playMus {
+    100% {
+        transform: translateY(3px);
+    }
+}
+.preview-img-green{
+    width: 90px;
+    height: 76px;
+    position: absolute;
+    top: calc(50% - 95px);
+    left: calc(50% - 42.4px);
+    background: url(../../images/items/sprite_img/greenmus.png) left;
+    background-size: cover;
+    z-index: 1;
+    animation: playMus 1.2s steps(2) infinite;
+}
+@keyframes playMus {
+    100% {
+        transform: translateY(3px);
+    }
+}
+/* Mentle End */
+.preview-img-crown {
+    width: 90px;
+    height: 76px;
+    position : absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 44px);
+    background: url("../../images/items/sprite_img/crown.png") left;
+    background-size : cover;
+    z-index : 3;
+}
+/* Crown End */
+

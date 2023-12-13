@@ -41,7 +41,7 @@ public class ItemsRepository {
     }
 
     public List<Items> findAll() {
-        String sql = "SELECT * FROM items";
+        String sql = "SELECT * FROM items ORDER BY id";
         return jdbcTemplate.query(sql, rowMapper);
     }
 

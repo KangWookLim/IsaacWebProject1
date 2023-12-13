@@ -69,6 +69,15 @@ a{
     border : 2px solid white;
     margin-left : auto;
 }
+#preview-anibox{
+    width: 100%;
+    height: 100%;
+    position : relative;
+    min-height : 300px;
+    min-width : 200px;
+    margin : auto;
+    border-radius : 1rem;
+}
 #itemList-container {
     width : 100%;
     padding : 10px;
@@ -112,11 +121,24 @@ a{
     justify-content: center;
     align-items: center;
 }
+.skin-button{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background-color: black;
+    font-size: 11px;
+    border: solid 2px white;
+    color: white;
+    z-index: 6;
+}
 .skin-img-btn {
     margin : 10px auto;
     display : flex
 }
 .skin-img{
+        position: absolute;
+        left: 79px;
+        top: 41px;
         width: 30%;
         height: 30%;
         margin-left: -5px;
