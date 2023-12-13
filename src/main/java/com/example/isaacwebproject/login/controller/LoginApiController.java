@@ -3,12 +3,10 @@ package com.example.isaacwebproject.login.controller;
 import com.example.isaacwebproject.config.SessionConfig;
 import com.example.isaacwebproject.login.service.LoginService;
 import com.example.isaacwebproject.member.vo.Member;
-import com.example.isaacwebproject.websocket.socketClient.MyWebSocketClient;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
-import org.java_websocket.client.WebSocketClient;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,7 +18,6 @@ import java.util.Map;
 @RestController
 @RequiredArgsConstructor
 public class LoginApiController {
-    private MyWebSocketClient client;
     private final LoginService service;
     private final SessionConfig sessionConfig;
 

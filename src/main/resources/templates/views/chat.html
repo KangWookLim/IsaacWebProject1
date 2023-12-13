@@ -3,58 +3,117 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/main_layout}">
 
-<th:block layout:fragment="css">
-    <link rel="stylesheet" th:href="@{/css/home/home.css}">
-    <link rel="stylesheet" th:href="@{/css/chat/chat.css}">
 
-</th:block>
-<th:block layout:fragment="script">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.5.1/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script th:src="@{/js/view/chat.js}"></script>
-</th:block>
 <div layout:fragment="content">
+    <th:block layout:fragment="css">
+        <link rel="stylesheet" th:href="@{/css/home/home.css}">
+        <link rel="stylesheet" th:href="@{/css/chat/tempchat.css}">
+    </th:block>
     <div id = "main-container">
-        <div id = "left-navbar-container">
-
+        <div id = "menu-container">
+            <ul>
+                <li>방 만들기</li>
+                <li>빠른 입장</li>
+                <li>방 검색</li>
+            </ul>
+        </div>
+        <div id = "total-mem-container">
+            <ul>
+                <li>member1</li>
+                <li>member2</li>
+                <li>member3</li>
+                <li>member4</li>
+            </ul>
+        </div>
+        <div id = "chat-room-container">
+           <div class="chat-room-card">
+               <div class="chat-room-name"> room name</div>
+               <div class="chat-room-number"> <span>1</span> </div>
+               <div class="chat-room-icon-container">
+                   <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                   <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+               </div>
+           </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+            <div class="chat-room-card">
+                <div class="chat-room-name"> room name</div>
+                <div class="chat-room-number"> <span>1</span> </div>
+                <div class="chat-room-icon-container">
+                    <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>
+                    <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>
+                </div>
+            </div>
+        </div>
+        <div id = "user-view-container">
         </div>
         <div id = "chat-container">
-            <input type="text" id="message" placeholder="메세지 입력" />
-            <button id="sendBtn">메세지 전송</button>
+
         </div>
     </div>
+    <script type="text/javascript" src="js/view/chat.js">
+    </script>
 </div>
 </html>
-<script type="text/javascript">
-    var socket = new WebSocket("ws://localhost:8056");
-    socket.onopen = function (event) {
-        console.log("연결 성공");
-    };
-    socket.onmessage = function (event) {
-        showMessage(event.data);
-    };
-
-    function sendMessage() {
-        var message = $("#message").val();
-        socket.send(message);
-        console.log(message);
-    }
-
-    socket.onerror = function(event){
-        console.log("에러");
-    }
-
-    function showMessage(message) {
-        $("#messageArea").append("<br>" + message);
-    }
-
-    $("#sendBtn").on("click", function () {
-        sendMessage();
-    });
-
-    $("#message").keypress(function (e) {
-        if (e.which === 13) {
-            sendMessage();
-        }
-    });
-</script>
