@@ -6,8 +6,7 @@
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/home/home.css}">
     <link rel="stylesheet" th:href="@{/css/home/modal.css}">
-    <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
-    <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
+    <link rel="stylesheet" th:href="@{/css/animation/Ani.css}">
 
 </th:block>
 <div layout:fragment="content">
@@ -26,6 +25,7 @@
                             <button type="button" class="btn btn-light btn-head">Head</button>
                             <button type="button" class="btn btn-light btn-body">Body</button>
                             <button type="button" class="btn btn-light btn-worm">Worm</button>
+                            <button type="button" class="btn btn-light btn-fly">Fly</button>
                         </div>
                     </div>
                 </div>
@@ -75,87 +75,123 @@
                         <img th:src="@{images/logo/isaaclogo.png}" class="home-logo-img"/>
                     </div>
                     <span>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                    "The Binding of Isaac" is a popular indie video game developed by Edmund McMillen and Florian Himsl. The game was initially released in 2011 and has seen multiple expansions and updates since then. It falls under the roguelike genre and is known for its challenging gameplay, randomly generated levels, and distinctive art style.<br>
+                        The game's storyline draws inspiration from the biblical tale of the binding of Isaac, where Abraham is tested by God and asked to sacrifice his son Isaac. In the game, players control a character named Isaac, a child who is trying to escape his mother's basement after she receives a message from God instructing her to sacrifice him. The gameplay involves navigating through procedurally generated dungeon-like levels, battling enemies, and facing various bosses.
                     </span>
                 </div>
                 <!--        몬스터 섹션        -->
                 <div id = "monster-box-head" class = "main-slide-box">
                     <div class = "main-img-box">
-                        <img th:src="@{images/monster/head.png}" class="main-ex-img"/>
+                        <img th:src="@{images/monster/icon/head.png}" class="main-ex-img"/>
                     </div>
                     <table class="table table-dark main-text-container">
                         <thead></thead>
                         <tbody>
                         <tr>
                             <th>이름</th>
-                            <td>head</td>
+                            <td>Horf</td>
                         </tr>
                         <tr>
                             <th>체력</th>
                             <td>20</td>
                         </tr>
                         <tr>
-                            <th>설명</th>
-                            <td>head</td>
+                            <th>속도</th>
+                            <td>2</td>
                         </tr>
                         </tbody>
                     </table>
                     <span>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                        This monster moves diagonally. <br>
+                        It moves at a constant speed and bounces when it hits the wall.<br>
+                        Although it is not a threatening enemy, it can be attacked unexpectedly due to its bouncing habit.<br>
+                        Head remain immobile in one spot (although slightly moving with every shot), firing blood shots at Isaac when he gets in their range. They will fire shots directly at Isaac when they're about 1/2 room width away from them, even though their shots can travel the entire room's length. This makes it possible to outrange the Horfs in almost all encounters with them; even if Isaac is in range, they have slow rate of fire and their shots are slow-travelling as well, and can be dodged simply by moving slightly to the side.<br>
+                        Besides having their eyes gouged out, Horfs also lack their upper teeth. This, when combined with the gargling sound made when they fire, suggests that their shots are formed by the blood from their mouth, instead of their eyes.
+                        They are named "horfs" by the "horfing" sound they make.
                     </span>
                 </div>
                 <div id = "monster-box-body" class = "main-slide-box">
                     <div class = "main-img-box">
-                        <img th:src="@{images/monster/body.png}" class = "main-ex-img"/>
+                        <img th:src="@{images/monster/icon/body.png}" class = "main-ex-img"/>
                     </div>
                     <table class="table table-dark main-text-container">
                             <thead></thead>
                             <tbody>
                                 <tr>
                                     <th>이름</th>
-                                    <td>body</td>
+                                    <td>Pacer</td>
                                 </tr>
                                 <tr>
                                     <th>체력</th>
                                     <td>20</td>
                                 </tr>
                                 <tr>
-                                    <th>설명</th>
-                                    <td>body</td>
+                                    <th>속도</th>
+                                    <td>1</td>
                                 </tr>
                             </tbody>
                     </table>
                     <span>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                        Pacers are headless children with a bloody neck.<br>
+                        Walks towards Isaac, dealing contact damage.<br>
+                        He knows where the player is, and He keeps following player, so keep moving.<br>
+                        This monster alone isn't a threat, but if you're with another monster, you'll be more likely to be attacked.<br>
+                        Pacer will attempt to walk towards Isaac by taking the most direct route possible. If there is no way to reach Isaac, due to obstacles such as Rocks or Poop blocking the way, they will stand still and avoid moving towards Isaac until a proper route is created.
+
                     </span>
                 </div>
                 <div id = "monster-box-worm" class = "main-slide-box">
                     <div class = "main-img-box">
-                        <img th:src="@{images/monster/worm.png}" class = "main-ex-img"/>
+                        <img th:src="@{images/monster/icon/Charger.png}" class = "main-ex-img"/>
                     </div>
                     <table class="table table-dark main-text-container">
                         <thead></thead>
                         <tbody>
                         <tr>
                             <th>이름</th>
-                            <td>worm</td>
+                            <td>Charger</td>
                         </tr>
                         <tr>
                             <th>체력</th>
                             <td>20</td>
                         </tr>
                         <tr>
-                            <th>설명</th>
-                            <td>worm</td>
+                            <th>속도</th>
+                            <td>1, 4</td>
                         </tr>
                         </tbody>
                     </table>
                     <span>
-                    Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                    Chargers are a more advanced form of Maggot, and they're encountered more often as well, present in The Caves, The Catacombs and The Depths. As suggested by their names, they can charge toward Isaac when lining up.<br/>
+                    They possess a smiling face of sorts, and look quite harmless as they slowly crawl along without attempting to follow Isaac. If a Charger lines up with Isaac vertically or horizontally, they will immediately and quickly charge in a straight line towards him. Because they're always encountered in groups of at least four, avoiding them quickly becomes a problem.<br/>
+                    Chargers do not seem to notice Isaac unless he is moving. If Isaac stands still and a Charger lines up with him, they will continue crawling without attacking him.
+                    </span>
+                </div>
+                <div id = "monster-box-fly" class = "main-slide-box">
+                    <div class = "main-img-box">
+                        <img th:src="@{images/monster/icon/detailfly.png}" class = "main-ex-img"/>
+                    </div>
+                    <table class="table table-dark main-text-container">
+                        <thead></thead>
+                        <tbody>
+                        <tr>
+                            <th>이름</th>
+                            <td>Attack fly</td>
+                        </tr>
+                        <tr>
+                            <th>체력</th>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <th>속도</th>
+                            <td>2</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span>
+                    Attack Flies are red-and-black flashing type of fly enemies that will follow Isaac relentlessly until killed. Like regular Black Flies and few other types, they are commonly found in every chapter.<br/>
+                    Their only way of damaging Isaac is by contact, and they move rather slowly, making them easy to kill. However, they can be dangerous when found in groups, as they can swarm around Isaac quickly.
+                    Attack Flies turn into regular Black Flies if Isaac has Skatole. They take a small amount of time to convert into Black Flies, so it is possible for Isaac to be damaged if the player is not careful.
                     </span>
                 </div>
                 <!--         아이템 섹션       -->
