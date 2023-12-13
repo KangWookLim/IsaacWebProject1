@@ -29,7 +29,7 @@
             </div>
         </div>
         <div id = "itemList-container" >
-            <div class="item-container" th:each="items, loop : ${itemList}">
+            <div class="item-container" th:each="items, loop : ${itemList}" th:ItemId="${items.id}">
                 <div class="skin-img-container">
                     <div class="btn btn-outline-secondary skin-button">Preview</div>
                     <img class="skin-img" th:src="${items.img_url}">

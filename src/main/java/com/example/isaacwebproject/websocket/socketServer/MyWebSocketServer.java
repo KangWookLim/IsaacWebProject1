@@ -2,16 +2,13 @@ package com.example.isaacwebproject.websocket.socketServer;
 
 import jakarta.websocket.*;
 import jakarta.websocket.server.ServerEndpoint;
-
+import org.springframework.stereotype.Component;
 import java.util.*;
 
-@ServerEndpoint("/chat")
+@Component
+@ServerEndpoint("/chat/server")
 public class MyWebSocketServer {
     private static Set<Session> sessions = Collections.synchronizedSet(new HashSet<Session>());
-   
-    public MyWebSocketServer(){
-        System.out.println("실행");
-    }
 
     @OnOpen
     public void onOpen(Session session) {

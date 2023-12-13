@@ -11,8 +11,6 @@ public class IsaacWebProjectApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(IsaacWebProjectApplication.class, args);
-//       ServerControl serverControl = new ServerControl();
-//        MyWebSocketServer myWebSocketServer = new MyWebSocketServer();
     }
 
 }

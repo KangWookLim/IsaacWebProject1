@@ -43,6 +43,7 @@ dependencies {
     implementation("javax.servlet:javax.servlet-api:3.0.1")
     implementation("org.java-websocket:Java-WebSocket:1.5.4")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation("org.springframework.boot:spring-boot-starter-websocket")
 }
 
 

@@ -31,11 +31,8 @@
     function changeBg3() {
         document.getElementById("preview-bg").src = "/images/map/library.png";
     }
-
     /* 주문 확인 */
-
     const btnModal = document.querySelectorAll('.item-container');
-
     btnModal.forEach(function (obj, index){
         const totalprice = document.querySelectorAll(".total-price").item(index);
         const price =  document.querySelectorAll(".item-price").item(index);
@@ -46,6 +43,7 @@
         obj.addEventListener("click", e => {
             const evTarget = e.target;
             if  (!evTarget.classList.contains("skin-button")) {
+                console.log(obj.getAttribute("itemid"));
                 modalOn(index);
             }
         })
