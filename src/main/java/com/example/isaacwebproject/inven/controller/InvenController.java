@@ -21,7 +21,7 @@ public class InvenController {
 
     @RequestMapping("/inven")
     public ModelAndView inven(HttpServletRequest request){
-        List<InvenVO> inven = new ArrayList<>();
+        List<InvenVO> inven;
         ModelAndView view = new ModelAndView();
         HttpSession session = request.getSession();
         String memId = (String)(session.getAttribute("userInfo"));

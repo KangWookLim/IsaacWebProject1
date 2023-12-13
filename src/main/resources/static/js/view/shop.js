@@ -19,7 +19,6 @@
     }
     function modalOn(index) {
         modal.item(index).style.display = "grid"
-        console.log(index);
     }
 
     /* 배경 변경  */
@@ -45,9 +44,12 @@
         const minusbutton =  document.querySelectorAll(".amount-button-minus").item(index);
         const order = document.querySelectorAll(".order").item(index);
         obj.addEventListener("click", e => {
-            modalOn(index);
-            /* 모달 바깥이나 X버튼 누르면 종료 */
+            const evTarget = e.target;
+            if  (!evTarget.classList.contains("skin-button")) {
+                modalOn(index);
+            }
         })
+        /* 모달 바깥이나 X버튼 누르면 종료 */
         modal.item(index).addEventListener("click", e => {
             const evTarget = e.target
             if(evTarget.classList.contains("modal") ||
@@ -87,7 +89,7 @@
                     Amount : amount.innerHTML
                 }
                 }).done(function (data){
-                    console.log(data);
+                    alert(data);
                 }).fail(function (xhr, status, error) {
                     alert(xhr.responseText);
                     if(xhr.status === 401) {
@@ -99,6 +101,31 @@
             modalOff(index)
         })
     });
+    const skinbutton = document.querySelectorAll(".skin-button");
+    const preview_ani_box = document.querySelector("#preview-anibox");
+    const preview_ani= [
+        '<div class="preview-img-crown"></div>'
+        ,'<div class="preview-img-darkwings"></div>'
+        ,'<div class="preview-img-green"></div>'
+        ,'<div class="preview-img-mantle"></div>'
+        ,'<div></div>'
+        ,'<div></div>'
+        ,'<div></div>'
+        ,'<div></div>'
+        ,'<div class="preview-img-red"></div>'
+        ,'<div class="preview-img-wings"></div>'];
+    skinbutton.forEach(function (obj, index){
+        obj.addEventListener('click', e => {
+            if(preview_ani_box.childElementCount===2) {
+                preview_ani_box.innerHTML += preview_ani[index];
+                obj.innerHTML = "Cancel preview";
+            }else{
+                preview_ani_box.children[2].remove()
+                obj.innerHTML = "Preview";
+            }
+
+        })
+    })
 
 
 

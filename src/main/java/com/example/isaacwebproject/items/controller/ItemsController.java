@@ -1,6 +1,7 @@
 package com.example.isaacwebproject.items.controller;
 
 import com.example.isaacwebproject.error.exception.DoNotLoginException;
+import com.example.isaacwebproject.inven.service.InvenService;
 import com.example.isaacwebproject.items.service.ItemsService;
 import com.example.isaacwebproject.items.vo.Items;
 import com.example.isaacwebproject.member.service.MemberSecurityService;
@@ -17,9 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -28,6 +27,7 @@ public class ItemsController {
     private final ItemsService itemsService;
     private final MemberService memberService;
     private final MemberSecurityService memberSecurityService;
+    private final InvenService invenService;
     @RequestMapping(value = "/shop", method = RequestMethod.GET)
     public ModelAndView itemsList() {
         ModelAndView modelAndView = new ModelAndView();
@@ -47,13 +47,18 @@ public class ItemsController {
         }else {
             Member orderedMember = memberSecurityService.loadUserByUsername(memId);
             Items orderedItem = this.itemsService.getItem(ItemID);
-//            if(membercoin < totalprice) {
-//                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("소지 골드가 모자랍니다.");
-//            }else{
-//                System.out.println("성공");
-//                memberService.updateCoinById(memId, coin-totalprice);
-//                return ResponseEntity.ok("구입성공");
-//            }
+            if (orderedMember.getCOIN() < orderedItem.getPrice()*Amount) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("소지 골드가 모자랍니다.");
+            } else {
+                memberService.updateCoinById(memId, orderedMember.getCOIN() - orderedItem.getPrice());
+                if(invenService.checkItem(memId, orderedItem.getId())){
+                    int invenAmount = invenService.findElementByMemIDandItemId(memId, orderedItem.getId()).getAmount();
+                    invenService.UpdateItem(memId, orderedItem.getId(), invenAmount + Amount);
+                }else {
+                    invenService.InsertItem(memId, orderedItem.getId(), Amount);
+                }
+                return ResponseEntity.ok("구입성공");
+            }
         }
     }
 
