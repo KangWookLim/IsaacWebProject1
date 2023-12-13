@@ -13,6 +13,10 @@ $(document).ready(function(){
         boxOff();
         $("#monster-box-worm").fadeIn("slow");
     });
+    $(".btn-fly").click(function(){
+        boxOff();
+        $("#monster-box-fly").fadeIn("slow");
+    });
     $(".btn-crown").click(function(){
         boxOff();
         $("#item-box-crown").fadeIn("slow");
