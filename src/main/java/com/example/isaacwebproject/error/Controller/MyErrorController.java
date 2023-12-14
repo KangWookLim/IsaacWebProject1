@@ -21,6 +21,8 @@ public class MyErrorController {
     }
     @ExceptionHandler(DataNotFoundException.class)
     public ModelAndView error404(DataNotFoundException e ,HttpServletResponse response){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("message", e.getMessage());
         return new ModelAndView("views/error/error404");
     }
 
