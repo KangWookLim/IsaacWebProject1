@@ -8,7 +8,7 @@ socket.onmessage = function (event) {
 };
 
 function sendMessage() {
-    var message = $("#message").val();
+    const message = $("#messageInput").val();
     socket.send(message);
     console.log(message);
 }

@@ -1,7 +1,5 @@
 package com.example.isaacwebproject;
 
-import com.example.isaacwebproject.gameServer.miniprojectServer.ServerControl;
-import com.example.isaacwebproject.websocket.socketServer.MyWebSocketServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
