@@ -5,8 +5,7 @@
 <th:block layout:fragment="css">
     <link rel="stylesheet" th:href="@{/css/shop/shop.css}">
     <link rel="stylesheet" th:href="@{/css/shop/modal.css}">
-    <link rel="stylesheet" th:href="@{/css/animation/bodyAni.css}">
-    <link rel="stylesheet" th:href="@{/css/animation/headAni.css}">
+    <link rel="stylesheet" th:href="@{/css/animation/Ani.css}">
 </th:block>
 <div layout:fragment="content">
     <div id = "main-container">
@@ -18,13 +17,21 @@
                     <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg3();">3</button>
                 </div>
                 <img th:src="@{/images/map/caves.png}" class = "preview-bg" id = "preview-bg"/>
-                <div class="preview-img-head"></div>
-                <div class="preview-img-body"></div>
+<!--                <div class = "preview-img-mantle"></div>-->
+<!--                <div class = "preview-img-darkwings"></div>-->
+<!--                <div class = "preview-img-wings"></div>-->
+<!--                <div class = "preview-img-crown"></div>-->
+                <div id="preview-anibox">
+
+                    <div class="preview-img-head"></div>
+                    <div class="preview-img-body"></div>
+                </div>
             </div>
         </div>
         <div id = "itemList-container" >
             <div class="item-container" th:each="items, loop : ${itemList}">
                 <div class="skin-img-container">
+                    <div class="btn btn-outline-secondary skin-button">Preview</div>
                     <img class="skin-img" th:src="${items.img_url}">
                     <img class="table-img" src="/images/items/item_table.png"/>
                 </div>
