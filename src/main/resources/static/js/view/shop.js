@@ -8,7 +8,6 @@
  const modal_item_id = document.getElementById("modal-item-id");
  const modal_item_rarity = document.getElementById("modal-item-rarity")
  const modal_item_effect = document.getElementById("modal-item-effect")
-
  $(document).ready(function(){
         modalOff();
     });
@@ -40,15 +39,34 @@
         document.getElementById("preview-bg").src = "/images/map/library.png";
     }
     /* 주문 확인 */
+ const btnPrev = $(".skin-button");
+ const previewcontainer = $("#preview-anibox");
  const btnModal = document.querySelectorAll('.item-container');
+ const item_skin_id = [1,2,3,4,9,10];
  btnModal.forEach(function (obj, index){
         obj.addEventListener("click", e => {
             const evTarget = e.target;
             const itemid = obj.getAttribute("itemid")
             if  (!evTarget.classList.contains("skin-button")) {
+                modalSetting(index);
                 modalOn();
             }
-            modalSetting(index);
+        })
+        if(!item_skin_id.includes(parseInt(obj.getAttribute("itemid")))){
+            btnPrev[index].style.display = "none";
+        }
+        btnPrev[index].addEventListener("click", e => {
+            if(obj.getAttribute("itemid")==="1"){
+                if(previewcontainer.children().length===2){
+                    previewcontainer.append('<div class = "preview-img-crown"></div>')
+                    btnPrev[index].innerText = "Cancel Preview"
+                }
+                else if(btnPrev[index].innerText==="Cancel Preview") {
+                    previewcontainer.children().last().remove();
+                    btnPrev[index].innerText = "Preview";
+                }
+            }
+            console.log(previewcontainer.children().length);
         })
     });
 
@@ -75,7 +93,6 @@
         const itemprice = btnModal[index].getElementsByClassName("skin-img-btn")[0].getAttribute("itemprice")
         const itemrarity = btnModal[index].getElementsByClassName("item-rarity")[0].getAttribute("itemrarity")
         const itemeffect = btnModal[index].getElementsByClassName("item-effect")[0].getAttribute("itemeffect");
-        console.log(itemid, itemname, itemprice, itemrarity, itemeffect);
         modal_item_id.innerText = itemid;
         modal_btn_name.innerText = itemname;
         modal_item_price.innerText = itemprice;
@@ -142,6 +159,7 @@
     btnright.click(function () {
      modalSetting(localindex + 1)
     });
+
 
 
 
