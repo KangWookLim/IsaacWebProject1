@@ -1,4 +1,4 @@
-const socket = new WebSocket("ws://" + window.location.host + "/chat/socket");
+const socket = new WebSocket("ws://" + window.location.host + "/ws/chat");
 
 socket.onopen = function (event) {
     console.log("연결 성공");
