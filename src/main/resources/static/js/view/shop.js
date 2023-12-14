@@ -6,8 +6,21 @@ const modal_total_amount = document.getElementById("total-amount");
 const modal_item_price = document.getElementById("modal-item-price");
 const modal_btn_name = document.getElementById("modal-btn-name");
 const modal_item_id = document.getElementById("modal-item-id");
-const modal_item_rarity = document.getElementById("modal-item-rarity")
-const modal_item_effect = document.getElementById("modal-item-effect")
+const modal_item_rarity = document.getElementById("modal-item-rarity");
+const modal_item_effect = document.getElementById("modal-item-effect");
+const modal_preview_ani = $("#modal-preview-anibox");
+const preview_ani= [
+    '<div></div>'
+    ,'<div class="preview-img-crown"></div>'
+    ,'<div class="preview-img-darkwings"></div>'
+    ,'<div class="preview-img-green"></div>'
+    ,'<div class="preview-img-mantle"></div>'
+    ,'<div></div>'
+    ,'<div></div>'
+    ,'<div></div>'
+    ,'<div></div>'
+    ,'<div class="preview-img-red"></div>'
+    ,'<div class="preview-img-wings"></div>'];
 
 $(document).ready(function(){
     modalOff();
@@ -18,8 +31,10 @@ function modalOff() {
     modal_total_price.innerHTML = 0;
     modal.style.display = "none";
 }
-function modalOn() {
+function modalOn(itemid) {
+    modal_preview_ani.append(preview_ani[itemid]);
     modal.style.display = "grid";
+
 }
 
 /* 배경 변경  */
@@ -33,15 +48,33 @@ function changeBg3() {
     document.getElementById("preview-bg").src = "/images/map/library.png";
 }
 /* 주문 확인 */
+const btnPrev = $(".skin-button");
+const previewcontainer = $("#preview-anibox");
 const btnModal = document.querySelectorAll('.item-container');
+const item_skin_id = [1,2,3,4,9,10];
 btnModal.forEach(function (obj, index){
     obj.addEventListener("click", e => {
         const evTarget = e.target;
         const itemid = obj.getAttribute("itemid")
         if  (!evTarget.classList.contains("skin-button")) {
-            modalOn();
+            modalSetting(index);
+            modalOn(itemid);
         }
         modalSetting(index);
+    })
+    if(!item_skin_id.includes(parseInt(obj.getAttribute("itemid")))){
+        btnPrev[index].style.display = "none";
+    }
+    btnPrev[index].addEventListener("click", e => {
+            if(previewcontainer.children().length===2){
+                previewcontainer.append(preview_ani[obj.getAttribute("itemid")])
+                btnPrev[index].innerText = "Cancel Preview"
+            }
+            else if(btnPrev[index].innerText==="Cancel Preview") {
+                previewcontainer.children().last().remove();
+                btnPrev[index].innerText = "Preview";
+            }
+        console.log(previewcontainer.children().length);
     })
 });
 
@@ -49,12 +82,14 @@ modal.addEventListener("click", e => {
     const evTarget = e.target;
     if (evTarget.classList.contains("btn-close")
         ||evTarget.classList.contains("modal-overlay")) {
+        modal_preview_ani.children().last().remove();
         modalOff();
     }
 
 })
 window.addEventListener("keydown", e => {
     if (e.keyCode === 27){
+        modal_preview_ani.children().last().remove();
         modalOff();
     }
 })
@@ -68,7 +103,6 @@ function modalSetting(index) {
     const itemprice = btnModal[index].getElementsByClassName("skin-img-btn")[0].getAttribute("itemprice")
     const itemrarity = btnModal[index].getElementsByClassName("item-rarity")[0].getAttribute("itemrarity")
     const itemeffect = btnModal[index].getElementsByClassName("item-effect")[0].getAttribute("itemeffect");
-    console.log(itemid, itemname, itemprice, itemrarity, itemeffect);
     modal_item_id.innerText = itemid;
     modal_btn_name.innerText = itemname;
     modal_item_price.innerText = itemprice;
@@ -114,20 +148,25 @@ $('#order').click(function () {
         ItemID: $("#modal-item-id").text(),
         Amount: parseInt(modal_total_amount.innerText)
     }
-    $.ajax({
-        url: "/shop/order",
-        type: "POST",
-        data: orderinfo
-    }).done(function (data) {
-        modalOff();
-    }).fail(function (xhr, status, error) {
-        if(xhr.status === 401) {
-            alert("You Must be Logged In");
-            window.location.href = "/error/401";
-        }else{
-            alert(xhr.responseText);
-        }
-    })
+    let orderConfirm = window.confirm("구매하시겠습니까?");
+    if(orderConfirm) {
+            $.ajax({
+            url: "/shop/order",
+            type: "POST",
+            data: orderinfo
+        }).done(function (data) {
+            window.alert("구매성공");
+            modal_preview_ani.children().last().remove();
+            modalOff();
+        }).fail(function (xhr, status, error) {
+            if(xhr.status === 401) {
+                alert("You Must be Logged In");
+                window.location.href = "/error/401";
+            }else{
+                alert(xhr.responseText);
+            }
+        })
+    }
 })
 btnleft.click(function () {
     modalSetting(localindex - 1)
