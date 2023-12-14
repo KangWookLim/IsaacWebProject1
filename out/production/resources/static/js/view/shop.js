@@ -1,5 +1,5 @@
  let modal = document.querySelectorAll(".modal")
- var modalIndex;
+
     $(document).ready(function(){
         modalReady();
         loginChk();
@@ -18,6 +18,8 @@
         window.removeEventListener("keydown", e => {});
     }
     function modalOn(index) {
+        const modal_ani_box = document.querySelectorAll(".modal-preview-anibox").item(index);
+        modal_ani_box.innerHTML += preview_ani[index];
         modal.item(index).style.display = "grid"
     }
 
@@ -78,14 +80,16 @@
             }
         })
         order.addEventListener("click", e => {
-            $.ajax({
-                url : '/shop/order',
-                type : 'post',
-                data : 'json',
-                data : {
-                    ItemID : index+1,
-                    Amount : amount.innerHTML
-                }
+            let orderConfirm = window.confirm("구매하시겠습니까?");
+            if(orderConfirm) {
+                $.ajax({
+                    url : '/shop/order',
+                    type : 'post',
+                    data : 'json',
+                    data : {
+                        ItemID : index+1,
+                        Amount : amount.innerHTML
+                    }
                 }).done(function (data){
                     alert(data);
                 }).fail(function (xhr, status, error) {
@@ -94,9 +98,13 @@
                         window.location.href = "/error/401";
                     }
                 });
-            amount.innerHTML = 0;
-            totalprice.innerHTML = 0;
-            modalOff(index)
+                amount.innerHTML = 0;
+                totalprice.innerHTML = 0;
+                modalOff(index)
+            }
+
+
+
         })
     });
     const skinbutton = document.querySelectorAll(".skin-button");
