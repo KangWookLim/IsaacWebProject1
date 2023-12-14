@@ -1,19 +1,26 @@
-const socket = new WebSocket("ws://"+window.location.host+"/chat/socket");
+const socket = new WebSocket("ws://" + window.location.host + "/chat/socket");
 
 socket.onopen = function (event) {
     console.log("연결 성공");
 };
 socket.onmessage = function (event) {
-    showMessage(event.data);                 
+    showMessage(event.data);
 };
 
 function sendMessage() {
-    const message = $("#messageInput").val();
-    socket.send(message);
-    console.log(message);
+    const message = $("#messageInput");
+    const checkmessage = message.val().trim();
+    if (checkmessage == ""|| checkmessage == null||checkmessage == " ") {
+        alert("Message cannot be empty");
+        message.val('');
+    }else{
+        socket.send(message.val());
+        console.log(message.val());
+        message.val('');
+    }
 }
 
-socket.onerror = function(error){
+socket.onerror = function (error) {
     console.log(error);
 }
 
@@ -25,8 +32,8 @@ $("#sendBtn").on("click", function () {
     sendMessage();
 });
 
-$("#message").keypress(function (e) {
-    if (e.which === 13) {
+window.addEventListener("keydown", e => {
+    if (e.keyCode === 13) {
         sendMessage();
     }
-});
+})
