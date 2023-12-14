@@ -1,17 +1,16 @@
-const modal = document.getElementById("modal");
-const modal_amount_plus_button= document.getElementById("amount-button-plus");
-const modal_amount_minus_button = document.getElementById("amount-button-minus");
-const modal_total_price = document.getElementById("total-price");
-const modal_total_amount = document.getElementById("total-amount");
-const modal_item_price = document.getElementById("modal-item-price");
-const modal_btn_name = document.getElementById("modal-btn-name");
-const modal_item_id = document.getElementById("modal-item-id");
-const modal_item_rarity = document.getElementById("modal-item-rarity")
-const modal_item_effect = document.getElementById("modal-item-effect")
-
-$(document).ready(function(){
-    modalOff();
-});
+ const modal = document.getElementById("modal");
+ const modal_amount_plus_button= document.getElementById("amount-button-plus");
+ const modal_amount_minus_button = document.getElementById("amount-button-minus");
+ const modal_total_price = document.getElementById("total-price");
+ const modal_total_amount = document.getElementById("total-amount");
+ const modal_item_price = document.getElementById("modal-item-price");
+ const modal_btn_name = document.getElementById("modal-btn-name");
+ const modal_item_id = document.getElementById("modal-item-id");
+ const modal_item_rarity = document.getElementById("modal-item-rarity")
+ const modal_item_effect = document.getElementById("modal-item-effect")
+ $(document).ready(function(){
+        modalOff();
+    });
 
 function modalOff() {
     modal_total_amount.innerHTML = 0;
@@ -22,20 +21,59 @@ function modalOn() {
     modal.style.display = "grid";
 }
 
-/* 배경 변경  */
-function changeBg1() {
-    document.getElementById("preview-bg").src = "/images/map/caves.png";
-}
-function changeBg2() {
-    document.getElementById("preview-bg").src = "/images/map/nfloor.png";
-}
-function changeBg3() {
-    document.getElementById("preview-bg").src = "/images/map/library.png";
-}
-/* 주문 확인 */
-const btnModal = document.querySelectorAll('.item-container');
-btnModal.forEach(function (obj, index){
-    obj.addEventListener("click", e => {
+    function modalOff(index) {
+        modal.item(index).style.display = "none"
+        window.removeEventListener("keydown", e => {});
+    }
+    function modalOn(index) {
+        const modal_ani_box = document.querySelectorAll(".modal-preview-anibox").item(index);
+        modal_ani_box.innerHTML += preview_ani[index];
+        modal.item(index).style.display = "grid"
+    }
+
+    /* 배경 변경  */
+    function changeBg1() {
+        document.getElementById("preview-bg").src = "/images/map/caves.png";
+    }
+    function changeBg2() {
+        document.getElementById("preview-bg").src = "/images/map/nfloor.png";
+    }
+    function changeBg3() {
+        document.getElementById("preview-bg").src = "/images/map/library.png";
+    }
+    /* 주문 확인 */
+ const btnPrev = $(".skin-button");
+ const previewcontainer = $("#preview-anibox");
+ const btnModal = document.querySelectorAll('.item-container');
+ const item_skin_id = [1,2,3,4,9,10];
+ btnModal.forEach(function (obj, index){
+        obj.addEventListener("click", e => {
+            const evTarget = e.target;
+            const itemid = obj.getAttribute("itemid")
+            if  (!evTarget.classList.contains("skin-button")) {
+                modalSetting(index);
+                modalOn();
+            }
+        })
+        if(!item_skin_id.includes(parseInt(obj.getAttribute("itemid")))){
+            btnPrev[index].style.display = "none";
+        }
+        btnPrev[index].addEventListener("click", e => {
+            if(obj.getAttribute("itemid")==="1"){
+                if(previewcontainer.children().length===2){
+                    previewcontainer.append('<div class = "preview-img-crown"></div>')
+                    btnPrev[index].innerText = "Cancel Preview"
+                }
+                else if(btnPrev[index].innerText==="Cancel Preview") {
+                    previewcontainer.children().last().remove();
+                    btnPrev[index].innerText = "Preview";
+                }
+            }
+            console.log(previewcontainer.children().length);
+        })
+    });
+
+    modal.addEventListener("click", e => {
         const evTarget = e.target;
         const itemid = obj.getAttribute("itemid")
         if  (!evTarget.classList.contains("skin-button")) {
@@ -43,7 +81,6 @@ btnModal.forEach(function (obj, index){
         }
         modalSetting(index);
     })
-});
 
 modal.addEventListener("click", e => {
     const evTarget = e.target;
@@ -128,10 +165,32 @@ $('#order').click(function () {
             alert(xhr.responseText);
         }
     })
+
+    $('#order').click(function () {
+        const orderinfo = {
+            ItemID: $("#modal-item-id").text(),
+            Amount: parseInt(modal_total_amount.innerText)
+        }
+        $.ajax({
+            url: "/shop/order",
+            type: "POST",
+            data: orderinfo
+        }).done(function (data) {
+            modalOff();
+        }).fail(function (xhr, status, error) {
+            if(xhr.status === 401) {
+                alert("You Must be Logged In");
+                window.location.href = "/error/401";
+            }else{
+                alert(xhr.responseText);
+            }
+        })
+    })
+    btnleft.click(function () {
+     modalSetting(localindex - 1)
+    });
+    btnright.click(function () {
+     modalSetting(localindex + 1)
+    });
 })
-btnleft.click(function () {
-    modalSetting(localindex - 1)
-});
-btnright.click(function () {
-    modalSetting(localindex + 1)
-});
+

@@ -81,6 +81,18 @@
 #chat-container {
     grid-area : e;
     background : white;
+    border-radius: 1.5rem;
+}
+.text-input-container{
+    display: flex;
+}
+
+#messageInput{
+    width: 80%;
+}
+
+.sendmessage-btn{
+    font-size: 15px;
 }
 
 .img-container:hover {
