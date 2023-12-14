@@ -234,4 +234,10 @@ li:hover {
 .login-container {
     transform: translateY(10%);
 }
-
+.modal-preview-anibox {
+    width: 100%;
+    height: 100%;
+    position : relative;
+    margin : auto;
+    border-radius : 1rem;
+}

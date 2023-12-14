@@ -18,8 +18,15 @@
         modal_total_price.innerHTML = 0;
         modal.style.display = "none";
     }
-    function modalOn() {
-        modal.style.display = "grid";
+
+    function modalOff(index) {
+        modal.item(index).style.display = "none"
+        window.removeEventListener("keydown", e => {});
+    }
+    function modalOn(index) {
+        const modal_ani_box = document.querySelectorAll(".modal-preview-anibox").item(index);
+        modal_ani_box.innerHTML += preview_ani[index];
+        modal.item(index).style.display = "grid"
     }
 
     /* 배경 변경  */
