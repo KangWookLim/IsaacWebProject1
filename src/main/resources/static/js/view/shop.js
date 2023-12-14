@@ -31,8 +31,7 @@ function modalOff() {
     modal_total_price.innerHTML = 0;
     modal.style.display = "none";
 }
-function modalOn(itemid) {
-    modal_preview_ani.append(preview_ani[itemid]);
+function modalOn() {
     modal.style.display = "grid";
 
 }
@@ -58,7 +57,7 @@ btnModal.forEach(function (obj, index){
         const itemid = obj.getAttribute("itemid")
         if  (!evTarget.classList.contains("skin-button")) {
             modalSetting(index);
-            modalOn(itemid);
+            modalOn();
         }
         modalSetting(index);
     })
@@ -82,14 +81,13 @@ modal.addEventListener("click", e => {
     const evTarget = e.target;
     if (evTarget.classList.contains("btn-close")
         ||evTarget.classList.contains("modal-overlay")) {
-        modal_preview_ani.children().last().remove();
         modalOff();
     }
 
 })
 window.addEventListener("keydown", e => {
     if (e.keyCode === 27){
-        modal_preview_ani.children().last().remove();
+
         modalOff();
     }
 })
@@ -98,6 +96,10 @@ const btnright = $("#move-btn-right");
 let localindex = 0;
 function modalSetting(index) {
     localindex = index;
+    if(modal_preview_ani.children().length >= 3){
+        modal_preview_ani.children().last().remove();
+    }
+    modal_preview_ani.append(preview_ani[index+1]);
     const itemid = btnModal[index].getAttribute("itemid");
     const itemname = btnModal[index].getElementsByClassName("skin-name")[0].getAttribute("itemname");
     const itemprice = btnModal[index].getElementsByClassName("skin-img-btn")[0].getAttribute("itemprice")
@@ -156,7 +158,6 @@ $('#order').click(function () {
             data: orderinfo
         }).done(function (data) {
             window.alert("구매성공");
-            modal_preview_ani.children().last().remove();
             modalOff();
         }).fail(function (xhr, status, error) {
             if(xhr.status === 401) {
