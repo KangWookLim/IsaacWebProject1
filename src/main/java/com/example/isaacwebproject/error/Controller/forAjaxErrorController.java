@@ -14,4 +14,11 @@ public class forAjaxErrorController {
         modelAndView.setViewName("views/error/error401");
         return modelAndView;
     }
+
+    @RequestMapping("/404")
+    public ModelAndView dataerror(){
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("views/error/error404");
+        return modelAndView;
+    }
 }
