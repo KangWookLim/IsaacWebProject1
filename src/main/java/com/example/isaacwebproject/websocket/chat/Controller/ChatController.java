@@ -1,6 +1,7 @@
 package com.example.isaacwebproject.websocket.chat.Controller;
 
 import com.example.isaacwebproject.error.exception.DoNotLoginException;
+import com.example.isaacwebproject.error.exception.ServerNotFoundException;
 import com.example.isaacwebproject.websocket.Handler.CustomWebSocketHandler;
 import groovy.util.logging.Slf4j;
 import jakarta.servlet.http.HttpServletRequest;
