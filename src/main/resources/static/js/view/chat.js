@@ -156,5 +156,3 @@ function getRoomSession() {
         });
 }
 
-
-
