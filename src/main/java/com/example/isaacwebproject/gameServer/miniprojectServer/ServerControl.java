@@ -1,20 +1,25 @@
 package com.example.isaacwebproject.gameServer.miniprojectServer;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 
+import com.example.isaacwebproject.config.SessionConfig;
 import data.DataClass;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 public class ServerControl extends Server {
-	public ServerControl() {
-		start();
-	}
+	URL url = new URL("http://192.168.8.49:8098/mem/login");
+	HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
+	public ServerControl() throws Exception{
+		start();
+//		System.out.println(connection.getResponseMessage());
+	}
 	@Override
 	public void start() {
 		Socket socket = null;
@@ -59,8 +64,8 @@ public class ServerControl extends Server {
 					System.out.println("실행중");
 					getDataSendList().add(player_Out_Data);
 					reciveDataClass = (DataClass) player_In_Data.readObject();
-					name = reciveDataClass.getClientName();
-					System.out.println(name + "연결 성공");
+					System.out.println(reciveDataClass.toString());
+					System.out.println(reciveDataClass.getClientName()+ "연결 성공");
 				} catch (IOException | ClassNotFoundException e) {
 					System.out.println("데이터 가져오기 실패");
 					e.printStackTrace();

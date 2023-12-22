@@ -8,24 +8,25 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/mem")
 public class MemberController {
 
     private final MemberService memberService;
 
-        @RequestMapping("/mem/join")
+        @RequestMapping("/join")
     public ModelAndView join() {
         ModelAndView view = new ModelAndView();
         view.setViewName("views/member/join");
         return view;
     }
 
-    @GetMapping("/mem/chk")
+    @GetMapping("/chk")
     @ResponseBody
     public int memCheck(@RequestParam(name="ID") String ID) throws Exception {
         return memberService.checkUser(ID);
     }
 
-    @PostMapping("/mem/join")
+    @PostMapping("/join")
     public ModelAndView insertMember(@RequestParam(name="ID") String ID,
                                      @RequestParam(name="PW") String PW,
                                      @RequestParam(name="NICKNAME") String NICKNAME)  {

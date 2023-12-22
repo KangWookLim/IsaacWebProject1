@@ -47,11 +47,11 @@ public class InvenRepo {
         return jdbcTemplate.queryForObject(query, param, rowMapper);
     }
 
-    public int InsertItem(String memId, int itemsId, int amount){
+    public void InsertItem(String memId, int itemsId, int amount){
         String query =
                 "INSERT INTO inventory (mem_id, items_id, amount) VALUES (:memId, :itemsId, :amount)";
         Map<String, Object> param = Map.of("memId", memId, "itemsId", itemsId, "amount", amount);
-        return jdbcTemplate.update(query, param);
+        jdbcTemplate.update(query, param);
     }
 
     public void DeleteItem(String memId, int itemsId){
