@@ -5,6 +5,7 @@ const chat_container = $("#chat-container");
 
 socket.onopen = function (event) {
     getsession();
+    getRoomSession();
     console.log("연결 성공");
 };
 socket.onmessage = function (event) {
@@ -43,6 +44,7 @@ window.addEventListener("keydown", e => {
 
 $(document).ready(function () {
     sessionRefresh();
+    refreshRoomSession();
 })
 const connetecSessions = $("#total-mem-container")
 function sessionRefresh(){
@@ -57,7 +59,7 @@ function sessionRefresh(){
         .then(data => {
             connetecSessions.text(null);
             data.forEach(function(id){
-                connetecSessions.append(id+"접속중 <br>");
+                connetecSessions.append(id+"<br>");
                 console.log(id)
             });
             sessionRefresh();
@@ -85,6 +87,73 @@ function getsession(){
         .catch(error =>{
             console.error('데이터 입력 오류');
         })
+}
+const roomSession = $("#chat-room-container")
+function refreshRoomSession() {
+    fetch('/ws/checkroom')
+        .then(response => {
+            if(response.ok){
+                return response.json();
+            }else{
+                throw new Error("룸 생성 오류")
+            }
+        })
+        .then(data =>{
+            roomSession.text(null);
+            data.forEach(function(room){
+                console.log(room);
+                roomSession.append(
+                    "<div class='chat-room-card'>" +
+                    "<div class='chat-room-name'>" +
+                    "<span>" + room.mem1Id + "</span>" +
+                    "</div>" +
+                    "<div class='chat-room-number'>" +
+                    "<span>" + room.roomId + "</span>" +
+                    "</div>" +
+                    "<div class='chat-room-icon-container'> " +
+                    "<img src='../../images/chat/lock.png' class='chat-room-icon'/> " +
+                    "<img src='../../images/chat/play-button.png' class='chat-room-icon'/> " +
+                    "</div>" +
+                    "</div>"
+                );
+            });
+            refreshRoomSession();
+        })
+        .catch(error =>{
+            console.error('처리 도중 에러 발생');
+        });
+}
+function getRoomSession() {
+    fetch('/ws/getrooms')
+        .then(response => {
+            if(response.ok){
+                return response.json();
+            }else{
+                throw new Error("룸 생성 오류")
+            }
+        })
+        .then(data =>{
+            data.forEach(function(room){
+                console.log(room);
+                roomSession.append(
+                    "<div class='chat-room-card'>" +
+                    "<div class='chat-room-name'>" +
+                    "<span>" + room.mem1Id + "</span>" +
+                    "</div>" +
+                    "<div class='chat-room-number'>" +
+                    "<span>" + room.roomId + "</span>" +
+                    "</div>" +
+                    "<div class='chat-room-icon-container'> " +
+                    "<img src='../../images/chat/lock.png' class='chat-room-icon'/> " +
+                    "<img src='../../images/chat/play-button.png' class='chat-room-icon'/> " +
+                    "</div>" +
+                    "</div>"
+                );
+            });
+        })
+        .catch(error =>{
+            console.error('처리 도중 에러 발생');
+        });
 }
 
 
