@@ -46,6 +46,7 @@ public class CustomWebSocketHandler implements WebSocketHandler {
         System.out.println(((HttpSession)session.getAttributes().get("http_session")).getAttribute("userInfo"));
     }
 
+
     @Override
     public void handleTransportError(WebSocketSession session, Throwable exception) {
         System.out.println("서버통신 오류 " + exception);

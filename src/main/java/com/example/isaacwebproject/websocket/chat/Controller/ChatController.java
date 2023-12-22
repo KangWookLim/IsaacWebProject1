@@ -1,5 +1,7 @@
 package com.example.isaacwebproject.websocket.chat.Controller;
 
+import com.example.isaacwebproject.battle.service.BattleService;
+import com.example.isaacwebproject.battle.vo.BattleVO;
 import com.example.isaacwebproject.error.exception.AlreadyUseSockectException;
 import com.example.isaacwebproject.error.exception.DoNotLoginException;
 import com.example.isaacwebproject.websocket.Handler.CustomWebSocketHandler;
@@ -27,12 +29,15 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class ChatController {
     private final ChatService chatService;
+    private final BattleService battleService;
     private final CustomWebSocketHandler customWebSocketHandler;
     @GetMapping("/chat")
     public synchronized ModelAndView chatHome(HttpServletRequest request){
         List<ChatVo> chatLogs = chatService.findAllChat();
+        List<BattleVO> roomList = battleService.findAllRoom();
         ModelAndView view = new ModelAndView();
         view.addObject("chatLogs", chatLogs);
+        view.addObject("roomList", roomList);
         view.addObject("CurrentURI",request.getRequestURI());
         HttpSession session = request.getSession();
         String memId = (String)session.getAttribute("userInfo");
@@ -61,6 +66,25 @@ public class ChatController {
         }
         return customWebSocketHandler.getConnectedUsers();
     }
+    @RequestMapping("/ws/checkroom")
+    @ResponseBody
+    public List<BattleVO> connectRoom(HttpServletRequest request) {
+        int oldSessionLen = battleService.findAllRoom().size();
+        while(true){
+            int curruntSessionLen = battleService.findAllRoom().size();
+            if(oldSessionLen!=curruntSessionLen){
+                break;
+            }
+        }
+        return battleService.findAllRoom();
+    }
+
+    @RequestMapping("/ws/getrooms")
+    @ResponseBody
+    public List<BattleVO> getRoom(HttpServletRequest request){
+        return battleService.findAllRoom();
+    }
+
     @RequestMapping("/ws/getsessions")
     @ResponseBody
     public Set<Object> getSession(HttpServletRequest request){
