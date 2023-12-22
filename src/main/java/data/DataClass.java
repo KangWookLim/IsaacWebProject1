@@ -24,9 +24,12 @@ public class DataClass implements Serializable {
 	/* 시스템 정보 */
 	private String mem_Id;
 	private String mem_pw;
+	private boolean login_success;
 	private int startTime;
 	private boolean isMulti;
 	private boolean isStart;
+	private int battleRoomNum;
+	private int useitem;
 	
 	public DataClass() {}
 }

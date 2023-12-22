@@ -22,7 +22,7 @@ public class ChatRepo {
             );
 
     public List<ChatVo> findAllChat(){
-        String sql = "select * from CHAT_LOG ORDER BY id";
+        String sql = "select * from CHAT_LOG ORDER BY create_date desc";
         return jdbcTemplate.query(sql, rowMapper);
     }
 

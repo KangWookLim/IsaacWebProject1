@@ -5,20 +5,33 @@ import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 import com.example.isaacwebproject.config.SessionConfig;
+import com.example.isaacwebproject.gameServer.battleroom.service.BattleRoomService;
+import com.example.isaacwebproject.gameServer.mem.Service.servermemservice;
+import com.example.isaacwebproject.gameServer.mem.Vo.memVo;
 import data.DataClass;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
-public class ServerControl extends Server {
-	URL url = new URL("http://192.168.8.49:8098/mem/login");
-	HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 
-	public ServerControl() throws Exception{
+@Component
+@RequiredArgsConstructor
+public class ServerControl extends Server implements ApplicationRunner {
+	private final servermemservice servermemservice;
+	private final BattleRoomService battleRoomService;
+
+	@Override
+	public void run(ApplicationArguments args) throws Exception {
 		start();
-//		System.out.println(connection.getResponseMessage());
 	}
 	@Override
 	public void start() {
@@ -65,6 +78,16 @@ public class ServerControl extends Server {
 					getDataSendList().add(player_Out_Data);
 					reciveDataClass = (DataClass) player_In_Data.readObject();
 					System.out.println(reciveDataClass.toString());
+					memVo mem = servermemservice.findById(reciveDataClass.getMem_Id());
+					if(!servermemservice.pwmatch(reciveDataClass.getMem_pw(),mem.getPw())){
+						reciveDataClass.setLogin_success(false);
+					}else{
+						reciveDataClass.setLogin_success(true);
+					}
+					if(battleRoomService.findNumByMemId(reciveDataClass.getMem_Id())!=null){
+						reciveDataClass.setBattleRoomNum(battleRoomService.findNumByMemId(reciveDataClass.getMem_Id()));
+						reciveDataClass.setClientName(mem.getNickname());
+					}
 					System.out.println(reciveDataClass.getClientName()+ "연결 성공");
 				} catch (IOException | ClassNotFoundException e) {
 					System.out.println("데이터 가져오기 실패");
@@ -106,4 +129,6 @@ public class ServerControl extends Server {
 			}
 		}
 	}
+
+
 }

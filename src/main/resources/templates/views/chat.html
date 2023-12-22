@@ -111,8 +111,8 @@
                 <input type="text" id="messageInput">
                 <button class="sendmessage-btn" onclick="sendMessage()">Send Message</button>
             </div>
-            <div th:each="chatLog, loop : ${chatLogs}" th:text="${chatLog.getMem_id}+' : '+ ${chatLog.getMessage}"></div>
             <div id="messageArea"></div>
+            <div th:each="chatLog, loop : ${chatLogs}" th:text="${chatLog.getMem_id}+' : '+ ${chatLog.getMessage}"></div>
         </div>
     </div>
     <script type="text/javascript" src="js/view/chat.js">

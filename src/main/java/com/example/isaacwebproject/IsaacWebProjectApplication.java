@@ -11,11 +11,5 @@ public class IsaacWebProjectApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(IsaacWebProjectApplication.class, args);
-        try {
-            ServerControl server = new ServerControl();
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 }
