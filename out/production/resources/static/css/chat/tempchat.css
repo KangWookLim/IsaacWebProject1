@@ -24,6 +24,7 @@
     text-align : center;
     justify-content: center;
     display : flex;
+    padding-top : 15px;
 }
 #total-mem-container ul {
     margin : 0;
@@ -137,4 +138,8 @@
     width : 20px;
     height : 20px;
     margin : 0 5px 0 25px;
+}
+.login-mem {
+    width : 100%;
+    text-align : center;
 }
