@@ -18,12 +18,6 @@
             </ul>
         </div>
         <div id = "total-mem-container">
-            <ul>
-                <li>member1</li>
-                <li>member2</li>
-                <li>member3</li>
-                <li>member4</li>
-            </ul>
         </div>
         <div id = "chat-room-container">
            <div class="chat-room-card">
@@ -108,12 +102,16 @@
             </div>
         </div>
         <div id = "user-view-container">
+            <div id="user-id" th:text="|ID : ${session.userInfo}|" th:userid="${session.userInfo}">
+
+            </div>
         </div>
         <div id = "chat-container">
             <div class="text-input-container">
                 <input type="text" id="messageInput">
                 <button class="sendmessage-btn" onclick="sendMessage()">Send Message</button>
             </div>
+            <div th:each="chatLog, loop : ${chatLogs}" th:text="${chatLog.getMem_id}+' : '+ ${chatLog.getMessage}"></div>
             <div id="messageArea"></div>
         </div>
     </div>

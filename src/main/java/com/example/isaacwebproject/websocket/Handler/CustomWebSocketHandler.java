@@ -1,70 +1,70 @@
 package com.example.isaacwebproject.websocket.Handler;
 
-import com.example.isaacwebproject.error.exception.DoNotLoginException;
+import com.example.isaacwebproject.websocket.chat.service.ChatService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.OnMessage;
-import jakarta.websocket.Session;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.Synchronized;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.socket.CloseStatus;
-import org.springframework.web.socket.WebSocketHandler;
-import org.springframework.web.socket.WebSocketMessage;
-import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.*;
 
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 @Getter
-@Setter
+@Setter(onMethod_={@Synchronized}) //HttpSession을 가져올때 중복해서 겹치는 오류를 방지하기 위해 한 처리
 @Component
 @RequiredArgsConstructor
 public class CustomWebSocketHandler implements WebSocketHandler {
 
-    private final Map<HttpSession,WebSocketSession> Socket_HttpSessionBindMap = new ConcurrentHashMap<>();
+    private Map<HttpSession,WebSocketSession> Socket_HttpSessionBindMap = new ConcurrentHashMap<>();
+    private Set<Object> connectedUsers = new HashSet<>();
     private HttpSession httpSession;
+    private final ChatService chatService;
     private final ObjectMapper mapper;
-    private static final Map<String, WebSocketSession> chatsessions = new ConcurrentHashMap<>();
 
-    private Map<Long,Map<String,WebSocketSession>> chatRoomSessions = new ConcurrentHashMap<>();
 
 
     @Override
-    public void afterConnectionEstablished(@NotNull WebSocketSession session){
-        if(Socket_HttpSessionBindMap.containsKey(httpSession)){
-            System.out.println("실행");
-            throw new RuntimeException("You cannot connect to the chat server multiple times.");
-        }else{
-            Socket_HttpSessionBindMap.put(httpSession,session);
-            System.out.println(Socket_HttpSessionBindMap);
-        }
+    public synchronized void afterConnectionEstablished(@NotNull WebSocketSession session) throws Exception {
+        Socket_HttpSessionBindMap.put(httpSession,session);
+        session.getAttributes().put("http_session",httpSession);
+        session.getAttributes().put("userInfo",httpSession.getAttribute("userInfo"));
+        httpSession.setAttribute("socketsession",session);
+        connectedUsers.add(httpSession.getAttribute("userInfo"));
+        serverMessage(httpSession.getAttribute("userInfo")+"님이 연결 되었습니다.");
     }
 
     @Override
     public void handleMessage(@NotNull WebSocketSession session, @NotNull WebSocketMessage<?> message) throws Exception {
-        sendMessage(session,message);
-        System.out.println("message: " + message.getPayload().toString());
+        BroadCastMessage(session ,message);
+        chatService.addChat((String)session.getAttributes().get("userInfo"),(String)message.getPayload());
+        System.out.println(((HttpSession)session.getAttributes().get("http_session")).getAttribute("userInfo"));
     }
 
     @Override
-    public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
-        System.out.println("서버통신 오류 " + session);
+    public void handleTransportError(WebSocketSession session, Throwable exception) {
+        System.out.println("서버통신 오류 " + exception);
     }
 
     @Override
-    public void afterConnectionClosed(WebSocketSession session, CloseStatus closeStatus) throws Exception {
-        Socket_HttpSessionBindMap.remove(httpSession);
+    public synchronized void afterConnectionClosed(@NotNull WebSocketSession session, @NotNull CloseStatus closeStatus) throws Exception {
+        connectedUsers.remove(session.getAttributes().get("userInfo"));
+        Socket_HttpSessionBindMap.keySet().forEach(s->{
+            if(s.getAttribute("socketsession").equals(session)){
+                String Mem = (String)s.getAttribute("userInfo");
+                Socket_HttpSessionBindMap.remove(s);
+                try {
+                    serverMessage(Mem + "님이 연결을 종료했습니다");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         System.out.println("연결이 종료 되었습니다.");
     }
 
@@ -73,13 +73,32 @@ public class CustomWebSocketHandler implements WebSocketHandler {
         return false;
     }
 
-    public void sendMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+    public synchronized void BroadCastMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+        Socket_HttpSessionBindMap.keySet().forEach(s -> {
+            if(Socket_HttpSessionBindMap.get(s).equals(session)){
+                try {
+                    session.sendMessage(new TextMessage("나 : "+ message.getPayload()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }else {
+                try {
+                    Socket_HttpSessionBindMap.get(s).sendMessage(new TextMessage(session.getAttributes().get("userInfo") +" : "+message.getPayload()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
+    }
+
+    public synchronized void serverMessage(String message) throws Exception {
         Socket_HttpSessionBindMap.values().forEach(s -> {
             try {
-                s.sendMessage(message);
+                s.sendMessage(new TextMessage("Server : "+ message));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+        System.out.println(Socket_HttpSessionBindMap);
     }
 }

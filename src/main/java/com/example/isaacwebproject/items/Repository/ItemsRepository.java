@@ -50,7 +50,4 @@ public class ItemsRepository {
         Map<String, Object> params = Map.of("keyword", "%" + keyword + "%");
         return jdbcTemplate.query(sql, params, rowMapper);
     }
-
-
-
 }

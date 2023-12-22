@@ -24,9 +24,10 @@ public class InvenController {
         List<InvenVO> inven;
         ModelAndView view = new ModelAndView();
         HttpSession session = request.getSession();
+        System.out.println("inven : " + session);
         String memId = (String)(session.getAttribute("userInfo"));
         if(memId == null) {
-            throw new DoNotLoginException("로그인이 필요합니다.");
+            throw new DoNotLoginException();
         }else {
             inven = service.findElementsByMemid(memId);
             view.addObject("inven", inven);
