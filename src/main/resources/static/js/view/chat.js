@@ -80,7 +80,7 @@ function getsession(){
         .then(data =>{
             connetecSessions.text(null);
             data.forEach(function(id){
-                connetecSessions.append(id+"접속중 <br>");
+                connetecSessions.append(id +"<br>");
                 console.log(id)
             });
         })

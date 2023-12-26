@@ -27,7 +27,10 @@ public class Servermemrepo {
     public Optional<memVo> findById(String id) {
         String sql = "select * from member where id = :id";
         Map<String,Object> param = Map.of("id",id);
-        memVo vo = jdbcTemplate.queryForObject(sql,param,rowMapper);
-        return Optional.ofNullable(vo);
+        try{
+            return Optional.ofNullable(jdbcTemplate.queryForObject(sql,param,rowMapper));
+        }catch (Exception e){
+            return Optional.empty();
+        }
     }
 }
