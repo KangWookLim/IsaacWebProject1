@@ -26,15 +26,15 @@ public class BattleRepo {
         String sql = "SELECT * FROM battleroom ORDER BY room_id";
         return jdbcTemplate.query(sql, rowMapper);
     }
-    public void addBattleroom(String mem_id){
-        String sql = "INSERT INTO battleroom (room_ID, mem1_id) VALUES (battleroom_up.nextval, :mem_id)";
-        Map<String, Object> params = Map.of("MEM1_ID",mem_id);
+    public void addBattleroom(String mem1_id){
+        String sql = "INSERT INTO battleroom (room_ID, mem1_id) VALUES (battleroom_up.nextval, :mem1_id)";
+        Map<String, Object> params = Map.of("MEM1_ID",mem1_id);
         jdbcTemplate.update(sql, params);
     }
 
-    public void deleteBattleroom(String mem_id){
-        String sql = "DELETE * FROM battleroom WHERE mem1_id = :mem_id";
-        Map<String, Object> params = Map.of("mem_id", mem_id);
+    public void deleteBattleroom(String mem1_id){
+        String sql = "DELETE * FROM battleroom WHERE mem1_id = :mem1_id";
+        Map<String, Object> params = Map.of("mem1_id", mem1_id);
         jdbcTemplate.update(sql,params);
     }
 

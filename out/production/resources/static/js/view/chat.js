@@ -6,7 +6,6 @@ const chat_container = $("#chat-container");
 socket.onopen = function (event) {
     getsession();
     getRoomSession();
-    console.log("연결 성공");
 };
 socket.onmessage = function (event) {
     showMessage(event.data);
@@ -155,4 +154,18 @@ function getRoomSession() {
             console.error('처리 도중 에러 발생');
         });
 }
+// 새로운 부분
+$(".makeRoom").on("click", function () {
+    makeRoom();
+});
 
+function makeRoom() {
+    fetch('/ws/makerooms')
+        .then(response => {
+            if(response.ok){
+                console.log("룸 생성 완료")
+            }else{
+                throw new Error("룸 생성 오류")
+            }
+        })
+}
