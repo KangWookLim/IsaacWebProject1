@@ -2,11 +2,12 @@ package com.example.isaacwebproject.gameServer.battleroom.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 public class BattleRoomVo {
     private int room_id;
     private String mem1_id;
