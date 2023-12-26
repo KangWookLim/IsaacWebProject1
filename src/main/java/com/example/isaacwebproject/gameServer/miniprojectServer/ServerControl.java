@@ -61,7 +61,7 @@ public class ServerControl extends Server implements ApplicationRunner {
 	}
 
 	@Override
-	public void ReceiveThread(Socket socket) {
+	public synchronized void ReceiveThread(Socket socket) {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
@@ -102,6 +102,7 @@ public class ServerControl extends Server implements ApplicationRunner {
 					player_Out_Data.writeObject(reciveDataClass);
 					player_Out_Data.reset();
 					System.out.println(reciveDataClass.getClientName()+ "연결 성공");
+					System.out.println(getDataSendMap());
 				} catch (IOException | ClassNotFoundException e) {
 					System.out.println("데이터 가져오기 실패");
 					e.printStackTrace();
@@ -109,13 +110,13 @@ public class ServerControl extends Server implements ApplicationRunner {
 				try {
 					while (true) {
 						reciveDataClass = (DataClass) player_In_Data.readObject();
-						System.out.println(reciveDataClass.toString());
+						getDataSendMap().put(player_Out_Data,reciveDataClass);
 						sendData(reciveDataClass, player_Out_Data);
 					}
 				} catch (IOException | ClassNotFoundException e) {
 				} finally {
 					try {
-						System.out.println(name + "연결 종료");
+						System.out.println(reciveDataClass.getClientName() + "연결 종료");
 						getDataSendMap().remove(player_Out_Data);
 						socket.close();
 					} catch (IOException e) {
@@ -128,16 +129,28 @@ public class ServerControl extends Server implements ApplicationRunner {
 
 	@Override
 	public void sendData(DataClass sendDataClass, ObjectOutputStream objectOutputStream) {
-
+		int starttime = 0;
 		for (ObjectOutputStream send : getDataSendMap().keySet()) {
-			if (!send.equals(objectOutputStream)) {
-				if(getDataSendMap().get(send).getBattleRoomNum()==sendDataClass.getBattleRoomNum()) {
-					try {
-						send.writeObject(sendDataClass);
-						send.reset();
+			if(sendDataClass.isMulti()) {
+				if (!send.equals(objectOutputStream)) {
+					System.out.println(send);
+					System.out.println(objectOutputStream);
+					if (getDataSendMap().get(send).getBattleRoomNum() == sendDataClass.getBattleRoomNum()&&getDataSendMap().get(send).isMulti()) {
+						if(!sendDataClass.isStart()&&!getDataSendMap().get(send).isStart()){
+							sendDataClass.setStart(true);
+							getDataSendMap().get(send).setStart(true);
+							starttime = (int)System.currentTimeMillis();
+							sendDataClass.setStartTime(starttime);
+							getDataSendMap().get(send).setStartTime(starttime);
+						}
+						try {
+							System.out.println(getDataSendMap().get(send));
+							send.writeObject(sendDataClass);
+							send.reset();
 
-					} catch (Exception e) {
-						System.out.println("전송 종료");
+						} catch (Exception e) {
+							System.out.println("전송 종료");
+						}
 					}
 				}
 			}
