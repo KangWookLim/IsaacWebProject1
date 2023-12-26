@@ -10,6 +10,7 @@ import java.sql.DriverManager;
 
 import com.example.isaacwebproject.config.SessionConfig;
 import com.example.isaacwebproject.gameServer.battleroom.service.BattleRoomService;
+import com.example.isaacwebproject.gameServer.battleroom.vo.BattleRoomVo;
 import com.example.isaacwebproject.gameServer.mem.Service.servermemservice;
 import com.example.isaacwebproject.gameServer.mem.Vo.memVo;
 import data.DataClass;
@@ -31,6 +32,7 @@ public class ServerControl extends Server implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		int battleRoomId = battleRoomService.findNumByMemId("1111");
 		start();
 	}
 	@Override
@@ -75,19 +77,30 @@ public class ServerControl extends Server implements ApplicationRunner {
 					player_Out_Data = new ObjectOutputStream(outputStream);
 					player_In_Data = new ObjectInputStream(inputStream);
 					System.out.println("실행중");
-					getDataSendList().add(player_Out_Data);
 					reciveDataClass = (DataClass) player_In_Data.readObject();
-					System.out.println(reciveDataClass.toString());
+					getDataSendMap().put(player_Out_Data,reciveDataClass);
+					System.out.println(reciveDataClass.hashCode());
 					memVo mem = servermemservice.findById(reciveDataClass.getMem_Id());
-					if(!servermemservice.pwmatch(reciveDataClass.getMem_pw(),mem.getPw())){
+					if(mem == null){
 						reciveDataClass.setLogin_success(false);
-					}else{
-						reciveDataClass.setLogin_success(true);
-					}
-					if(battleRoomService.findNumByMemId(reciveDataClass.getMem_Id())!=null){
-						reciveDataClass.setBattleRoomNum(battleRoomService.findNumByMemId(reciveDataClass.getMem_Id()));
+					}else {
+                        reciveDataClass.setLogin_success(servermemservice.pwmatch(reciveDataClass.getMem_pw(), mem.getPw()));
+						int battleRoomId = battleRoomService.findNumByMemId(mem.getId());
 						reciveDataClass.setClientName(mem.getNickname());
+						BattleRoomVo battleRoomVo = battleRoomService.findById(battleRoomId);
+						if(battleRoomVo==null){
+							reciveDataClass.setBattleRoomNum(0);
+						}else {
+							reciveDataClass.setBattleRoomNum(battleRoomId);
+							if (battleRoomVo.getMem1_id().equals(reciveDataClass.getMem_Id())) {
+								reciveDataClass.setUseitem(battleRoomVo.getMem1_use_item_id());
+							} else {
+								reciveDataClass.setUseitem(battleRoomVo.getMem2_use_item_id());
+							}
+						}
 					}
+					player_Out_Data.writeObject(reciveDataClass);
+					player_Out_Data.reset();
 					System.out.println(reciveDataClass.getClientName()+ "연결 성공");
 				} catch (IOException | ClassNotFoundException e) {
 					System.out.println("데이터 가져오기 실패");
@@ -103,7 +116,7 @@ public class ServerControl extends Server implements ApplicationRunner {
 				} finally {
 					try {
 						System.out.println(name + "연결 종료");
-						getDataSendList().remove(player_Out_Data);
+						getDataSendMap().remove(player_Out_Data);
 						socket.close();
 					} catch (IOException e) {
 						System.out.println("클라이언트 강제 종료");
@@ -116,16 +129,17 @@ public class ServerControl extends Server implements ApplicationRunner {
 	@Override
 	public void sendData(DataClass sendDataClass, ObjectOutputStream objectOutputStream) {
 
-		for (ObjectOutputStream send : getDataSendList()) {
+		for (ObjectOutputStream send : getDataSendMap().keySet()) {
 			if (!send.equals(objectOutputStream)) {
-				try {
-					send.writeObject(sendDataClass);
-					send.reset();
+				if(getDataSendMap().get(send).getBattleRoomNum()==sendDataClass.getBattleRoomNum()) {
+					try {
+						send.writeObject(sendDataClass);
+						send.reset();
 
-				} catch (Exception e) {
-					System.out.println("전송 종료");
+					} catch (Exception e) {
+						System.out.println("전송 종료");
+					}
 				}
-
 			}
 		}
 	}

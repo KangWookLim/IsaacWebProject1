@@ -17,8 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 public class Server {
-	private List<ObjectOutputStream> dataSendList = Collections.synchronizedList(new ArrayList<>());
-	private Map<ObjectOutputStream, HttpSession> Session_StreamBindMap = Collections.synchronizedMap(new HashMap<>());
+	private Map<ObjectOutputStream,DataClass> dataSendMap = Collections.synchronizedMap(new HashMap<>());
 	private int socket = 8056;
 	private ServerSocket serverSocket;
 	private int startTime;

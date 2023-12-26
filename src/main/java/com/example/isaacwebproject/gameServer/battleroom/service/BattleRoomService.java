@@ -15,10 +15,7 @@ public class BattleRoomService {
         Optional<BattleRoomVo> optionalBattleRoomVo = repo.findById(id);
         return optionalBattleRoomVo.orElse(null);
     }
-    public Integer findNumByMemId(String memId){
-        if(repo.findNumByMemId(memId)==null){
-            return null;
-        }
-        else return repo.findNumByMemId(memId);
+    public int findNumByMemId(String memId) {
+        return repo.findNumByMemId(memId);
     }
 }
