@@ -15,9 +15,14 @@ public class BattleService {
     public List<BattleVO> findAllRoom(){
         return battleRepo.findAllRoom();
     }
-    public void addRoom(String mem_id){battleRepo.addBattleroom(mem_id);}
+    public void addRoom(String mem_id){
+        battleRepo.addBattleroom(mem_id);
+    }
 
     public void deleteRoom(String mem_id){
         battleRepo.deleteBattleroom(mem_id);
+    }
+    public List<BattleVO> getRoomInfo(String mem_id){
+        return battleRepo.getRoomInfo(mem_id);
     }
 }

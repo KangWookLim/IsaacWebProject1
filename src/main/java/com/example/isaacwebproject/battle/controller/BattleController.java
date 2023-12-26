@@ -32,5 +32,37 @@ public class BattleController {
         HttpSession session = request.getSession();
         String memId = (String)session.getAttribute("userInfo");
         battleService.addRoom(memId);
+     }
+    @RequestMapping("/ws/deleterooms")
+    @ResponseBody
+    public void deleteRoom(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String memId = (String)session.getAttribute("userInfo");
+        battleService.deleteRoom(memId);
+    }
+    @RequestMapping("/ws/getroominfo")
+    @ResponseBody
+    public List<BattleVO> getRoomInfos(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String memId = (String)session.getAttribute("userInfo");
+        return battleService.getRoomInfo(memId);
+    }
+    @RequestMapping("/ws/checkroominfo")
+    @ResponseBody
+    public List<BattleVO> checkRoomInfos(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        int curruntSessionLen = 0;
+        String memId = (String)session.getAttribute("userInfo");
+        int oldSessionLen = battleService.getRoomInfo(memId).size();
+        while(true){
+            curruntSessionLen = battleService.getRoomInfo(memId).size();
+            System.out.println(1);
+            if(oldSessionLen!=curruntSessionLen){
+                break;
+            }
+            System.out.println(2);
+        }
+
+        return battleService.getRoomInfo(memId);
     }
 }

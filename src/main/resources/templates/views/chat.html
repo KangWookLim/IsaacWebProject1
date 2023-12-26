@@ -8,6 +8,7 @@
     <th:block layout:fragment="css">
         <link rel="stylesheet" th:href="@{/css/home/home.css}">
         <link rel="stylesheet" th:href="@{/css/chat/tempchat.css}">
+        <link rel="stylesheet" th:href="@{/css/chat/modal.css}">
     </th:block>
     <div id = "main-container">
         <div id = "menu-container">
@@ -41,6 +42,45 @@
             <div id="messageArea"></div>
             <div th:each="chatLog, loop : ${chatLogs}" th:text="${chatLog.getMem_id}+' : '+ ${chatLog.getMessage}"></div>
         </div>
+    </div>
+<!--    modal section -->
+    <div id="modal">
+        <form th:action="@{/chat/ready}" method="post">
+            <div class="modal-window">
+                <div class="modal-title-container">
+                    Room No. <span id="modal-room-num"></span>
+                </div>
+                <div class="modal-btn-container">
+                    <button type="button" class="btn-close" aria-label="Close"></button>
+                </div>
+                <div class="modal-user1-container">
+                    <span id="modal-mem1"></span>
+                </div>
+                <div class="modal-flex-container">
+                    <span>
+                        VS
+                    </span>
+                </div>
+                <div class="modal-user2-container">
+                    <span id="modal-mem2"></span>
+                </div>
+                <div class="modal-item-chk-container">
+                    <label class="modal-radio" for="modal-radio-one"><input type="radio" name="item" id="modal-radio-one" value='1'>Crown</label>
+                    <label class="modal-radio" for="modal-radio-two"><input type="radio" name="item" id="modal-radio-two" value='2'>Inverted Cross</label>
+                    <label class="modal-radio" for="modal-radio-three"><input type="radio" name="item" id="modal-radio-three" value='3'>Green Mushroom</label>
+                    <label class="modal-radio" for="modal-radio-four"><input type="radio" name="item" id="modal-radio-four" value='4'>Mantle</label>
+                    <label class="modal-radio" for="modal-radio-five"><input type="radio" name="item" id="modal-radio-five" value='5'>Meat</label>
+                    <label class="modal-radio" for="modal-radio-six"><input type="radio" name="item" id="modal-radio-six" value='6'>Piggybank</label>
+                    <label class="modal-radio" for="modal-radio-seven"><input type="radio" name="item" id="modal-radio-seven" value='7'>Pill</label>
+                    <label class="modal-radio" for="modal-radio-eight"><input type="radio" name="item" id="modal-radio-eight" value='8'>Pyro</label>
+                    <label class="modal-radio" for="modal-radio-nine"><input type="radio" name="item" id="modal-radio-nine" value='9'>Red Mushroom</label>
+                    <label class="modal-radio" for="modal-radio-ten"><input type="radio" name="item" id="modal-radio-ten" value='10'>Halo</label>
+                </div>
+                <div class="modal-confirm-container">
+                    <input type="submit" value="start!"/>
+                </div>
+            </div>
+        </form>
     </div>
     <script type="text/javascript" src="js/view/chat.js">
     </script>
