@@ -40,7 +40,6 @@
     </div>
 <!--    modal section -->
     <div id="modal">
-        <form th:action="@{/ws/ready}" method="post">
             <div class="modal-window">
                 <div class="modal-title-container">
                     Room No. <span id="modal-room-num"></span>
@@ -60,22 +59,21 @@
                     <span id="modal-mem2"></span>
                 </div>
                 <div class="modal-item-chk-container">
-                    <label class="modal-radio" for="modal-radio-one"><input type="radio" name="item" id="modal-radio-one" value='1'>Crown</label>
-                    <label class="modal-radio" for="modal-radio-two"><input type="radio" name="item" id="modal-radio-two" value='2'>Inverted Cross</label>
-                    <label class="modal-radio" for="modal-radio-three"><input type="radio" name="item" id="modal-radio-three" value='3'>Green Mushroom</label>
-                    <label class="modal-radio" for="modal-radio-four"><input type="radio" name="item" id="modal-radio-four" value='4'>Mantle</label>
-                    <label class="modal-radio" for="modal-radio-five"><input type="radio" name="item" id="modal-radio-five" value='5'>Meat</label>
-                    <label class="modal-radio" for="modal-radio-six"><input type="radio" name="item" id="modal-radio-six" value='6'>Piggybank</label>
-                    <label class="modal-radio" for="modal-radio-seven"><input type="radio" name="item" id="modal-radio-seven" value='7'>Pill</label>
-                    <label class="modal-radio" for="modal-radio-eight"><input type="radio" name="item" id="modal-radio-eight" value='8'>Pyro</label>
-                    <label class="modal-radio" for="modal-radio-nine"><input type="radio" name="item" id="modal-radio-nine" value='9'>Red Mushroom</label>
-                    <label class="modal-radio" for="modal-radio-ten"><input type="radio" name="item" id="modal-radio-ten" value='10'>Halo</label>
+                    <label class="modal-radio" for="modal-radio-one" style="display: none"><input type="radio" name="item" id="modal-radio-one" value='1'>Crown</label>
+                    <label class="modal-radio" for="modal-radio-two" style="display: none"><input type="radio" name="item" id="modal-radio-two" value='2'>Inverted Cross</label>
+                    <label class="modal-radio" for="modal-radio-three" style="display: none"><input type="radio" name="item" id="modal-radio-three" value='3'>Green Mushroom</label>
+                    <label class="modal-radio" for="modal-radio-four" style="display: none"><input type="radio" name="item" id="modal-radio-four" value='4'>Mantle</label>
+                    <label class="modal-radio" for="modal-radio-five" style="display: none"><input type="radio" name="item" id="modal-radio-five" value='5'>Meat</label>
+                    <label class="modal-radio" for="modal-radio-six" style="display: none"><input type="radio" name="item" id="modal-radio-six" value='6' >Piggybank</label>
+                    <label class="modal-radio" for="modal-radio-seven" style="display: none"><input type="radio" name="item" id="modal-radio-seven" value='7'>Pill</label>
+                    <label class="modal-radio" for="modal-radio-eight" style="display: none"><input type="radio" name="item" id="modal-radio-eight" value='8'>Pyro</label>
+                    <label class="modal-radio" for="modal-radio-nine" style="display: none"><input type="radio" name="item" id="modal-radio-nine" value='9'>Red Mushroom</label>
+                    <label class="modal-radio" for="modal-radio-ten" style="display: none"><input type="radio" name="item" id="modal-radio-ten" value='10'>Halo</label>
                 </div>
                 <div class="modal-confirm-container">
-                    <input type="submit" value="start!"/>
+                    <input id="start-btn" type="submit" value="start!" style="display: none"/>
                 </div>
             </div>
-        </form>
     </div>
     <script type="text/javascript" src="js/view/chat.js">
     </script>

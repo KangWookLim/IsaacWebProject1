@@ -3,7 +3,6 @@ package com.example.isaacwebproject.battle.service;
 import com.example.isaacwebproject.battle.repo.BattleJAPRepo;
 import com.example.isaacwebproject.battle.repo.BattleRepo;
 import com.example.isaacwebproject.battle.vo.BattleRoom;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +18,6 @@ public class BattleService {
     public List<BattleRoom> findAllRoom(){
         return battleRepo.findAllRoom();
     }
-    public void addBattleRoom(String mem_id){
-        int roo_num = battleJAPRepo.findAll().size();
-        battleRepo.addBattleroom(mem_id,roo_num+1);
-    }
 
     public void deleteRoom(String mem_id){
         battleRepo.deleteBattleroom(mem_id);
@@ -36,5 +31,8 @@ public class BattleService {
 
     public BattleRoom findByMem_Id(String memId) throws SQLException {
         return battleRepo.findByMem_Id(memId);
+    }
+    public void addBattleRoom(BattleRoom room){
+        battleJAPRepo.save(room);
     }
 }

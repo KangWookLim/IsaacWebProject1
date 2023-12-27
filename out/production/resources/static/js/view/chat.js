@@ -47,6 +47,7 @@ $(document).ready(function () {
     sessionRefresh();
     refreshRoomSession();
     modalOff();
+    getMemInvenInfo();
 })
 // /chat으로 매핑된 이후 html세팅용
 const connetecSessions = $("#total-mem-container")
@@ -172,7 +173,6 @@ function makeRoom() {
             if(response.ok){
                 getModalInfo();
                 modalOn();
-                refreshModalInfo();
                 console.log("룸 생성 완료")
             }else{
                 throw new Error("룸 생성 오류")
@@ -182,7 +182,7 @@ function makeRoom() {
 
 function modalOff() {
     modal.style.display = "none";
-    fetch('/ws/deleterooms')
+    fetch('/ws/exitroom')
         .then(response => {
             if(response.ok){
                 console.log("룸 삭제 완료")
@@ -195,7 +195,7 @@ function modalOff() {
 const radio_container = document.querySelector(".modal-item-chk-container");
 function modalOn() {
     modal.style.display = "grid";
-    radio_container.style.display = "none";
+    radio_container.style.display = "flex";
 }
 modal.addEventListener("click", e => {
     const evTarget = e.target;
@@ -226,6 +226,7 @@ function getModalInfo(){
             data.forEach(room =>{
                 if(room.mem1_Id === principal_User||room.mem2_Id === principal_User){
                     modalSetting(room);
+                    refreshModalInfo(room)
                 }
             })
         })
@@ -233,28 +234,22 @@ function getModalInfo(){
             console.error('데이터 입력 오류');
         })
 }
-function refreshModalInfo(){
-    fetch('/ws/checkroominfo')
-        .then(response => {
-            if(response.ok){
-                return response.json();
-            }else{
-                throw new Error("네트워크 오류")
-            }
-        })
-        .then(data =>{
-            data.forEach((room) => {
-                if (room.mem1_Id === principal_User || room.mem2_Id === principal_User) {
-                    modalSetting(room);
-                    if(room.mem2_Id == null){
-                        refreshModalInfo();
-                    }
-                }
-            })
-        })
-        .catch(error =>{
-            console.error(error);
-        })
+function refreshModalInfo(room){
+    if(modal.style.display==="none"){
+        throw "out of modal";
+    }
+    $.ajax({
+        url: '/ws/checkroominfo',
+        type: 'POST',
+        dataType: 'json',
+        data: JSON.stringify(room),
+        contentType: "application/json; charset=utf-8"
+    }).done(function (data){
+        modalSetting(data);
+        refreshModalInfo(data);
+    }).fail(function (error){
+        console.log(error);
+    })
 }
 
 
@@ -270,15 +265,17 @@ function modalSetting(room){
         modalMem2.text("대기중");
     }else{
         radio_container.style.display = "flex";
+        if(principal_User===modalMem1.text()){
+            document.querySelector("#start-btn").style.display = "grid";
+        }
     }
 }
 //룸 생성 및 생성한 후 보이는 modal창과 정보 세팅
 
 function roombtnclick(room_num){
     intoroom(room_num);
-    getModalInfo();
     modalOn();
-    refreshModalInfo();
+    getModalInfo();
 }
 
 
@@ -293,6 +290,36 @@ function intoroom(room_num){
             console.log(error)
     })
 }
+
+const modal_radio_button = document.querySelectorAll(".modal-radio");
+function getMemInvenInfo(){
+    $.ajax({
+        url: "/ws/meminveninfo",
+        type: "POST"
+    }).done(function (data){
+        data.forEach(function(obj){
+            modal_radio_button[obj.itemId-1].innerHTML += (" "+(obj.amount));
+            modal_radio_button[obj.itemId-1].style.display = "flex"
+        })
+    })
+}
+const start_button = $("#start-btn")
+start_button.click(function (){
+    const item = $("input:radio[name=item]:checked");
+    console.log(item.val());
+    const params= {
+        item_id : item.val(),
+        principal : principal_User
+    }
+    $.ajax({
+        url: "start_game",
+        type: "POST",
+        data:params
+    }).done(function (data){
+        console.log(data);
+    })
+})
+
 
 
 
