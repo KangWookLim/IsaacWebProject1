@@ -42,6 +42,8 @@ public class LoginApiController {
                     throw new Exception("중복 로그인 입니다.");
                 }else {
                     session.setAttribute("userInfo", member.getID());
+                    session.setAttribute("userCoin", member.getCOIN());
+                    session.setAttribute("userExp", member.getEXP());
                     sessionConfig.sessionCreated(session);
                     resultMap.put("resultCode", 200);
                     session.setMaxInactiveInterval(60 * 30);

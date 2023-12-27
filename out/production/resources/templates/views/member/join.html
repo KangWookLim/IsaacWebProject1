@@ -14,10 +14,10 @@
         <!-- 로고 -->
         <h1>Sign In</h1>
         <form id="frm"  action="/mem/join"  method="post">
-        <div class="wrap" style = "margin-bottom : 30px;">
+        <div class="wrap" style = "margin-bottom : 10px;">
             <label class="form-label-mt-4"><b>ID</b></label>
             <input type="text" class="form-control" id="ID" name="ID">
-            <button type = "button" class="btn btn-secondary" id="idChkBtn" style = "float : right; display : block;" onclick="userIdChk();">중복확인</button>
+            <button type = "button" class="btn btn-secondary" id="idChkBtn" style = " display : block;" onclick="userIdChk();">중복확인</button>
         </div>
 
         <div class="wrap">
@@ -31,8 +31,12 @@
         <div class="wrap">
             <label class="form-label-mt-4"><b>Nickname</b></label>
             <input type="text" class="form-control" id="nickname" name="NICKNAME">
+
         </div>
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "background : black; margin-right: 5px; float : right; width : 60px; position : relative" onclick="join()">Join</button>
+        <div class="btn-container">
+            <button type = "button" class="btn btn-secondary" id="nickChkBtn" style = " display : block; margin-bottom : 7px; position : relative;" onclick="userNickChk();">중복확인</button>
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" style = "background : black; float : right; width : 60px;" onclick="join()">Join</button>
+        </div>
         </form>
     </div>
 </div>

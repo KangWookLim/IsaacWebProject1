@@ -58,8 +58,9 @@ function sessionRefresh(){
         })
         .then(data => {
             connetecSessions.text(null);
+            connetecSessions.append("<div class='login-mem'> 접속유저 </div>");
             data.forEach(function(id){
-                connetecSessions.append(id+"<br>");
+                connetecSessions.append("<div class='connect-session-id'>" + id + "</div>");
                 console.log(id)
             });
             sessionRefresh();
@@ -77,10 +78,11 @@ function getsession(){
                 throw new Error("네트워크 오류")
             }
         })
-        .then(data =>{
+        .then(data => {
             connetecSessions.text(null);
+            connetecSessions.append("<div class='login-mem'> 접속유저 </div>");
             data.forEach(function(id){
-                connetecSessions.append(id +"<br>");
+                connetecSessions.append("<div class='connect-session-id'>" + id + "</div>");
                 console.log(id)
             });
         })

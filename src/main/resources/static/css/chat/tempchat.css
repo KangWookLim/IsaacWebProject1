@@ -22,9 +22,6 @@
     grid-area : b;
     background : white;
     text-align : center;
-    justify-content: center;
-    display : flex;
-    padding-top : 15px;
 }
 #total-mem-container ul {
     margin : 0;
@@ -78,6 +75,13 @@
 #user-view-container {
     grid-area : d;
     background : white;
+    padding : 15px;
+    text-align : center;
+}
+#user-view-container div {
+    border : 2px solid #666;
+    margin-bottom : 10px;
+    font-size : 1rem;
 }
 #chat-container {
     display: flex;
@@ -86,17 +90,35 @@
     border-radius: 1.5rem;
     overflow: scroll;
     flex-direction: column-reverse;
+    padding : 15px;
 }
 .text-input-container{
     display: flex;
 }
+.chat-message {
+    margin-bottom: 5px;
+}
 
 #messageInput{
     width: 80%;
+    padding : 2px;
+    height : max-content;
 }
 
 .sendmessage-btn{
     font-size: 15px;
+    padding : 4px;
+    height : max-content;
+    background-color: black;
+    color : white;
+    border : none;
+    border-radius : 5px;
+    line-height : inherit;
+    padding-block: 1px;
+    padding-inline: 2px;
+}
+.sendmessage-btn:hover {
+    color : #ccc;
 }
 
 .img-container:hover {
@@ -142,4 +164,14 @@
 .login-mem {
     width : 100%;
     text-align : center;
+    height: max-content;
+    background-color: #ccc;
+    padding : 10px;
+    margin-bottom : 15px;
+}
+.connect-session-id {
+    width: 100%;
+    text-align: center;
+    height: max-content;
+    font-size : 1.2rem;
 }
