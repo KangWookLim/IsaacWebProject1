@@ -4,6 +4,8 @@ import com.example.isaacwebproject.battle.service.BattleService;
 import com.example.isaacwebproject.battle.vo.BattleRoom;
 import com.example.isaacwebproject.error.exception.AlreadyUseSockectException;
 import com.example.isaacwebproject.error.exception.DoNotLoginException;
+import com.example.isaacwebproject.login.service.LoginService;
+import com.example.isaacwebproject.member.vo.Member;
 import com.example.isaacwebproject.websocket.Handler.CustomWebSocketHandler;
 import com.example.isaacwebproject.websocket.chat.service.ChatService;
 import com.example.isaacwebproject.websocket.chat.vo.Chat_Log;
@@ -27,8 +29,10 @@ public class ChatController {
     private final ChatService chatService;
     private final BattleService battleService;
     private final CustomWebSocketHandler customWebSocketHandler;
+    private final LoginService service;
     @GetMapping("/chat")
     public synchronized ModelAndView chatHome(HttpServletRequest request){
+
         List<Chat_Log> chatLogs = chatService.findAllChat();
         List<BattleRoom> roomList = battleService.findAllRoom();
         ModelAndView view = new ModelAndView();
@@ -37,6 +41,9 @@ public class ChatController {
         view.addObject("CurrentURI",request.getRequestURI());
         HttpSession session = request.getSession();
         String memId = (String)session.getAttribute("userInfo");
+        Member member = service.getMemberById(memId);
+        session.setAttribute("userCoin", member.getCOIN());
+        session.setAttribute("userExp", member.getEXP());
         Integer memCoin = (Integer)session.getAttribute("userCoin");
         Integer memExp = (Integer)session.getAttribute("userExp");
         if(memId == null) {
