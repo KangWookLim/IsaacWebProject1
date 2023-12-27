@@ -28,7 +28,7 @@ socket.onerror = function (error) {
 }
 
 function showMessage(message) {
-    $("#messageArea").append("<br>" + message);
+    $("#messageArea").append(message);
 }
 
 $("#sendBtn").on("click", function () {
