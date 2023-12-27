@@ -2,6 +2,8 @@ const socket = new WebSocket("ws://" + window.location.host + "/ws");
 const userid = document.getElementById("user-id");
 const connectmem = $("#total-mem-container");
 const chat_container = $("#chat-container");
+const principal_User = $("#user-id").attr("principal");
+const modal_radio = document.querySelectorAll(".modal-radio");
 
 socket.onopen = function (event) {
     getsession();
@@ -36,16 +38,17 @@ $("#sendBtn").on("click", function () {
 });
 
 window.addEventListener("keydown", e => {
-    if (e.keyCode === 13) {
+    if (e.keyCode === 13&&modal.style.display==="none") {
         sendMessage();
     }
 })
-
+//서버와 웹소켓 연결, 종료, 메세지전송 관련 메서드
 $(document).ready(function () {
     sessionRefresh();
     refreshRoomSession();
     modalOff();
 })
+// /chat으로 매핑된 이후 html세팅용
 const connetecSessions = $("#total-mem-container")
 function sessionRefresh(){
     fetch('/ws/sessionrefresh')
@@ -90,6 +93,9 @@ function getsession(){
             console.error('데이터 입력 오류');
         })
 }
+//현재 웹소켓으로 /chat에 접속중인 유저 표시(로그인 유저 X)**
+//이미 접속하고있던 유저는 서버에 지속적인 요청을 보내 새로 접속한 유저 정보를 들고 옴
+
 const roomSession = $("#chat-room-container")
 function refreshRoomSession() {
     fetch('/ws/checkroom')
@@ -105,12 +111,12 @@ function refreshRoomSession() {
             data.forEach(function(room){
                 console.log(room);
                 roomSession.append(
-                    "<div class='chat-room-card'>" +
+                    "<div class='chat-room-card' onclick='roombtnclick(" + room.room_num + ")'>" +
                     "<div class='chat-room-name'>" +
-                    "<span>" + room.mem1Id + "</span>" +
+                    "<span>" + room.mem1_Id + "</span>" +
                     "</div>" +
                     "<div class='chat-room-number'>" +
-                    "<span>" + room.roomId + "</span>" +
+                    "<span>" + room.room_num + "</span>" +
                     "</div>" +
                     "<div class='chat-room-icon-container'> " +
                     "<img src='../../images/chat/play-button.png' class='chat-room-icon'/> " +
@@ -137,12 +143,12 @@ function getRoomSession() {
             data.forEach(function(room){
                 console.log(room);
                 roomSession.append(
-                    "<div class='chat-room-card'>" +
+                    "<div class='chat-room-card' onclick='roombtnclick(" + room.room_num + ")'>" +
                     "<div class='chat-room-name'>" +
-                    "<span>" + room.mem1Id + "</span>" +
+                    "<span>" + room.mem1_Id + "</span>" +
                     "</div>" +
                     "<div class='chat-room-number'>" +
-                    "<span>" + room.roomId + "</span>" +
+                    "<span>" + room.room_num + "</span>" +
                     "</div>" +
                     "<div class='chat-room-icon-container'> " +
                     "<img src='../../images/chat/play-button.png' class='chat-room-icon'/> " +
@@ -158,23 +164,21 @@ function getRoomSession() {
 // 새로운 부분
 $(".makeRoom").on("click", function () {
     makeRoom();
-    getModalInfo();
-    modalOn();
-    refreshModalInfo();
 });
 
 function makeRoom() {
     fetch('/ws/makerooms')
         .then(response => {
             if(response.ok){
+                getModalInfo();
+                modalOn();
+                refreshModalInfo();
                 console.log("룸 생성 완료")
             }else{
                 throw new Error("룸 생성 오류")
             }
         })
 }
-
-
 
 function modalOff() {
     modal.style.display = "none";
@@ -186,10 +190,12 @@ function modalOff() {
                 throw new Error("룸 삭제 오류")
             }
         })
+
 }
+const radio_container = document.querySelector(".modal-item-chk-container");
 function modalOn() {
     modal.style.display = "grid";
-
+    radio_container.style.display = "none";
 }
 modal.addEventListener("click", e => {
     const evTarget = e.target;
@@ -197,11 +203,9 @@ modal.addEventListener("click", e => {
         ||evTarget.classList.contains("modal-overlay")) {
         modalOff();
     }
-
 })
 window.addEventListener("keydown", e => {
     if (e.keyCode === 27){
-
         modalOff();
     }
 })
@@ -219,16 +223,9 @@ function getModalInfo(){
             }
         })
         .then(data =>{
-            modalRoomNum.text(null);
-            modalMem1.text(null);
-            modalMem2.text(null);
-            data.forEach(function(room){
-                console.log(room);
-                modalMem1.text(room.mem1Id);
-                modalRoomNum.text(room.roomId);
-                modalMem2.text(room.mem2Id);
-                if(modalMem2.size() === 0) {
-                    modalMem2.text("대기중");
+            data.forEach(room =>{
+                if(room.mem1_Id === principal_User||room.mem2_Id === principal_User){
+                    modalSetting(room);
                 }
             })
         })
@@ -246,21 +243,56 @@ function refreshModalInfo(){
             }
         })
         .then(data =>{
-            modalRoomNum.text(null);
-            modalMem1.text(null);
-            modalMem2.text(null);
-            data.forEach(function(room){
-                console.log(room);
-                modalMem1.text(room.mem1Id);
-                modalRoomNum.text(room.roomId);
-                modalMem2.text(room.mem2Id);
-                if(modalMem2.size() === 0) {
-                    modalMem2.text("대기중");
+            data.forEach((room) => {
+                if (room.mem1_Id === principal_User || room.mem2_Id === principal_User) {
+                    modalSetting(room);
+                    if(room.mem2_Id == null){
+                        refreshModalInfo();
+                    }
                 }
             })
-            refreshModalInfo();
         })
         .catch(error =>{
-            console.error('데이터 입력 오류');
+            console.error(error);
         })
 }
+
+
+function modalSetting(room){
+    modalRoomNum.text(null);
+    modalMem1.text(null);
+    modalMem2.text(null);
+    modalMem1.text(room.mem1_Id);
+    modalRoomNum.text(room.room_num);
+    modalMem2.text(room.mem2_Id);
+    console.log(modalMem2.text())
+    if (modalMem2.text().trim() === "") {
+        modalMem2.text("대기중");
+    }else{
+        radio_container.style.display = "flex";
+    }
+}
+//룸 생성 및 생성한 후 보이는 modal창과 정보 세팅
+
+function roombtnclick(room_num){
+    intoroom(room_num);
+    getModalInfo();
+    modalOn();
+    refreshModalInfo();
+}
+
+
+function intoroom(room_num){
+    $.ajax({
+        url: "/ws/intoroom",
+        type: "GET",
+        data: {
+            room_num : room_num
+        }
+    }).fail(function(xhr, status, error){
+            console.log(error)
+    })
+}
+
+
+

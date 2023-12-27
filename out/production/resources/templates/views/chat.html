@@ -20,17 +20,9 @@
 
         </div>
         <div id = "chat-room-container">
-<!--           <div class="chat-room-card" th:each="roomList, loop : ${roomList}">-->
-<!--               <div class="chat-room-name"> <span th:text="${roomList.mem1Id}"></span></div>-->
-<!--               <div class="chat-room-number"> <span th:text="${roomList.roomId}"></span> </div>-->
-<!--               <div class="chat-room-icon-container">-->
-<!--                   <img th:src="@{/images/chat/lock.png}" class="chat-room-icon"/>-->
-<!--                   <img th:src="@{/images/chat/play-button.png}" class="chat-room-icon"/>-->
-<!--               </div>-->
-<!--           </div>-->
         </div>
         <div id = "user-view-container">
-            <div id="user-id" th:text="|ID : ${session.userInfo}|" th:userid="${session.userInfo}">
+            <div id="user-id" th:principal="${session.userInfo}" th:text="|ID : ${session.userInfo}|" th:userid="${session.userInfo}">
             </div>
             <div id="user-coin" th:text="|COIN : ${session.userCoin}|" th:userid="${session.userCoin}">
             </div>
@@ -48,7 +40,7 @@
     </div>
 <!--    modal section -->
     <div id="modal">
-        <form th:action="@{/chat/ready}" method="post">
+        <form th:action="@{/ws/ready}" method="post">
             <div class="modal-window">
                 <div class="modal-title-container">
                     Room No. <span id="modal-room-num"></span>

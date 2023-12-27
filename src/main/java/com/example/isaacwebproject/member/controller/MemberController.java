@@ -34,19 +34,14 @@ public class MemberController {
     @PostMapping("/join")
     public ModelAndView insertMember(@RequestParam(name="ID") String ID,
                                      @RequestParam(name="PW") String PW,
-                                     @RequestParam(name="NICKNAME") String NICKNAME)  {
+                                     @RequestParam(name="NICKNAME") String NICKNAME) throws Exception {
         ModelAndView view = new ModelAndView();
         try{
-            Boolean result = memberService.insertMember(ID,PW,NICKNAME)!=null;
-            if(result) {
-                view.addObject("resultMsg", "가입을 축하드립니다.");
-            } else {
-                throw new Exception("가입이 실패하였습니다.");
-            }
-
+            memberService.insertMember(ID,PW,NICKNAME);
+            view.addObject("resultMsg", "가입을 축하드립니다.");
         }catch (Exception e) {
             view.addObject("resultMsg", e.getMessage());
-            e.printStackTrace();
+            throw new Exception("가입이 실패하였습니다.");
         }
         view.setViewName("views/member/join_result");
         return view;

@@ -21,13 +21,12 @@ public class MemberService{
         return memberMapper.checkNickname(NICKNAME);
     }
 
-    public Member insertMember(String ID,String PW, String NICKNAME) throws Exception {
+    public void insertMember(String ID,String PW, String NICKNAME) throws Exception {
         Member member = new Member();
         member.setID(ID);
         member.setPW(passwordEncoder.encode(PW));
         member.setNICKNAME(NICKNAME);
         this.memberRepo.save(member);
-        return member;
     }
     public boolean updateCoinById(String ID, int COIN){
         return memberMapper.updateCoinById(ID, COIN);
