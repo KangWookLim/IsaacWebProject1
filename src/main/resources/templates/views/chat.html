@@ -17,7 +17,7 @@
             </ul>
         </div>
         <div id = "total-mem-container">
-            <div class = "login-mem"> 접속중 </div>
+
         </div>
         <div id = "chat-room-container">
 <!--           <div class="chat-room-card" th:each="roomList, loop : ${roomList}">-->
@@ -31,7 +31,10 @@
         </div>
         <div id = "user-view-container">
             <div id="user-id" th:text="|ID : ${session.userInfo}|" th:userid="${session.userInfo}">
-
+            </div>
+            <div id="user-coin" th:text="|COIN : ${session.userCoin}|" th:userid="${session.userCoin}">
+            </div>
+            <div id="user-exp" th:text="|EXP : ${session.userExp}|" th:userid="${session.userExp}">
             </div>
         </div>
         <div id = "chat-container">
@@ -40,7 +43,7 @@
                 <button class="sendmessage-btn" onclick="sendMessage()">Send Message</button>
             </div>
             <div id="messageArea"></div>
-            <div th:each="chatLog, loop : ${chatLogs}" th:text="${chatLog.getMem_id}+' : '+ ${chatLog.getMessage}"></div>
+            <div class="chat-message" th:each="chatLog, loop : ${chatLogs}" th:text="${chatLog.getMem_id}+' : '+ ${chatLog.getMessage}"></div>
         </div>
     </div>
 <!--    modal section -->

@@ -1,4 +1,5 @@
  let isUserIdChk = false;
+ let isUserNickChk = false;
 
 function userIdChk() {
     const ID = $('#ID').val();
@@ -31,6 +32,36 @@ function userIdChk() {
         console.log(status);
     });
 }
+ function userNickChk() {
+     const Nick = $('#nickname').val();
+     isUserNickChk = false;
+     if($.trim(Nick).length === 0) {
+         alert('닉네임을 입력하십시오.');
+         return false;
+     }
+
+     $.ajax({
+         url : '/mem/nickchk',
+         type : 'get',
+         dataType : 'json',
+         data : 'json',
+         data :{
+             NICKNAME : Nick
+         }
+     }).done(function (data){
+         if(data === 0) {
+             alert('사용가능한 Nickname 입니다');
+             console.log(data);
+             isUserNickChk = true;
+             $('#nickChkBtn').prop('disabled', true);
+         }else {
+             alert('이미 등록된 Nickname 입니다.');
+         }
+     }).fail(function (xhr, status, error) {
+         alert('시스템에 문제가 발생했습니다. 관리자에게 문의해주세요.');
+         console.log(status);
+     });
+ }
 
 function validated () {
     const inputAll = document.querySelectorAll("input");
@@ -41,7 +72,11 @@ function validated () {
         isValid = false;
         return false;
     }
-
+    if(!isUserNickChk) {
+        alert('아이디 중복체크를 실행해주세요');
+        isValid = false;
+        return false;
+    }
     $.each(inputAll, function (index, obj) {
         const inputId = $(obj).attr('id');
         checkObj = $('#' + inputId);

@@ -7,6 +7,11 @@
         from member
         where ID =  #{ID}
     </select>
+    <select id="checkNickname" resultType="int" parameterType="map">
+        select count(*) as  cnt
+        from member
+        where NICKNAME =  #{NICKNAME}
+    </select>
 
     <insert id="insertMember" parameterType="com.example.isaacwebproject.member.vo.Member">
         INSERT INTO member

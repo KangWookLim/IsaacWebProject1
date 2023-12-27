@@ -37,6 +37,8 @@ public class ChatController {
         view.addObject("CurrentURI",request.getRequestURI());
         HttpSession session = request.getSession();
         String memId = (String)session.getAttribute("userInfo");
+        Integer memCoin = (Integer)session.getAttribute("userCoin");
+        Integer memExp = (Integer)session.getAttribute("userExp");
         if(memId == null) {
             throw new DoNotLoginException();
         }else{

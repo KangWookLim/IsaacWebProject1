@@ -10,6 +10,7 @@ import java.util.Optional;
 @Mapper
 public interface MemberMapper {
     int checkId(@Param("ID") String ID);
+    int checkNickname(@Param("NICKNAME") String NICKNAME);
 
     Boolean insertMember(Member member);
 
