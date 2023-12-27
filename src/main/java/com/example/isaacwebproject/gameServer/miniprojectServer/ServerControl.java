@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 
-@Component
+//@Component
 @RequiredArgsConstructor
 public class ServerControl extends Server implements ApplicationRunner {
 	private final servermemservice servermemservice;
@@ -32,7 +32,6 @@ public class ServerControl extends Server implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
-		int battleRoomId = battleRoomService.findNumByMemId("1111");
 		start();
 	}
 	@Override

@@ -1,7 +1,7 @@
 package com.example.isaacwebproject.battle.service;
 
 import com.example.isaacwebproject.battle.repo.BattleRepo;
-import com.example.isaacwebproject.battle.vo.BattleVO;
+import com.example.isaacwebproject.battle.vo.BattleRoom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import java.util.List;
 public class BattleService {
     private final BattleRepo battleRepo;
 
-    public List<BattleVO> findAllRoom(){
+    public List<BattleRoom> findAllRoom(){
         return battleRepo.findAllRoom();
     }
     public void addRoom(String mem_id){
@@ -22,7 +22,7 @@ public class BattleService {
     public void deleteRoom(String mem_id){
         battleRepo.deleteBattleroom(mem_id);
     }
-    public List<BattleVO> getRoomInfo(String mem_id){
+    public List<BattleRoom> getRoomInfo(String mem_id){
         return battleRepo.getRoomInfo(mem_id);
     }
 }

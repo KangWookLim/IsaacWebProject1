@@ -17,7 +17,7 @@
         INSERT INTO member
         (memid,id,pw,nickname)
         VALUES
-        (IDUP.NEXTVAL,#{ID},#{PW},#{NICKNAME})
+        (,#{ID},#{PW},#{NICKNAME})
 
     </insert>
 

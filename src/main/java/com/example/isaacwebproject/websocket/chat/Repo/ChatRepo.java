@@ -1,6 +1,6 @@
 package com.example.isaacwebproject.websocket.chat.Repo;
 
-import com.example.isaacwebproject.websocket.chat.vo.ChatVo;
+import com.example.isaacwebproject.websocket.chat.vo.Chat_Log;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -13,21 +13,22 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class ChatRepo {
     private final NamedParameterJdbcTemplate jdbcTemplate;
-    private final RowMapper<ChatVo> rowMapper = (rs, rowNum) ->
-            new ChatVo(
-              rs.getString("mem_id"),
-              rs.getString("create_date"),
-              rs.getString("message"),
-              rs.getInt("id")
+    private final RowMapper<Chat_Log> rowMapper = (rs, rowNum) ->
+            new Chat_Log(
+                    rs.getInt("chat_log_id"),
+                    rs.getString("mem_id"),
+                    rs.getTimestamp("created_date").toLocalDateTime(),
+                    rs.getString("message")
+
             );
 
-    public List<ChatVo> findAllChat(){
-        String sql = "select * from CHAT_LOG ORDER BY create_date desc";
+    public List<Chat_Log> findAllChat(){
+        String sql = "select * from CHAT_LOG ORDER BY created_date desc";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     public void addChatLog(String mem_id, String message){
-        String sql = "insert into chat_log (mem_id, message, id) values (:mem_id, :message, chat_log_id.nextval)";
+        String sql = "insert into chat_log (mem_id, message) values (:mem_id, :message)";
         Map<String,Object> params = Map.of("mem_id", mem_id, "message", message);
         jdbcTemplate.update(sql,params);
     }

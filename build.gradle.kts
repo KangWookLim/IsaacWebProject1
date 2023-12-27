@@ -44,6 +44,8 @@ dependencies {
     implementation("org.java-websocket:Java-WebSocket:1.5.4")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-websocket")
+    implementation("com.h2database:h2")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 }
 
 

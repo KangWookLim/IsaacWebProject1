@@ -1,6 +1,5 @@
 # Compiled class file
 *.class
-*.gradle
 # Log file
 *.log
 
@@ -27,4 +26,3 @@ replay_pid*
 # settingFile
 .gradle/
 .idea/
-*.yml

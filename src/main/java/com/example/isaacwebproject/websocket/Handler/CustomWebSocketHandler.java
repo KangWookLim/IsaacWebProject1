@@ -1,6 +1,7 @@
 package com.example.isaacwebproject.websocket.Handler;
 
 import com.example.isaacwebproject.websocket.chat.service.ChatService;
+import com.example.isaacwebproject.websocket.chat.vo.Chat_Log;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
@@ -42,7 +43,7 @@ public class CustomWebSocketHandler implements WebSocketHandler {
     @Override
     public void handleMessage(@NotNull WebSocketSession session, @NotNull WebSocketMessage<?> message) throws Exception {
         BroadCastMessage(session ,message);
-        chatService.addChat((String)session.getAttributes().get("userInfo"),(String)message.getPayload());
+        chatService.addChatatJAP((String)session.getAttributes().get("userInfo"),(String)message.getPayload());
         System.out.println(((HttpSession)session.getAttributes().get("http_session")).getAttribute("userInfo"));
     }
 
