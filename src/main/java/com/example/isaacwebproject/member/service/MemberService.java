@@ -15,6 +15,9 @@ public class MemberService{
     public int checkUser(String ID){
         return memberMapper.checkId(ID);
     }
+    public int checkNickname(String NICKNAME){
+        return memberMapper.checkNickname(NICKNAME);
+    }
 
     public Boolean insertMember(String ID,String PW, String NICKNAME) throws Exception {
         Member member = new Member();

@@ -25,6 +25,11 @@ public class MemberController {
     public int memCheck(@RequestParam(name="ID") String ID) throws Exception {
         return memberService.checkUser(ID);
     }
+    @GetMapping("/nickchk")
+    @ResponseBody
+    public int memNickCheck(@RequestParam(name="NICKNAME") String NICKNAME) throws Exception {
+        return memberService.checkNickname(NICKNAME);
+    }
 
     @PostMapping("/join")
     public ModelAndView insertMember(@RequestParam(name="ID") String ID,
