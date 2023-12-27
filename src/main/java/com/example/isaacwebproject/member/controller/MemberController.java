@@ -13,7 +13,7 @@ public class MemberController {
 
     private final MemberService memberService;
 
-        @RequestMapping("/join")
+        @GetMapping("/join")
     public ModelAndView join() {
         ModelAndView view = new ModelAndView();
         view.setViewName("views/member/join");
@@ -31,9 +31,8 @@ public class MemberController {
                                      @RequestParam(name="PW") String PW,
                                      @RequestParam(name="NICKNAME") String NICKNAME)  {
         ModelAndView view = new ModelAndView();
-        view.setViewName("views/member/join_result");
         try{
-            Boolean result = memberService.insertMember(ID,PW,NICKNAME);
+            Boolean result = memberService.insertMember(ID,PW,NICKNAME)!=null;
             if(result) {
                 view.addObject("resultMsg", "가입을 축하드립니다.");
             } else {
@@ -44,7 +43,7 @@ public class MemberController {
             view.addObject("resultMsg", e.getMessage());
             e.printStackTrace();
         }
-
+        view.setViewName("views/member/join_result");
         return view;
     }
 }
