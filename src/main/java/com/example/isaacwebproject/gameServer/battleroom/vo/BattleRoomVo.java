@@ -14,4 +14,5 @@ public class BattleRoomVo {
     private String mem2_id;
     private int mem1_use_item_id;
     private int mem2_use_item_id;
+    private String winner_id;
 }

@@ -1,7 +1,7 @@
 package com.example.isaacwebproject.member.service;
 
 import com.example.isaacwebproject.member.mapper.MemberMapper;
-import com.example.isaacwebproject.member.repo.MemberRepo;
+import com.example.isaacwebproject.member.repo.MemberJPARepo;
 import com.example.isaacwebproject.member.vo.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class MemberService{
 
     private final MemberMapper memberMapper;
-    private final MemberRepo memberRepo;
+    private final MemberJPARepo memberJPARepo;
     private final PasswordEncoder passwordEncoder;
     public int checkUser(String ID){
         return memberMapper.checkId(ID);
@@ -26,7 +26,7 @@ public class MemberService{
         member.setID(ID);
         member.setPW(passwordEncoder.encode(PW));
         member.setNICKNAME(NICKNAME);
-        this.memberRepo.save(member);
+        this.memberJPARepo.save(member);
     }
     public boolean updateCoinById(String ID, int COIN){
         return memberMapper.updateCoinById(ID, COIN);

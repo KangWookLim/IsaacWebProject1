@@ -33,6 +33,11 @@ public class BattleService {
         return battleRepo.findByMem_Id(memId);
     }
     public void addBattleRoom(BattleRoom room){
+        System.out.println("실행");
         battleJAPRepo.save(room);
+    }
+
+    public void removeBattleRoomByID(int rum_num){
+        battleJAPRepo.deleteById(rum_num);
     }
 }

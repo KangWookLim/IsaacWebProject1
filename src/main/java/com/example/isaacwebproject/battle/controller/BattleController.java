@@ -30,6 +30,12 @@ public class BattleController {
     public synchronized void makeRoom(HttpServletRequest request) {
         HttpSession session = request.getSession();
         String memId = (String) session.getAttribute("userInfo");
+        List<BattleRoom> reporoom = battleService.findAllRoom();
+        for (BattleRoom room : reporoom){
+            if(room.getMem1_Id().equals(memId)||room.getMem2_Id().equals(memId)){
+                throw new RuntimeException();
+            }
+        }
         BattleRoom room = new BattleRoom();
         room.setRoom_num(rooms.size() + 1);
         room.setMem1_Id(memId);
@@ -76,6 +82,7 @@ public class BattleController {
                     break;
                 }else{
                     room.setMem1_Id(null);
+                    room.setMEM1_USE_ITEM_ID(0);
                     break;
                 }
             } else if (room.getMem2_Id()!=null && room.getMem2_Id().equals(memId)){
@@ -85,6 +92,7 @@ public class BattleController {
                     break;
                 }else {
                     room.setMem2_Id(null);
+                    room.setMEM2_USE_ITEM_ID(0);
                     break;
                 }
             }
@@ -108,8 +116,13 @@ public class BattleController {
         String memId = (String) request.getSession().getAttribute("userInfo");
         int room_num = room.getRoom_num()-1;
         long starttime = System.currentTimeMillis();
-        boolean isChanged = false;
-        while (true) {
+        boolean isStarted = true;
+
+        if(room.getMem2_Id()!=null && room.getMem1_Id()!=null && room.getMEM1_USE_ITEM_ID() != 0 && room.getMEM2_USE_ITEM_ID() != 0){
+            isStarted=false;
+            return rooms.get(room_num);
+        }
+        while (isStarted) {
             int time = (int) (System.currentTimeMillis() - starttime) / 1000;
             if(!rooms.isEmpty()){
                 if(!room.equals(rooms.get(room_num))){
@@ -143,14 +156,27 @@ public class BattleController {
         String principal_Mem_Id = (String) request.getSession().getAttribute("userInfo");
         return invenService.findElementsByMemid(principal_Mem_Id);
     }
-//    @RequestMapping("/ready")
-//    @ResponseBody
-//    public void ready(@RequestParam int item_id, HttpServletRequest request) {
-//
-//    }
+    @RequestMapping("/ready_game")
+    @ResponseBody
+    public void intertitem(@RequestParam(name = "itemId")int itemId, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        String Principal = (String) session.getAttribute("userInfo");
+        for(BattleRoom room : rooms){
+            if(room.getMem1_Id()==Principal){
+                room.setMEM1_USE_ITEM_ID(itemId);
+            }
+            if(room.getMem2_Id()==Principal){
+                room.setMEM2_USE_ITEM_ID(itemId);
+            }
+        }
+    }
     @RequestMapping("/start_game")
     @ResponseBody
-    public BattleRoom startGame(@ResponseBody,HttpServletRequest request){
-        battleService.addBattleRoom();
+    public void startGame(@RequestParam(name = "mem_id")String memId,HttpServletRequest request){
+        for(BattleRoom room : rooms){
+                if(room.getMem1_Id().equals(memId)){
+                    battleService.addBattleRoom(room);
+                }
+        }
     }
 }

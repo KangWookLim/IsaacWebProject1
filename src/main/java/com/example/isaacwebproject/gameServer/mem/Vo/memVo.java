@@ -1,6 +1,9 @@
 package com.example.isaacwebproject.gameServer.mem.Vo;
 
 import lombok.*;
+import org.springframework.cglib.core.Local;
+
+import java.time.LocalDateTime;
 
 
 @Data
@@ -13,6 +16,6 @@ public class memVo {
     private String nickname;
     private int coin;
     private int exp;
-    private String createdate;
-    private String updatedate;
+    private LocalDateTime createdate;
+    private LocalDateTime updatedate;
 }

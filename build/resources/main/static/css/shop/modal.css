@@ -1,5 +1,5 @@
 @charset "UTF-8";
-.modal {
+#modal {
     z-index: 100;
     width: 100%;
     height: 100%;
@@ -18,7 +18,7 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.modal .modal-window {
+.modal-window {
     background: rgb( 255, 255, 255 );
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
     backdrop-filter: blur( 14px );
@@ -42,7 +42,7 @@
             "a e " 70px / 1fr 1fr;
 
 }
-.modal .modal-window::-webkit-scrollbar{
+#modal .modal-window::-webkit-scrollbar{
     border-radius: 1.5rem;
 }
 
@@ -84,7 +84,7 @@
     color : #999;
 }
 
-.modal-item-id{
+.modal-item-id div{
     font-size: 2rem;
     font-weight: bold;
     text-align : center;
@@ -114,6 +114,11 @@
 .modal-price-container p{
     color : #aaa;
 }
+.modal-amount-button-container{
+    width: fit-content;
+    height: fit-content;
+    justify-self: right;
+}
 .price-txt{
     display: flex;
     flex-wrap: wrap;
@@ -134,7 +139,7 @@
 .modal-confirm-container:active {
     background : #aaa;
 }
-.modal-confirm-container .order {
+.modal-confirm-container #order {
     text-align: center;
     position: relative;
     top: 50%;
@@ -147,4 +152,26 @@
     text-align : center;
     margin-bottom : 10px;
     color : black;
+}
+.modal-move-btn-container{
+
+}
+#move-btn-left{
+    width: fit-content;
+    height: fit-content;
+    justify-self: left;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+#move-btn-right{
+    width: fit-content;
+    height: fit-content;
+    justify-self: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#modal-btn-name{
+    font-size: 2rem;
+    font-weight: bold;
 }

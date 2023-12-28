@@ -6,38 +6,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Error</title>
 <style>
-   h1 > span {
-     color : red;
-     font-size : 20px;
-   }
+    #error-container {
+        width : 100vw;
+        height : 100vh;
+        display : flex;
+        align-items: center;
+        justify-content: center;
+        margin : 0 auto;
+    }
+    h1 > span {
+        color : red;
+        font-size : 20px;
+        margin : 0 auto;
+    }
+    #error-box {
+        width : 500px;
+        height : 300px;
+        border-radius : 10px;
+        border : 3px solid black;
+        display : flex;
+        align-items: center;
+        justify-content: center;
+        text-align : center;
+
+    }
 </style>
 </head>
 <body>
-  <h1>
-    <span>로그인이 필요한 페이지입니다.</span><br>
-    <span><span id="second">5</span>초후 로그인페이지로 이동합니다.</span>
-  </h1>
+    <div id = "error-container">
+        <div id = "error-box">
+            <h1>
+                <span>데이터를 찾을 수 없습니다.</span><br>
+                <span><span id="second">5</span>초후 메인페이지로 이동합니다.</span>
+            </h1>
+        </div>
+    </div>
 </body>
- <script th:src="@{/webjars/jquery/3.5.1/jquery.js}"></script>
- <script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script>
 
-   // let pageMove = function(){
-	//    location.href ="/mem/login";
-   // }
-   //
-   //
-   // $(document).ready(function(){
-   //
-	//    setInterval(function(){
-	// 	   let time = Number($('#second').text()) - 1;
-	// 	   console.log(time);
-	// 	   $('#second').text(time);
-	//    }, 1000);
-   //
-	//    setTimeout(pageMove, 5000);
-	//
-   // });
-    
+     let pageMove = function(){
+         location.href ="/home";
+     }
+
+
+     $(document).ready(function(){
+
+         setInterval(function(){
+             let time = Number($('#second').text()) - 1;
+             console.log(time);
+             $('#second').text(time);
+         }, 1000);
+         setTimeout(pageMove, 5000);
+     });
+
+
  
    
  

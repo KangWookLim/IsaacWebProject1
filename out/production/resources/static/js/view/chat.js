@@ -114,7 +114,8 @@ function refreshRoomSession() {
                 roomSession.append(
                     "<div class='chat-room-card' onclick='roombtnclick(" + room.room_num + ")'>" +
                     "<div class='chat-room-name'>" +
-                    "<span>" + room.mem1_Id + "</span>" +
+                    "<span>" +"Player1 :"+ room.mem1_Id + "</span>" +
+                    "<span>" +",Player2 :"+room.mem2_Id + "</span>" +
                     "</div>" +
                     "<div class='chat-room-number'>" +
                     "<span>" + room.room_num + "</span>" +
@@ -146,7 +147,8 @@ function getRoomSession() {
                 roomSession.append(
                     "<div class='chat-room-card' onclick='roombtnclick(" + room.room_num + ")'>" +
                     "<div class='chat-room-name'>" +
-                    "<span>" + room.mem1_Id + "</span>" +
+                    "<span>" +"Player1 :"+ room.mem1_Id + "</span>" +
+                    "<span>" +",Player2 :"+room.mem2_Id + "</span>" +
                     "</div>" +
                     "<div class='chat-room-number'>" +
                     "<span>" + room.room_num + "</span>" +
@@ -175,7 +177,7 @@ function makeRoom() {
                 modalOn();
                 console.log("룸 생성 완료")
             }else{
-                throw new Error("룸 생성 오류")
+                alert("전투중이거나 서버문제로 생성에 실패하였습니다.")
             }
         })
 }
@@ -226,7 +228,7 @@ function getModalInfo(){
             data.forEach(room =>{
                 if(room.mem1_Id === principal_User||room.mem2_Id === principal_User){
                     modalSetting(room);
-                    refreshModalInfo(room)
+                    refreshModalInfo(room);
                 }
             })
         })
@@ -246,11 +248,11 @@ function refreshModalInfo(room){
         contentType: "application/json; charset=utf-8"
     }).done(function (data){
         modalSetting(data);
-        refreshModalInfo(data);
     }).fail(function (error){
         console.log(error);
     })
 }
+
 
 
 function modalSetting(room){
@@ -261,12 +263,21 @@ function modalSetting(room){
     modalRoomNum.text(room.room_num);
     modalMem2.text(room.mem2_Id);
     console.log(modalMem2.text())
-    if (modalMem2.text().trim() === "") {
+    if (room.mem1_Id===null) {
+        modalMem1.text("대기중");
+    }
+    if(room.mem2_Id===null) {
         modalMem2.text("대기중");
-    }else{
+    }
+    if(room.mem2_Id!==null && room.mem1_Id!==null){
         radio_container.style.display = "flex";
-        if(principal_User===modalMem1.text()){
-            document.querySelector("#start-btn").style.display = "grid";
+        document.querySelector("#ready-btn").style.display = "grid";
+        if(room.mem1_USE_ITEM_ID !== 0 && room.mem2_USE_ITEM_ID !== 0){
+            radio_container.style.display = "none";
+            document.querySelector("#ready-btn").style.display = "none";
+            if(principal_User===room.mem1_Id) {
+                document.querySelector("#start-btn").style.display = "grid";
+            }
         }
     }
 }
@@ -303,20 +314,40 @@ function getMemInvenInfo(){
         })
     })
 }
-const start_button = $("#start-btn")
-start_button.click(function (){
+const start_button = $("#start-btn");
+const ready_button = $("#ready-btn")
+ready_button.click(function (){
     const item = $("input:radio[name=item]:checked");
     console.log(item.val());
-    const params= {
-        item_id : item.val(),
-        principal : principal_User
+    if(item.val()===undefined){
+        alert("Please select Your Item")
+    }else{
+        $.ajax({
+            url: "/ws/ready_game",
+            type: "POST",
+            data:{
+                itemId: item.val()
+            }
+        }).done(function (data){
+            ready_button.css("display", "none");
+            radio_container.style.display = "none";
+            start_button.css("display","grid");
+        })
     }
+})
+
+start_button.click(function (){
     $.ajax({
-        url: "start_game",
-        type: "POST",
-        data:params
-    }).done(function (data){
-        console.log(data);
+        url:"/ws/start_game",
+        type: "post",
+        data:{
+            mem_id : principal_User
+        }
+    }).done(function(){
+        start_button.css("display","none")
+        $(".modal-confirm-container").text("Gaming.....")
+    }).fail(function (){
+        alert("Fail")
     })
 })
 

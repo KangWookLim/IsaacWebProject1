@@ -1,11 +1,11 @@
   server:
     port: 8098
-    file:
-      storage:
-        #      #Mac OS
-        path: /Users/laku_mwa/resource/
-  #      Windows OS
-  #      path:
+    error:
+      include-exception: true
+      include-stacktrace: always
+      path: /error/**
+      whitelabel:
+        enabled: true
   spring:
     main:
       allow-bean-definition-overriding: true
@@ -13,11 +13,21 @@
       view:
         prefix: /WEB-INF/views/
         suffix: .jsp
+    h2:
+      console:
+        path: /h2
+        enabled: true
+    jpa:
+      hibernate:
+        ddl-auto: update
+      properties:
+        hibernate:
+          format_sql: true
     datasource:
-      driver-class-name: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@localhost:1521:xe
-      username: isaacweb
-      password: 1234
+#      driver-class-name: oracle.jdbc.OracleDriver
+#      url: jdbc:oracle:thin:@localhost:1521:xe
+#      username: isaacweb
+#      password: 1234
       hikari:
         connection-timeout: 60000
         maximum-pool-size: 50
@@ -28,8 +38,13 @@
           prepStmtCacheSize: 250
           prepStmtCacheSqlLimit: 2048
           useServerPrepStmts: true
+      driver-class-name: org.h2.Driver
+      url: jdbc:h2:~/isaacweb;AUTO_SERVER=TRUE
+      username: isaacweb
+      password: 1234
+
     thymeleaf:
-      cache: true
+      cache: false
       check-template-location: true
       encoding: UTF-8
       servlet:
@@ -44,6 +59,7 @@
           enabled: true
       restart:
         enabled: true
+
   mybatis:
     config-location: classpath:config/mybatis-config.xml
     mapper-locations: classpath:mapper/**/*.xml

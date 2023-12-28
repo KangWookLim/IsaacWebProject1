@@ -1,34 +1,27 @@
 package com.example.isaacwebproject.gameServer.miniprojectServer;
 
 import java.io.*;
-import java.net.HttpURLConnection;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 
-import com.example.isaacwebproject.config.SessionConfig;
+import com.example.isaacwebproject.battle.service.BattleService;
 import com.example.isaacwebproject.gameServer.battleroom.service.BattleRoomService;
 import com.example.isaacwebproject.gameServer.battleroom.vo.BattleRoomVo;
 import com.example.isaacwebproject.gameServer.mem.Service.servermemservice;
 import com.example.isaacwebproject.gameServer.mem.Vo.memVo;
 import data.DataClass;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 
-//@Component
+@Component
 @RequiredArgsConstructor
 public class ServerControl extends Server implements ApplicationRunner {
 	private final servermemservice servermemservice;
 	private final BattleRoomService battleRoomService;
+	private final BattleService battleService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -78,7 +71,6 @@ public class ServerControl extends Server implements ApplicationRunner {
 					System.out.println("실행중");
 					reciveDataClass = (DataClass) player_In_Data.readObject();
 					getDataSendMap().put(player_Out_Data,reciveDataClass);
-					System.out.println(reciveDataClass.hashCode());
 					memVo mem = servermemservice.findById(reciveDataClass.getMem_Id());
 					if(mem == null){
 						reciveDataClass.setLogin_success(false);
@@ -100,8 +92,7 @@ public class ServerControl extends Server implements ApplicationRunner {
 					}
 					player_Out_Data.writeObject(reciveDataClass);
 					player_Out_Data.reset();
-					System.out.println(reciveDataClass.getClientName()+ "연결 성공");
-					System.out.println(getDataSendMap());
+					System.out.println(reciveDataClass.getClientName()+ " 연결 성공");
 				} catch (IOException | ClassNotFoundException e) {
 					System.out.println("데이터 가져오기 실패");
 					e.printStackTrace();
@@ -110,12 +101,24 @@ public class ServerControl extends Server implements ApplicationRunner {
 					while (true) {
 						reciveDataClass = (DataClass) player_In_Data.readObject();
 						getDataSendMap().put(player_Out_Data,reciveDataClass);
-						sendData(reciveDataClass, player_Out_Data);
+						if(!reciveDataClass.isSingle()&&!reciveDataClass.isEnd()) {
+							sendData(reciveDataClass, player_Out_Data);
+						}else if(reciveDataClass.isEnd()){
+							if(!reciveDataClass.isDead()){
+								servermemservice.multiIncreaseCoinById(reciveDataClass.getMem_Id());
+								battleService.removeBattleRoomByID(reciveDataClass.getBattleRoomNum());
+							}
+						}
+						if(reciveDataClass.isEnd()){
+							if(!reciveDataClass.isDead()){
+								servermemservice.SingleincreaseCoinById(reciveDataClass.getMem_Id());
+							}
+						}
 					}
 				} catch (IOException | ClassNotFoundException e) {
 				} finally {
 					try {
-						System.out.println(reciveDataClass.getClientName() + "연결 종료");
+						System.out.println(reciveDataClass.getClientName() + " 연결 종료");
 						getDataSendMap().remove(player_Out_Data);
 						socket.close();
 					} catch (IOException e) {
@@ -132,18 +135,9 @@ public class ServerControl extends Server implements ApplicationRunner {
 		for (ObjectOutputStream send : getDataSendMap().keySet()) {
 			if(sendDataClass.isMulti()) {
 				if (!send.equals(objectOutputStream)) {
-					System.out.println(send);
-					System.out.println(objectOutputStream);
 					if (getDataSendMap().get(send).getBattleRoomNum() == sendDataClass.getBattleRoomNum()&&getDataSendMap().get(send).isMulti()) {
-						if(!sendDataClass.isStart()&&!getDataSendMap().get(send).isStart()){
-							sendDataClass.setStart(true);
-							getDataSendMap().get(send).setStart(true);
-							starttime = (int)System.currentTimeMillis();
-							sendDataClass.setStartTime(starttime);
-							getDataSendMap().get(send).setStartTime(starttime);
-						}
 						try {
-							System.out.println(getDataSendMap().get(send));
+							sendDataClass.setStart(true);
 							send.writeObject(sendDataClass);
 							send.reset();
 
