@@ -8,80 +8,88 @@
     <link rel="stylesheet" th:href="@{/css/animation/Ani.css}">
 </th:block>
 <div layout:fragment="content">
-    <div id = "main-container">
-        <div id = "preview-container">
-            <div id = "preview-box">
-                <div class = "preview-bg-btn-container">
-                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg1();">1</button>
-                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg2();">2</button>
-                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg3();">3</button>
+    <div id="main-container">
+        <div id="preview-container">
+            <div id="preview-box">
+                <div class="preview-bg-btn-container">
+                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg1();">1
+                    </button>
+                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg2();">2
+                    </button>
+                    <button class="btn btn-outline-secondary preview-bg-btn" type="button" onclick="changeBg3();">3
+                    </button>
                 </div>
-                <img th:src="@{/images/map/caves.png}" class = "preview-bg" id = "preview-bg"/>
-<!--                <div class = "preview-img-mantle"></div>-->
-<!--                <div class = "preview-img-darkwings"></div>-->
-<!--                <div class = "preview-img-wings"></div>-->
-<!--                <div class = "preview-img-crown"></div>-->
+                <img th:src="@{/images/map/caves.png}" class="preview-bg" id="preview-bg"/>
+                <!--                <div class = "preview-img-mantle"></div>-->
+                <!--                <div class = "preview-img-darkwings"></div>-->
+                <!--                <div class = "preview-img-wings"></div>-->
+                <!--                <div class = "preview-img-crown"></div>-->
                 <div id="preview-anibox">
-
                     <div class="preview-img-head"></div>
                     <div class="preview-img-body"></div>
                 </div>
             </div>
         </div>
-        <div id = "itemList-container" >
-            <div class="item-container" th:each="items, loop : ${itemList}">
+        <div id="itemList-container">
+            <div class="item-container" th:each="items, loop : ${itemList}" th:itemid="${items.id}">
                 <div class="skin-img-container">
+                    <div typeof="hidden" class="item-rarity" th:itemrarity="${items.rarity}"></div>
+                    <div typeof="hidden" class="item-effect" th:itemeffect="${items.effect}"></div>
                     <div class="btn btn-outline-secondary skin-button">Preview</div>
                     <img class="skin-img" th:src="${items.img_url}">
                     <img class="table-img" src="/images/items/item_table.png"/>
                 </div>
-                <div class="skin-name" th:text="${items.name}"></div>
-                <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex" th:text="|Price : ${items.price}|"></a>
+                <div class="skin-name" th:text="${items.name}" th:itemname="${items.name}"></div>
+                <a href="#" class="btn btn-secondary skin-img-btn" style="display : flex"
+                   th:text="|Price : ${items.price}|" th:ItemPrice="${items.price}"></a>
             </div>
         </div>
     </div>
 
     <!-- modal section -->
-    <div class="modal" th:each="items, loop : ${itemList}">
+    <div id="modal" class="modal-overlay">
         <div class="modal-window">
             <div class = "modal-img-container">
                 <div class = "modal-img-box">
                     <img th:src="@{/images/map/caves.png}" class = "preview-bg"/>
-                    <div class="preview-img-head"></div>
-                    <div class="preview-img-body"></div>
+                    <div id = "modal-preview-anibox">
+                        <div class="preview-img-head"></div>
+                        <div class="preview-img-body"></div>
+                    </div>
                 </div>
             </div>
-            <div class = "modal-btn-container">
-                <div class = "modal-item-id">
-                    <div th:text="${items.name}"></div>
-                </div>
+            <div class="modal-btn-container">
+                <div id="modal-btn-name"></div>
                 <button type="button" class="btn-close" aria-label="Close"></button>
             </div>
-            <div class = "modal-title-container">
-                <strong>ID : </strong><span th:text="${items.id}"></span> <br>
-                <strong>PRICE : </strong><span class="item-price" th:text="|${items.price}|"></span> <br>
-                <strong>RARITY : </strong><span th:text="|${items.rarity}|"></span> <br>
-                <strong>EFECT : </strong><span th:text="|${items.effect}|"></span>
+            <div class="modal-title-container">
+                <strong>ID : </strong><span id="modal-item-id"></span> <br>
+                <strong>PRICE : </strong><span id="modal-item-price"></span> <br>
+                <strong>RARITY : </strong><span id="modal-item-rarity"></span> <br>
+                <strong>EFECT : </strong><span id="modal-item-effect"></span>
             </div>
-            <div class = "modal-price-container">
-                <div class = "price-txt">
+            <div class="modal-price-container">
+                <div class="price-txt">
                     <div>
-                        <span>Total Price : </span> <span class="total-price"> 0 </span>
+                        <span>Total Price : </span> <span id="total-price">0</span>
                     </div>
                     <div>
-                        <span>Amount : </span> <span class="total-amount"> 0 </span>
+                        <span>Amount : </span> <span id="total-amount">0</span>
                     </div>
                 </div>
-                <div class="amount-button-container">
-                    <div class="amount-button-plus">+</div>
-                    <div class="amount-button-minus">-</div>
+                <div class="modal-amount-button-container">
+                    <div id="amount-button-plus" class="btn btn-outline-dark">+</div>
+                    <div id="amount-button-minus" class="btn btn-outline-dark">-</div>
                 </div>
+                    <div id="move-btn-left" class="btn btn-outline-dark">
+                        <
+                    </div>
+                    <div id="move-btn-right" class="btn btn-outline-dark">
+                        >
+                    </div>
             </div>
-            <div class="modal-pagebutton-container">
-
-            </div>
-            <div class = "modal-confirm-container">
-                <div class = "order">
+            <div class="modal-confirm-container">
+                <div id="order">
                     Purchase
                 </div>
             </div>

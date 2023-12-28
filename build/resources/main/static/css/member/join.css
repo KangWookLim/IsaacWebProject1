@@ -53,3 +53,6 @@
     font-weight: bold;
 }
 
+.btn-container {
+    display : block;
+}

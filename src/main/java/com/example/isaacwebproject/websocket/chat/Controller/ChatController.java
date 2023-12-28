@@ -65,7 +65,8 @@ public class ChatController {
         long starttime = System.currentTimeMillis();
         while(true){
             int curruntSessionLen = customWebSocketHandler.getConnectedUsers().size();
-            if(System.currentTimeMillis()-starttime==10){
+            int time = (int)(System.currentTimeMillis() - starttime)/1000;
+            if(time==10){
                 break;
             }
             if(oldSessionLen!=curruntSessionLen){
@@ -74,29 +75,6 @@ public class ChatController {
             Thread.sleep(1000);
         }
         return customWebSocketHandler.getConnectedUsers();
-    }
-    @RequestMapping("/ws/checkroom")
-    @ResponseBody
-    public List<BattleRoom> connectRoom(HttpServletRequest request) throws InterruptedException {
-        int oldSessionLen = battleService.findAllRoom().size();
-        long starttime = System.currentTimeMillis();
-        while(true){
-            int curruntSessionLen = battleService.findAllRoom().size();
-            if(System.currentTimeMillis()-starttime==10){
-                break;
-            }
-            if(oldSessionLen!=curruntSessionLen){
-                break;
-            }
-            Thread.sleep(1000);
-        }
-        return battleService.findAllRoom();
-    }
-
-    @RequestMapping("/ws/getrooms")
-    @ResponseBody
-    public List<BattleRoom> getRoom(HttpServletRequest request){
-        return battleService.findAllRoom();
     }
 
     @RequestMapping("/ws/getsessions")

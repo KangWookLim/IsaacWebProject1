@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.Synchronized;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.*;
 
@@ -31,7 +30,7 @@ public class CustomWebSocketHandler implements WebSocketHandler {
 
 
     @Override
-    public synchronized void afterConnectionEstablished(@NotNull WebSocketSession session) throws Exception {
+    public synchronized void afterConnectionEstablished(WebSocketSession session) throws Exception {
         Socket_HttpSessionBindMap.put(httpSession,session);
         session.getAttributes().put("http_session",httpSession);
         session.getAttributes().put("userInfo",httpSession.getAttribute("userInfo"));
@@ -41,7 +40,7 @@ public class CustomWebSocketHandler implements WebSocketHandler {
     }
 
     @Override
-    public void handleMessage(@NotNull WebSocketSession session, @NotNull WebSocketMessage<?> message) throws Exception {
+    public void handleMessage(WebSocketSession session,WebSocketMessage<?> message) throws Exception {
         BroadCastMessage(session ,message);
         chatService.addChatatJAP((String)session.getAttributes().get("userInfo"),(String)message.getPayload());
         System.out.println(((HttpSession)session.getAttributes().get("http_session")).getAttribute("userInfo"));
@@ -54,7 +53,7 @@ public class CustomWebSocketHandler implements WebSocketHandler {
     }
 
     @Override
-    public synchronized void afterConnectionClosed(@NotNull WebSocketSession session, @NotNull CloseStatus closeStatus) throws Exception {
+    public synchronized void afterConnectionClosed(WebSocketSession session,CloseStatus closeStatus) throws Exception {
         connectedUsers.remove(session.getAttributes().get("userInfo"));
         Socket_HttpSessionBindMap.keySet().forEach(s->{
             if(s.getAttribute("socketsession").equals(session)){

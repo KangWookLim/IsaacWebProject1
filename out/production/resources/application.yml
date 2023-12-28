@@ -1,17 +1,11 @@
   server:
     port: 8098
-    file:
-      storage:
-        #      #Mac OS
-        path: /Users/laku_mwa/resource/
-        #      Windows OS
     error:
       include-exception: true
       include-stacktrace: always
       path: /error/**
       whitelabel:
         enabled: true
-
   spring:
     main:
       allow-bean-definition-overriding: true

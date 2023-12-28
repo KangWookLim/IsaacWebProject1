@@ -16,14 +16,15 @@ public class BattleRoomRepo {
     private final NamedParameterJdbcTemplate jdbcTemplate;
     private final RowMapper<BattleRoomVo> rowMapper = ((rs, rowNum) ->
             new BattleRoomVo(
-                    rs.getInt("room_id"),
+                    rs.getInt("room_num"),
                     rs.getString("mem1_id"),
                     rs.getString("mem2_id"),
                     rs.getInt("mem1_use_item_id"),
-                    rs.getInt("mem2_use_item_id")
+                    rs.getInt("mem2_use_item_id"),
+                    rs.getString("winner_id")
             ));
     public Optional<BattleRoomVo> findById(int roomId) {
-        String sql = "select * from battleroom where room_id = :room_id";
+        String sql = "select * from battle_room where ROOM_NUM = :room_id";
         Map<String, Object> params = Map.of("room_id",roomId);
         try{
             return Optional.ofNullable(jdbcTemplate.queryForObject(sql,params,rowMapper));
@@ -33,7 +34,7 @@ public class BattleRoomRepo {
     }
 
     public int findNumByMemId(String memId) {
-        String sql = "select ROOM_ID from battleroom where mem1_id = :memid OR mem2_id = :memid";
+        String sql = "select ROOM_NUM from battle_room where mem1_id = :memid OR mem2_id = :memid";
         Map<String, Object> params = Map.of("memid",memId);
         int res;
         try{

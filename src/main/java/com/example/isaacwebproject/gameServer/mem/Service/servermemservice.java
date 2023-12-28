@@ -23,4 +23,11 @@ public class servermemservice {
         return passwordEncoder.matches(lowpw,encryptionpw);
     }
 
+    public void SingleincreaseCoinById(String id){
+        servermemrepo.SingleincreaseCoinById(id);
+    }
+
+    public void multiIncreaseCoinById(String id){
+        servermemrepo.multiIncreaseCoinById(id);
+    }
 }
