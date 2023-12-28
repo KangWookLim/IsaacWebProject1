@@ -15,7 +15,7 @@ public class memberRepo {
 
     private final RowMapper<Member> rowMapper = (rs, rowNum) ->
             new Member(
-                    rs.getInt("memid"),
+                    rs.getLong("memid"),
                     rs.getString("id"),
                     rs.getString("pw"),
                     rs.getString("nickname"),

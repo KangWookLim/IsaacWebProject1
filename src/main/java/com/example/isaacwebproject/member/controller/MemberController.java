@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.sql.SQLException;
+
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/mem")
@@ -39,7 +41,8 @@ public class MemberController {
         try{
             memberService.insertMember(ID,PW,NICKNAME);
             view.addObject("resultMsg", "가입을 축하드립니다.");
-        }catch (Exception e) {
+        }catch (SQLException e) {
+            e.printStackTrace();
             view.addObject("resultMsg", e.getMessage());
             throw new Exception("가입이 실패하였습니다.");
         }

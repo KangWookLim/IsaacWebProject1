@@ -22,7 +22,7 @@ import java.util.Collection;
 public class Member implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int MEMID;
+    private Long MEMID;
 
     @Column(length = 100, unique = true)
     @NotNull
