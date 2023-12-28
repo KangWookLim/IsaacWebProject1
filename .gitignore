@@ -16,6 +16,7 @@
 *.nar
 *.ear
 *.zip
+!KIT_해커톤_공모전_신청양식.zip
 *.tar.gz
 *.rar
 
