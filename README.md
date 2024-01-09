@@ -1,8 +1,13 @@
 # Isaac RPG
 >> URL : http://ourisaacweb.com/home
+
+
+>> Swing(게임) 프로젝트 URL : https://github.com/sungyeon2022/miniproject.git
 ## 시연영상
 
 [![Video Label](http://img.youtube.com/vi/JFvctJiDEds/0.jpg)](https://www.youtube.com/watch?v=JFvctJiDEds)
+
+
 
 <h2> KoreaIT Academy</h2>
 <h3> 과정평가형 정보처리산업기사 과정</h3>
